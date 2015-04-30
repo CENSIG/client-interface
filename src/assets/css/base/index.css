@@ -1,0 +1,35 @@
+:root {
+	--titleColor: #0052CC;
+}
+
+@custom-selector --indexWrapper .index .wrapper;
+
+.index {
+	position: absolute;
+	top: 0; right: 0; bottom: 0; left: 0;
+	background: #fff url('./img/bcg.jpg') no-repeat fixed 0 0 / 100% auto;
+}
+
+--indexWrapper {
+	display        : flex;
+	flex-direction : column;
+	align-items    : flex-start;
+	margin         : 20px 0 0 20px;
+}
+
+--indexWrapper .title {
+	width : 350px;
+	margin: 0 0 45px 0
+}
+
+--indexWrapper .title .logo {
+	background: #fff url('./img/logo.jpeg') no-repeat scroll center center /
+		contain content-box padding-box;
+	height: 150px;
+}
+
+--indexWrapper .title .logo > span {
+	display  : block;
+	height   : 0px;
+	overflow : hidden;
+} 

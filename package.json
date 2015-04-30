@@ -1,0 +1,38 @@
+{
+  "name": "client-interface",
+  "version": "1.0.0",
+  "description": "User interface for data reading SICEN",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CENSIG/client-interface.git"
+  },
+  "author": "Jean BOUDET",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CENSIG/client-interface/issues"
+  },
+  "homepage": "https://github.com/CENSIG/client-interface",
+  "dependencies": {
+    "cssnext-loader": "^1.0.1",
+    "express": "^4.12.3",
+    "extract-text-webpack-plugin": "^0.7.0",
+    "file-loader": "^0.8.1",
+    "jade": "^1.9.2",
+    "node-jsx": "^0.13.3",
+    "react": "^0.13.2",
+    "react-router": "^0.13.3",
+    "style-loader": "^0.12.1",
+    "url-loader": "^0.5.5"
+  },
+  "devDependencies": {
+    "css-loader": "^0.12.0",
+    "gulp": "^3.8.11",
+    "gulp-jshint": "^1.10.0",
+    "jshint-jsx": "^0.4.1",
+    "jsx-loader": "^0.13.2",
+    "webpack": "^1.8.10"
+  }
+}
