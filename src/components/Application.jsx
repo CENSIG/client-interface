@@ -1,43 +1,31 @@
-var React            = require("react"),
-		ApplicationStore = require("../stores/ApplicationStore"),
-		provideContext   = require("fluxible/addons/provideContext"),
-		handleHistory = require("fluxible-router").handleHistory,
-		Index            = require("./Index"),
-		Taxon            = require("./Taxon");
+import React						from "react";
+import ApplicationStore from "../stores/ApplicationStore";
+import {provideContext, connectToStores} from "fluxible/addons";
+import {handleHistory}  from "fluxible-router";
 
 if (process.env.BROWSER) {
 	require('../assets/css/reset.css');
 	require('../assets/css/base/utils.css');
 }
 
-var Application = React.createClass({
-	contextTypes: {
-		getStore: React.PropTypes.func	
-	},
+/**
+ * Top component. This component handles
+ * display application
+ * @author Jean BOUDET
+ */
+class Application extends React.Component
+{
+	constructor(props, context) {
+		super(props);
+	}
 
-	componentDidMount: function() {
-		this.context.getStore(ApplicationStore).addChangeListener(this.onChange);
-	},
-
-	componentDidUpdate: function(prevProps, prevState) {
-		var newState = this.state;
-		if (newState.currentTitlePage === prevState.currentTitlePage) {
+	componentDidUpdate(prevProps) {
+		var newProps = this.props;
+		if (newProps.applicationStore.currentTitlePage === prevProps.applicationStore.currentTitlePage) {
 			return;	
 		}
-		document.title = newState.currentTitlePage;
-	},
-
-	getInitialState: function() {
-		return this.getState();
-	},
-
-	getState: function() {
-		return this.context.getStore(ApplicationStore).getState();
-	},
-
-	onChange: function() {
-		this.setState(this.getState());
-	},
+		document.title = newProps.applicationStore.currentTitlePage;
+	}
 
 	render() {
 		var Handler = this.props.currentRoute.get("handler");
@@ -47,10 +35,15 @@ var Application = React.createClass({
 			</div>
 		);
 	}
+}
+
+Application = connectToStores(Application, [ ApplicationStore ], (stores, props) => {
+	return {
+		applicationStore: stores.ApplicationStore.getState()
+	}
 });
 
 Application = handleHistory(Application);
-
 Application = provideContext(Application);
 
-module.exports = Application;
+export default Application;

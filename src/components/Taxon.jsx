@@ -1,34 +1,33 @@
-var React      = require("react"),
-		TaxonStore = require("../stores/TaxonStore");
+import React						 from "react";
+import TaxonStore				 from "../stores/TaxonStore";
+import {connectToStores} from "fluxible/addons";
 
-var Taxon = React.createClass({
-	contextTypes: {
-		getStore: React.PropTypes.func
-	},
+class Taxon extends React.Component
+{
+	constructor(props, context) {
+		super(props);
+		this.state = context.getStore(TaxonStore).getState();
+	}
 
-	componentDidMount: function() {
-		this.context.getStore(TaxonStore).addChangeListener(this.onChange);
-	},
+	componentDidMount() {
+		this.context.getStore(TaxonStore).addChangeListener(this._onChange.bind(this));	
+	}
 
-	getInitialState: function() {
-		return this.getState();	
-	},
-
-	getState: function() {
-		return this.context.getStore(TaxonStore).getState();
-	},
-
-	onChange: function() {
-		this.setState(this.getState());
-	},
+	_onChange() {
+		this.setState(this.context.getStore(TaxonStore).getState());
+	}
 
 	render() {
 		return (
 			<div>
-				<p>Bienvenue dans l'atlas des {this.state.info.name}</p>
+				<p>Bienvenue dans l'atlas {this.state.info.name}</p>
 			</div>	
 		);
 	}
-});
+}
 
-module.exports = Taxon;
+Taxon.contextTypes = {
+	getStore: React.PropTypes.func
+}
+
+export default Taxon;

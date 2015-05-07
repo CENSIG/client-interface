@@ -1,34 +1,44 @@
-var createStore = require("fluxible/addons/createStore");
+import BaseStore from "fluxible/addons/BaseStore";
 
-var TaxonStore = createStore({
-	storeName: "TaxonStore",
-
-	handlers: {
-		"RECEIVE_INFO": "_handleInfo"
-	},
-
-	initialize: function(dispatcher) {
-		this.info = {};	
-	},
-
-	_handleInfo: function(taxon) {
-		this.info = taxon.info;
-		this.emitChange();
-	},
-
-	getState: function() {
-		return {
-			info: this.info	
-		}	
-	},
-
-	dehydrate: function() {
-		return this.getState();
-	}, 
-
-	rehydrate: function(state) {
-		this.info = state.info;
+class TaxonStore extends BaseStore
+{
+	constructor(dispatcher) {
+		super(dispatcher);
+		this.info    = {};
+		this.geojson = {};
 	}
-});
 
-module.exports = TaxonStore;
+	_handleInfo(taxon) {
+		this.info = taxon.info;	
+		this.emitChange();
+	}
+
+	_handleGeoJson(taxon) {
+		this.geojson = taxon.geojson;	
+		this.emitChange();
+	}
+
+	getState() {
+		return {
+			info: this.info,
+			geojson: this.geojson
+		}	
+	}
+
+	dehydrate() {
+		return this.getState();
+	}
+
+	rehydrate(state) {
+		this.info    = state.info;
+		this.geojson = state.geojson;
+	}
+}
+
+TaxonStore.storeName = "TaxonStore";
+TaxonStore.handlers  = {
+	"RECEIVE_INFO"    : "_handleInfo",
+	"RECEIVE_GEOJSON" : "_handleGEOJSON"
+}
+
+export default TaxonStore;

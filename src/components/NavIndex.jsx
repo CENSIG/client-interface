@@ -1,9 +1,14 @@
-var React = require("react"),
-		NavLink = require("fluxible-router").NavLink;
+import React		 from "react";
+import {NavLink} from "fluxible-router";
 
-var NavIndexItemTheme = React.createClass({
+class NavIndexItemTheme extends React.Component
+{
+	constructor(props) {
+		super(props);
+	}
+
 	render() {
-		var items = this.props.themes.map(function(item) {
+		var items = this.props.themes.map(item => {
 			return (
 				<li>
 					<NavLink routeName={item.routeName}>
@@ -17,13 +22,17 @@ var NavIndexItemTheme = React.createClass({
 			<ul>
 				{items}
 			</ul>
-		);	
+		);
 	}
-});
+}
 
+class NavIndexItem extends React.Component
+{
+	constructor(props) {
+		super(props);
+	}
 
-var NavIndexItem = React.createClass({
-	render: function() {
+	render() {
 		return (
 			<li className="card">
 				<h3>{this.props.title}</h3>
@@ -32,11 +41,16 @@ var NavIndexItem = React.createClass({
 			</li>
 		);
 	}
-});
+}
 
-var NavIndex = React.createClass({
-	render: function() {
-		var linkHTML = this.props.elements.map(function(element) {
+class NavIndex extends React.Component
+{
+	constructor(props) {
+		super(props);	
+	}
+
+	render() {
+		var linkHTML = this.props.elements.map(element => {
 			var themes = element.themes;
 			var linkTheme;
 
@@ -57,6 +71,6 @@ var NavIndex = React.createClass({
 			</nav>
 		);
 	}
-});
+}
 
-module.exports = NavIndex;
+export default NavIndex;

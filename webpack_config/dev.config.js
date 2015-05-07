@@ -26,9 +26,9 @@ module.exports = {
 	},
 	module: {
 		loaders: [
-			{test: /\.jsx?$/, loader: "jsx-loader?harmony"},
+			{test: /\.jsx?$/, exclude: /node_modules/, loader: "jsx-loader!babel-loader"},
 			{test: /\.css$/, loader: "style!css!cssnext-loader"},
-			{test :/\.jpe?g$/, loader: "url-loader?prefix=static/"}
+			{test :/\.jpe?g$/, loader: "url-loader?prefix=static/"},
 		]	
 	},
 	resolve: {

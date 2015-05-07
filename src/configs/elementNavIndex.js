@@ -1,4 +1,4 @@
-module.exports = [
+export default [
 	{
 		title: "Atlas",
 		description:"Découvrez l'ensemble des données collectées par le Conservatoire d'espaces naturels sur une des thématiques suivantes:",
@@ -9,4 +9,4 @@ module.exports = [
 			}	
 		]
 	}
-]
+];

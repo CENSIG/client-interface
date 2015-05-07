@@ -1,4 +1,4 @@
-var infos = {
+export var infos = {
 	"185214": {
 		name: "Lepidoptera"	
 	},
@@ -8,7 +8,7 @@ var infos = {
 	}
 };
 
-var geojson = {
+export var geojson = {
 	"185214": {
 		type:"FeatureCollection",
 		geometries:["fii"]
@@ -18,7 +18,4 @@ var geojson = {
 		type:"FeatureCollection",
 		geometries:["foo"]
 	}
-}
-
-exports.infos   = infos;
-exports.geojson = geojson;
+};

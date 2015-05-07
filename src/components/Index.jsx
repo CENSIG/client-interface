@@ -1,11 +1,22 @@
-var React           = require("react"),
-		NavIndex        = require("./NavIndex"),
-		elementNavIndex = require("../configs/elementNavIndex");
+import React					 from "react";
+import NavIndex				 from "./NavIndex";
+import elementNavIndex from "../configs/elementNavIndex";
+
 if (process.env.BROWSER) {
 	require("../assets/css/base/index.css");
 }
 
-var Index = React.createClass({
+/**
+ * A component for display first page
+ * of application
+ * @author Jean BOUDET
+ */
+class Index extends React.Component
+{
+	constructor(props) {
+		super(props);
+	}
+
 	render() {
 		return (
 			<div className="index">
@@ -20,6 +31,6 @@ var Index = React.createClass({
 			</div>
 		);
 	}
-});
+}
 
-module.exports = Index;
+export default Index;

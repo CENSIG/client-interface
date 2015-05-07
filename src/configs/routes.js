@@ -1,14 +1,16 @@
-var data = require("../actions/TaxonActions");
+import {infos, geojson} from "../actions/TaxonActions";
+import Index from "../components/Index";
+import Taxon from "../components/Taxon";
 
-module.exports = {
+export default {
 	index: {
 		path: "/",
 		method: "get",
 		label: "Index",
 		page: "index",
-		handler: require("../components/Index"),
-		action: function(context, payload, done) {
-			context.dispatch("UPDATE_TITLE", { label: "Bienvenue sur l'application WebOb's"})	
+		handler: Index,
+		action: (context, payload, done) => {
+			context.dispatch("UPDATE_TITLE", { label: "Bienvenue sur l'application WebOb's"});
 			done();
 		}
 	},
@@ -18,10 +20,10 @@ module.exports = {
 		method: "get",
 		label: "Papillons",
 		page: "papillons",
-		handler: require("../components/Taxon"),
-		action: function(context, payload, done) {
+		handler: Taxon,
+		action: (context, payload, done) => {
 			context.dispatch("UPDATE_TITLE", { label: "WebOb's | Atlas Papillons"});
-			context.dispatch("RECEIVE_INFO", { info: data.infos["185214"] });
+			context.dispatch("RECEIVE_INFO", { info: infos["185214"] });
 			done();
 		}
 	}

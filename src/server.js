@@ -9,6 +9,8 @@ require("node-jsx").install({
 	extension: ".jsx"
 });
 
+require("babel/register");
+
 // Dependencies
 var express       = require("express");
 		expstate      = require("express-state");

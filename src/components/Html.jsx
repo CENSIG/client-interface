@@ -1,8 +1,17 @@
-var React            = require("react"),
-		ApplicationStore = require("../stores/ApplicationStore");
+import React						from "react";
+import ApplicationStore from "../stores/ApplicationStore";
 
-var Html = React.createClass({
-	render: function() {
+/**
+ * A component for HTML structure
+ * @author Jean BOUDET
+ */
+class Html extends React.Component
+{
+	constructor(props) {
+		super(props);
+	}
+
+	render() {
 		return (
 			<html lang="fr">
 				<head>
@@ -17,6 +26,6 @@ var Html = React.createClass({
 			</html> 	
 		);
 	}
-});
+}
 
-module.exports = Html;
+export default Html;
