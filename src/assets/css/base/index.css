@@ -33,3 +33,7 @@
 	height   : 0px;
 	overflow : hidden;
 } 
+
+--indexWrapper nav {
+	width: 650px;
+}

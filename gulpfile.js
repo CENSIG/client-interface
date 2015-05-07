@@ -1,25 +1,29 @@
 /**
  * Gulpfile
  */
-
-var gulp   = require("gulp")
-		jshint = require("gulp-jshint");
-
-// Path for jshint
-var jsHintPath = [
-	"./src/server.js",
-	"./src/routing/routes.js",
-	"./src/routing/serverRoutes.js",
-	"./src/assets/js/clientRoutes.jsx",
-	"./src/assets/js/main.js",
-	"./src/assets/js/components/**/*.jsx",
-]
+var gulp             = require("gulp"),
+		nodemon          = require("gulp-nodemon"),
+		webpack          = require("gulp-webpack"),
+		webpackDevConfig = require("./webpack_config/dev.config");
 
 /**
- * jshint task
+ * Start server with nodemon
  */
-gulp.task("jshint", function() {
-	return gulp.src(jsHintPath)
-		.pipe(jshint({ linter: require("jshint-jsx").JSXHINT}))
-		.pipe(jshint.reporter('default'));
+gulp.task("start", function () {
+  nodemon({
+	  script: "src/server.js", 
+		ext: "js jsx css", 
+		env: { "NODE_ENV": "development" }
+	})
 });
+
+/**
+ * Webpack build
+ */
+gulp.task("webpack", function() {
+	return gulp.src("src/client.js")
+		.pipe(webpack(webpackDevConfig))
+		.pipe(gulp.dest("src/assets/dist/"))
+});
+
+gulp.task("dev", ["start", "webpack"]);

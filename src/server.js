@@ -3,30 +3,60 @@
  * @author Jean BOUDET
  */
 
-// Dependencies
-var express = require("express");
-var app     = express();
-
 // Load file with .jsx
 require("node-jsx").install({
 	harmony: true,
 	extension: ".jsx"
 });
 
-var serverRoutes = require("./routing/serverRoutes");
+// Dependencies
+var express       = require("express");
+		expstate      = require("express-state");
+		server        = express();
+		React         = require("react");
+		app           = require("./app");
+		navigation    = require("fluxible-router").navigateAction;
+		HtmlComponent = React.createFactory(require("./components/Html"));
 
-// Update the views directory and engine template
-app.set("views", __dirname+"/templates");
-app.set("view engine", "jade");
+// Use expose function
+expstate.extend(server);
 
 // Static ressource
-app.use("/static", express.static(__dirname+"/assets/dist"));
+server.use("/static", express.static(__dirname+"/assets/dist"));
 
-// Routes
-app.use("/", serverRoutes);
+// All requests
+server.use(function(req, res, next) {
+	var context = app.createContext();
+	var params = {
+		url: req.url	
+	};
+
+	// Router
+	context.getActionContext().executeAction(navigation, params, function(err) {
+		if (err) {
+			if (err.status && err.status === 404)	{
+				next();	
+			} else {
+				next(err);
+			}
+			return;
+		}
+
+		// Save state of app
+		res.expose(app.dehydrate(context), 'states');
+
+		// Get HTML string
+		var html = React.renderToStaticMarkup(HtmlComponent({
+			markup: React.renderToString(context.createElement()),
+			context: context.getComponentContext(),
+			state: res.locals.state
+		}));
+		res.send(html);
+	});
+});
 
 // Server listen
-var server = app.listen(3000, function() {
+var server = server.listen(3000, function() {
 	var host = server.address().host;
 	var port = server.address().port;
 

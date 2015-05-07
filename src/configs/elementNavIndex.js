@@ -5,8 +5,8 @@ module.exports = [
 		themes: [
 			{
 				title: "Papillons",
-				cdnom: "185214"
+				routeName: "papillons"
 			}	
 		]
 	}
-];
+]

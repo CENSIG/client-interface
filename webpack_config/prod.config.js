@@ -7,9 +7,8 @@ var webpack     = require("webpack"),
 		path        = require("path");
 
 // Path
-var pathToAssets = path.resolve(__dirname, "../src/assets/");
-var pathToJs     = path.join(pathToAssets, "js");
-var pathToDist   = path.join(pathToAssets, "dist");
+var pathToSrc  = path.resolve(__dirname, "../src/");
+var pathToDist = path.join(pathToSrc, "assets/dist");
 
 // Define global variable for include css file
 var define = new webpack.DefinePlugin({
@@ -26,22 +25,22 @@ var extract = new ExtractText("bundle.css");
 var uglify = new webpack.optimize.UglifyJsPlugin();
 
 module.exports = {
-	context: pathToJs,
-	entry: "./main.js",
+	context: pathToSrc,
+	entry: "./client.js",
 	output: {
 		path: pathToDist, 
 		filename: "bundle.js"
 	},
 	module: {
 		loaders: [
-			{test: /\.jsx$/, loader: "jsx-loader?harmony"},
+			{test: /\.jsx?$/, loader: "jsx-loader?harmony"},
 			{test: /\.css$/, loader: ExtractText.extract("style-loader", "css-loader", "cssnext-loader")},
-			{test :/\.jpg$/, loader: "url-loader?prefix=static/"}
+			{test :/\.jpe?g$/, loader: "url-loader?prefix=static/"}
 		]	
 	},
 	resolve: {
 		extensions: ["", ".js", ".jsx"],
-		root: __dirname + "/src/assets/js",
+		root: pathToSrc,
 		modulesDirectories:	["node_modules"]
 	},
 	plugins: [define, extract, uglify]
