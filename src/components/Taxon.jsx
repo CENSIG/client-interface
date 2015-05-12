@@ -6,25 +6,21 @@ class Taxon extends React.Component
 {
 	constructor(props, context) {
 		super(props);
-		this.state = context.getStore(TaxonStore).getState();
-	}
-
-	componentDidMount() {
-		this.context.getStore(TaxonStore).addChangeListener(this._onChange.bind(this));	
-	}
-
-	_onChange() {
-		this.setState(this.context.getStore(TaxonStore).getState());
 	}
 
 	render() {
 		return (
 			<div>
-				<p>Bienvenue dans l'atlas {this.state.info.name}</p>
+				<p>Bienvenue dans l'atlas {this.props.info.nom}</p>
+				<p>Geojson: {this.props.geojson.type}</p>
 			</div>	
 		);
 	}
 }
+
+Taxon = connectToStores(Taxon, [ TaxonStore ], (stores, props) => {
+	return stores.TaxonStore.getState();	
+});
 
 Taxon.contextTypes = {
 	getStore: React.PropTypes.func

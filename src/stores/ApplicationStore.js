@@ -11,6 +11,7 @@ class ApplicationStore extends BaseStore
 		super(dispatcher);
 		this.currentTitlePage = null;
 		this.pages            = routes;
+		this.loaded           = true;
 	}
 	
 	_handleTitle(title) {
@@ -18,14 +19,24 @@ class ApplicationStore extends BaseStore
 		this.emitChange();
 	}
 
+	_handleLoaded(loaded) {
+		this.loaded = loaded;	
+		this.emitChange();
+	}
+
 	getCurrentTitlePage() {
 		return this.currentTitlePage;
 	}
 
+	getLoaded() {
+		return this.loaded;	
+	}
+
 	getState() {
 		return {
-			currentTitlePage: this.currentTitlePage,
-			pages: this.pages
+			currentTitlePage : this.currentTitlePage,
+			loaded           : this.loaded,
+			pages            : this.pages
 		};
 	}
 	
@@ -41,7 +52,8 @@ class ApplicationStore extends BaseStore
 
 ApplicationStore.storeName = "ApplicationStore";
 ApplicationStore.handlers = {
-	"UPDATE_TITLE": "_handleTitle"
+	"UPDATE_TITLE": "_handleTitle",
+	"LOADED": "_handleLoaded"
 };
 
 export default ApplicationStore;

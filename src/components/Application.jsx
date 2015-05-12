@@ -2,6 +2,7 @@ import React						from "react";
 import ApplicationStore from "../stores/ApplicationStore";
 import {provideContext, connectToStores} from "fluxible/addons";
 import {handleHistory}  from "fluxible-router";
+import Loader					  from "react-loader";
 
 if (process.env.BROWSER) {
 	require('../assets/css/reset.css');
@@ -21,26 +22,27 @@ class Application extends React.Component
 
 	componentDidUpdate(prevProps) {
 		var newProps = this.props;
-		if (newProps.applicationStore.currentTitlePage === prevProps.applicationStore.currentTitlePage) {
+		if (newProps.currentTitlePage === prevProps.currentTitlePage) {
 			return;	
 		}
-		document.title = newProps.applicationStore.currentTitlePage;
+		document.title = newProps.currentTitlePage;
 	}
 
 	render() {
 		var Handler = this.props.currentRoute.get("handler");
+		console.log(this.props.loaded);
 		return (
 			<div>
-				<Handler />	
+				<Loader loaded={this.props.loaded}>
+					<Handler />	
+				</Loader>
 			</div>
 		);
 	}
 }
 
 Application = connectToStores(Application, [ ApplicationStore ], (stores, props) => {
-	return {
-		applicationStore: stores.ApplicationStore.getState()
-	}
+		return stores.ApplicationStore.getState();
 });
 
 Application = handleHistory(Application);

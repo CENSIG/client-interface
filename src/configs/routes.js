@@ -1,6 +1,6 @@
-import {infos, geojson} from "../actions/TaxonActions";
-import Index from "../components/Index";
-import Taxon from "../components/Taxon";
+import {getAll} from "../actions/TaxonActions";
+import Index		from "../components/Index";
+import Atlas		from "../components/Atlas";
 
 export default {
 	index: {
@@ -16,15 +16,17 @@ export default {
 	},
 
 	"papillons": {
-		path: "/papillons",
-		method: "get",
-		label: "Papillons",
-		page: "papillons",
-		handler: Taxon,
-		action: (context, payload, done) => {
-			context.dispatch("UPDATE_TITLE", { label: "WebOb's | Atlas Papillons"});
-			context.dispatch("RECEIVE_INFO", { info: infos["185214"] });
-			done();
+		path    : "/papillons",
+		cdnom		: "185214",
+		method  : "get",
+		label   : "Papillons",
+		page    : "papillons",
+		handler : Atlas,
+		action  : (context, payload, done) => {
+			context.dispatch("UPDATE_TITLE", { label: "WebOb's | Atlas des papillons" });
+			getAll(context, payload).then(function() {
+				done();
+			});
 		}
 	}
 };
