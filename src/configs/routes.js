@@ -1,7 +1,11 @@
-import {getAll} from "../actions/TaxonActions";
-import Index		from "../components/Index";
-import Atlas		from "../components/Atlas";
+import TaxonAction from "../actions/TaxonAction";
+import Index		   from "../components/Index";
+import Atlas		   from "../components/Atlas";
 
+/**
+ * Routes
+ * @author Jean BOUDET
+ */
 export default {
 	index: {
 		path: "/",
@@ -24,8 +28,8 @@ export default {
 		handler : Atlas,
 		action  : (context, payload, done) => {
 			context.dispatch("UPDATE_TITLE", { label: "WebOb's | Atlas des papillons" });
-			getAll(context, payload).then(function() {
-				done();
+			TaxonAction.getAll(context, payload).then(function() {
+				done();	
 			});
 		}
 	}

@@ -3,11 +3,17 @@ import TaxonStore				 from "../stores/TaxonStore";
 import ApplicationStore	 from "../stores/ApplicationStore";
 import {connectToStores} from "fluxible/addons";
 import PanelInformations from "./PanelInformations";
+import {base}						 from "../configs/themesForMap";
 
+// if application is in browser then require BaseMap
 if (process.env.BROWSER && typeof window !== "undefined") {
-	var BaseMap = require("./BaseMap");
+	var BaseMap = require("./map/BaseMap");
 }
 
+/**
+ * A component for Atlas
+ * @author Jean BOUDET
+ */
 class Atlas extends React.Component
 {
 	constructor(props, context) {
@@ -16,16 +22,21 @@ class Atlas extends React.Component
 
 	render() {
 		var map;
+		// if application is in browser then display BaseMap
 		if (process.env.BROWSER && typeof window !== "undefined") {
-			map = <BaseMap />
+			map = <BaseMap 
+				geojson={this.props.geojson} 
+				theme={base} 
+			/>
 		}
+
 		return (
 			<div>	
 				<header>
-					<h1>Bienvenue sur l'atlas des {this.props.nom}</h1>
-					<h3>({this.props.nomVern})</h3>
+					<h1>Bienvenue sur l'atlas des {this.props.info.nom}</h1>
+					<h3>({this.props.info.nomVern})</h3>
 				</header>
-				<PanelInformations />
+				<PanelInformations info={this.props.info} />
 				{map}
 			</div>
 		)	
@@ -34,8 +45,8 @@ class Atlas extends React.Component
 
 Atlas = connectToStores(Atlas, [ TaxonStore ], (stores, props) => {
 	return {
-		nom     : stores.TaxonStore.getInfo().nom,
-		nomVern : stores.TaxonStore.getInfo().nomVern
+		info: stores.TaxonStore.getInfo(),
+		geojson: stores.TaxonStore.getGeoJson()
 	}
 });
 

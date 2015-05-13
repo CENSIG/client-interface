@@ -1,6 +1,11 @@
 import React		 from "react";
 import {NavLink} from "fluxible-router";
 
+/**
+ * This is item for theme navigation (if exist)
+ * For example, Papillons is a theme for item Atlas
+ * @author Jean BOUDET
+ */
 class NavIndexItemTheme extends React.Component
 {
 	constructor(props) {
@@ -26,6 +31,10 @@ class NavIndexItemTheme extends React.Component
 	}
 }
 
+/**
+ * This is main item for navigation (example Atlas)
+ * @author Jean BOUDET
+ */
 class NavIndexItem extends React.Component
 {
 	constructor(props) {
@@ -43,6 +52,10 @@ class NavIndexItem extends React.Component
 	}
 }
 
+/**
+ * This is index page navigation
+ * @author Jean BOUDET
+ */
 class NavIndex extends React.Component
 {
 	constructor(props) {

@@ -1,5 +1,9 @@
 import BaseStore from "fluxible/addons/BaseStore";
 
+/**
+ * A store for Taxon
+ * @author Jean BOUDET
+ */
 class TaxonStore extends BaseStore
 {
 	constructor(dispatcher) {

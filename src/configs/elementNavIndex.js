@@ -1,3 +1,7 @@
+/**
+ * This is element of index page navigation
+ * @author Jean BOUDET
+ */
 export default [
 	{
 		title: "Atlas",

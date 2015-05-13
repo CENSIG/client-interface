@@ -1,7 +1,9 @@
-import React						 from "react";
-import TaxonStore				 from "../stores/TaxonStore";
-import {connectToStores} from "fluxible/addons";
+import React	from "react";
 
+/**
+ * Display informations about taxon
+ * @author Jean BOUDET
+ */
 class PanelInformations extends React.Component
 {
 	constructor(props, context) {
@@ -12,21 +14,17 @@ class PanelInformations extends React.Component
 		return (
 			<div>
 				<ul>
-					<li>Nom: {this.props.nom}</li>
-					<li>Phylum: {this.props.phylum}</li>
-					<li>Classe: {this.props.classe}</li>
-					<li>Nombre d'observations: {this.props.observations}</li>
-					<li>Nombre d'especes: {this.props.especes}</li>
-					<li>Nombre de communes: {this.props.communes}</li>
+					<li>Nom: {this.props.info.nom}</li>
+					<li>Phylum: {this.props.info.phylum}</li>
+					<li>Classe: {this.props.info.classe}</li>
+					<li>Nombre d'observations: {this.props.info.observations}</li>
+					<li>Nombre d'especes: {this.props.info.especes}</li>
+					<li>Nombre de communes: {this.props.info.communes}</li>
 				</ul>
 			</div>
 		);
 	}
 }
-
-PanelInformations = connectToStores(PanelInformations, [ TaxonStore ], (stores, props) => {
-	return stores.TaxonStore.getInfo();
-});
 
 export default PanelInformations;
 
