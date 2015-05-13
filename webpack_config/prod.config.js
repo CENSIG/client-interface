@@ -35,7 +35,7 @@ module.exports = {
 		loaders: [
 			{test: /\.jsx?$/, loader: "jsx-loader?harmony"},
 			{test: /\.css$/, loader: ExtractText.extract("style-loader", "css-loader", "cssnext-loader")},
-			{test :/\.(jpe?g|png)$/i, loader: "url-loader?prefix=static/"}
+			{test :/\.(jpe?g|png|woff?2|tff|eot|svg)$/i, loader: "url-loader?prefix=static/"}
 		]	
 	},
 	resolve: {

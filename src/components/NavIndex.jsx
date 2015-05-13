@@ -42,11 +42,14 @@ class NavIndexItem extends React.Component
 	}
 
 	render() {
+		var className = this.props.className + " card";
 		return (
-			<li className="card">
-				<h3>{this.props.title}</h3>
-				<p>{this.props.children}</p>
-				{this.props.themes}
+			<li className={className}>
+				<div className="content-item">
+					<h3>{this.props.title}</h3>
+					<p>{this.props.children}</p>
+					{this.props.themes}
+				</div>
 			</li>
 		);
 	}
@@ -70,7 +73,7 @@ class NavIndex extends React.Component
 			if (themes) linkTheme = <NavIndexItemTheme themes={themes} />;
 
 			return (
-				<NavIndexItem title={element.title} themes={linkTheme}>
+				<NavIndexItem className={element.className} title={element.title} themes={linkTheme}>
 					{element.description}
 				</NavIndexItem>
 			);

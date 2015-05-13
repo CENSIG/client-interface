@@ -1,3 +1,29 @@
+/**
+ * Classes for flexbox
+ */
+.flex {
+	display: flex;
+}
+
+.flex-justify-center {
+	justify-content: center;
+}
+
+.flex-align-center {
+	align-items: center;
+}
+
+.flex-align-start {
+	align-items: flex-start;
+}
+
+.flex-direction-column {
+	flex-direction: column;
+}
+
+/**
+ * Classes for box
+ */
 .card {
 	padding          : 25px;
 	background-color : #fff;
@@ -5,20 +31,29 @@
 	border-radius    : 1px;
 }
 
+.card h3 { font-family: open_sansbold; }
+
+.card h3, p { margin: 0 0 10px 0;	}
+
+.card ul { margin: 0 0 0 10px ; }
+
+/**
+ * Classes for spinner
+ */
 .spin {
 	position: absolute;
 	z-index: 1000;
 	background-color:rgba(255, 255, 255, 0.5);
 	top: 0; right: 0; bottom: 0; left: 0;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 }
 
 .spin .three-bounce > div {
 	background-color:  #4caf50;
 }
 
+/**
+ * Classes for map legend
+ */
 .map-legend {
 	padding: 6px 8px; 
 	background: rgba(255,255,255,0.8);
