@@ -3,12 +3,12 @@
 	background-color:  #4caf50;
 	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.26);
 	color: #fff;
-	line-height: 64px;
 }
 
 .atlas header h1 {
-	margin: 0 0 0 20px;
+	font-size: 1.2em;
 	font-family: open_sansbold;
+	margin: 0 0 0 10px;
 }
 
 .atlas section {

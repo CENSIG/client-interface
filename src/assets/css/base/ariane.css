@@ -1,0 +1,15 @@
+.ariane {
+	align-self: flex-end;
+	margin: 0 10px 10px 0;
+}
+
+.ariane-item::after {
+	content				:"";
+	width         : 10px;
+	height        : 10px;
+	display       : inline-block;
+	margin				: 0 10px 0 0;
+	border-top    : 2px solid white;
+	border-right  : 2px solid white;
+	transform			:	rotate(45deg);
+}

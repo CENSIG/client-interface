@@ -9,25 +9,12 @@ const api = new Api("taxon");
  */
 class TaxonAction
 {
-	static getInfo(cdnom, context) {
+	static get(cdnom, context, option) {
 		return new Promise(function(resolve, reject) {
 			if (context.getStore(TaxonStore).getState().info.id !== cdnom) {
-				api.get(cdnom, "informations")
+				api.get(cdnom, option)
 					.then(function(data) {
 						resolve(data);
-					}, function() {
-						reject();
-					});
-			}
-		});
-	}
-	
-	static getGeoJson(cdnom, context) {
-		return new Promise(function(resolve, reject) {
-			if (context.getStore(TaxonStore).getState().info.id !== cdnom) {
-				api.get(cdnom, "geojson")
-					.then(function(data) {
-						resolve(data);	
 					}, function() {
 						reject();
 					});
@@ -43,8 +30,9 @@ class TaxonAction
 		} 
 
 		return Promise.all([
-			TaxonAction.getInfo(cdnom, context),
-			TaxonAction.getGeoJson(cdnom, context),
+			TaxonAction.get(cdnom, context, "informations"),
+			TaxonAction.get(cdnom, context, "geojson"),
+			TaxonAction.get(cdnom, context, "parents")
 		]).then(function(data) {
 			context.dispatch("RECEIVE_ALL_DATA", data)
 			context.dispatch("LOADED", true);
