@@ -29,13 +29,20 @@ class BaseMap extends React.Component
 		}	
 	}
 
+	_handleGeojsonPopup(feature, layer) {
+		if (feature.properties && feature.properties.nombres) {
+			layer.bindPopup("<p>"+feature.properties.nombres+"</p>");
+		}	
+	}
+
 	render() {
 		var geojson;
 
 		if (this.props.geojson.hasOwnProperty("type")) {
 			geojson = <GeoJson 
 				data={this.props.geojson} 
-				style={this._handleStyle.bind(this)}		
+				style={this._handleStyle.bind(this)}
+				onEachFeature={this._handleGeojsonPopup}
 			/>;
 		}
 

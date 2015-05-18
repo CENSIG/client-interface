@@ -20,7 +20,7 @@ class Index extends React.Component
 	render() {
 		return (
 			<div className="index">
-				<div className="wrapper flex flex-direction-column flex-align-start">
+				<div className="wrapper flex fdc fas">
 					<div className="title card">
 						<h1 className="logo">
 							<span>Conservatoire d'espaces naturels</span>

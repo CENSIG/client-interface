@@ -27,14 +27,6 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
-body {
-	font-family: open_sansregular;
-	line-height: 1;
-}
-a {
-	color: #50a5e6;
-	text-decoration:none;
-}
 ol, ul {
 	list-style: none;
 }

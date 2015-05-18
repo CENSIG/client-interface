@@ -5,30 +5,38 @@
 	display: flex;
 }
 
-.flex-justify-center {
+.fjc {
 	justify-content: center;
 }
 
-.flex-align-center {
+.fjb {
+	justify-content: space-between;
+}
+
+.fac {
 	align-items: center;
 }
 
-.flex-align-start {
+.fas {
 	align-items: flex-start;
 }
 
-.flex-direction-column {
+.fdc {
 	flex-direction: column;
+}
+
+.fdrr {
+	flex-direction: row-reverse;
 }
 
 /**
  * Classes for box
  */
 .card {
-	padding          : 25px;
+	padding          : 20px;
 	background-color : #fff;
-	box-shadow       : 1px 1px 10px 2px #343434;
-	border-radius    : 1px;
+	box-shadow       : 0px 2px 5px rgba(0, 0, 0, 0.26);
+	border-radius    : 2px;
 }
 
 .card h3 { font-family: open_sansbold; }

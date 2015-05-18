@@ -3,10 +3,12 @@ import TaxonStore				 from "../stores/TaxonStore";
 import ApplicationStore	 from "../stores/ApplicationStore";
 import {connectToStores} from "fluxible/addons";
 import PanelInformations from "./PanelInformations";
+import Search						 from "./Search";
 import {base}						 from "../configs/themesForMap";
 
 // if application is in browser then require BaseMap
 if (process.env.BROWSER && typeof window !== "undefined") {
+	require("../assets/css/base/atlas.css");
 	var BaseMap = require("./map/BaseMap");
 }
 
@@ -31,14 +33,16 @@ class Atlas extends React.Component
 		}
 
 		return (
-			<div>	
+			<article className="atlas">	
 				<header>
 					<h1>Bienvenue sur l'atlas des {this.props.info.nom}</h1>
-					<h3>({this.props.info.nomVern})</h3>
 				</header>
-				<PanelInformations info={this.props.info} />
-				{map}
-			</div>
+				<Search label={this.props.info.nom} />
+				<section className="flex fdrr fjb">
+					<PanelInformations info={this.props.info} />
+					{map}
+				</section>
+			</article>
 		)	
 	}
 }

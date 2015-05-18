@@ -12,14 +12,20 @@ class PanelInformations extends React.Component
 
 	render() {
 		return (
-			<div>
-				<ul>
-					<li>Nom: {this.props.info.nom}</li>
-					<li>Phylum: {this.props.info.phylum}</li>
-					<li>Classe: {this.props.info.classe}</li>
-					<li>Nombre d'observations: {this.props.info.observations}</li>
-					<li>Nombre d'especes: {this.props.info.especes}</li>
-					<li>Nombre de communes: {this.props.info.communes}</li>
+			<div className="panel-info">
+				<ul className="card flex fjb">
+					<li>
+						<span className="stats">{this.props.info.observations}</span>
+						<span>Observations</span>
+					</li>
+					<li>
+						<span className="stats">{this.props.info.especes}</span>
+						<span>Espèces</span>
+					</li>
+					<li>
+						<span className="stats">{this.props.info.communes}</span>
+						<span>Communes</span>
+					</li>
 				</ul>
 			</div>
 		);

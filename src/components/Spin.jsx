@@ -12,7 +12,7 @@ class Spin extends React.Component
 
 	render() {
 		return (
-			<div className="spin flex flex-justify-center flex-align-center">
+			<div className="spin flex fjc fac">
 				<Spinner spinnerName={this.props.name} />
 			</div>
 		)	

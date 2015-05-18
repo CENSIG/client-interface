@@ -5,7 +5,7 @@
 export default [
 	{
 		title: "Atlas",
-		className: "atlas",
+		className: "index-atlas",
 		description:"Découvrez l'ensemble des données collectées par le Conservatoire d'espaces naturels sur une des thématiques suivantes:",
 		themes: [
 			{

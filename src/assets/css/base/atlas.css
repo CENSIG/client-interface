@@ -1,0 +1,41 @@
+.atlas header {
+	height: 70px;
+	background-color:  #4caf50;
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.26);
+	color: #fff;
+	line-height: 64px;
+}
+
+.atlas header h1 {
+	margin: 0 0 0 20px;
+	font-family: open_sansbold;
+}
+
+.atlas section {
+	margin: 20px 10px 0px 10px;
+}
+
+.atlas .panel-info {
+	flex-basis: 700px;
+}
+
+.panel-info li span {
+	display: block;
+	text-align: center;
+}
+
+.stats {
+	font-family: open_sansbold;
+}
+
+.search {
+	background: url("./img/search.svg") no-repeat 20px center;
+	margin: 10px 10px 0;
+}
+
+.search input {
+	background: none;
+	border: none;
+	width: 100%;
+	padding: 0 0 0 50px;
+}

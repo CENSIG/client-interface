@@ -7,6 +7,7 @@ if (process.env.BROWSER) {
 	require('../assets/css/reset.css');
 	require('../assets/css/base/fonts/fonts.css');
 	require('../assets/css/base/utils.css');
+	require('../assets/css/base/main.css');
 	var Spin = require("./Spin");
 }
 
