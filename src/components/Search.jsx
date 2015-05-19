@@ -1,5 +1,9 @@
 import React from "react";
 
+/**
+ * Element for search taxon
+ * @author Jean BOUDET
+ */
 class Search extends React.Component
 {
 	constructor(props) {

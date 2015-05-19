@@ -4,6 +4,10 @@ if (process.env.BROWSER) {
 	require('../assets/css/base/ariane.css');
 }
 
+/**
+ * Last item for breadcrumb
+ * @author Jean BOUDET
+ */
 class ArianeItemLast extends React.Component
 {
 	constructor(props) {
@@ -19,6 +23,10 @@ class ArianeItemLast extends React.Component
 	}
 }
 	
+/**
+ * Item for breadcrumb
+ * @author Jean BOUDET
+ */
 class ArianeItem extends React.Component
 {
 	constructor(props) {
@@ -34,6 +42,10 @@ class ArianeItem extends React.Component
 	}
 }
 
+/**
+ * Breadcrumb
+ * @author Jean BOUDET
+ */
 class Ariane extends React.Component
 {
 	constructor(props) {
