@@ -1,4 +1,5 @@
 import TaxonAction from "../actions/TaxonAction";
+import TaxonStore	 from "../stores/TaxonStore";
 import Index		   from "../components/Index";
 import Atlas		   from "../components/Atlas";
 
@@ -28,9 +29,12 @@ export default {
 		handler : Atlas,
 		action  : (context, payload, done) => {
 			context.dispatch("UPDATE_TITLE", { label: "WebOb's | Atlas des papillons" });
-			TaxonAction.getAll(context, payload).then(function() {
-				done();	
-			});
+			var cdnom = payload.get("cdnom");
+			if (cdnom !== context.getStore(TaxonStore).getInfo().id) {
+				TaxonAction.getAll(context, payload).then(function() {
+					done();	
+				});
+			}
 		}
 	}
 };

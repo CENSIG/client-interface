@@ -9,30 +9,37 @@ const api = new Api("taxon");
  */
 class TaxonAction
 {
-	static get(cdnom, context, option) {
+	/**
+	 * A promise for GET request
+	 * @param cdnom		identifiant
+	 * @param object	output
+	 * @param options request parameters
+	 * @return promise
+	 */
+	static get(cdnom, object, options=null) {
 		return new Promise(function(resolve, reject) {
-			if (context.getStore(TaxonStore).getState().info.id !== cdnom) {
-				api.get(cdnom, option)
-					.then(function(data) {
-						resolve(data);
-					}, function() {
-						reject();
-					});
-			}
+			api.get(cdnom, object, options)
+				.then(function(data) {
+					resolve(data);
+				}, function() {
+					reject();
+				});
 		});
 	}
 
+	/**
+	 * A promise for execute multiple GET request
+	 * @param context The context
+	 * @param payload data
+	 */
 	static getAll(context, payload) {
 		var cdnom = payload.get("cdnom");
-
-		if (context.getStore(TaxonStore).getState().info.id !== cdnom) {
-			context.dispatch("LOADED", false);
-		} 
+		context.dispatch("LOADED", false);
 
 		return Promise.all([
-			TaxonAction.get(cdnom, context, "informations"),
-			TaxonAction.get(cdnom, context, "geojson"),
-			TaxonAction.get(cdnom, context, "parents")
+			TaxonAction.get(cdnom, "informations"),
+			TaxonAction.get(cdnom, "geojson"),
+			TaxonAction.get(cdnom, "parents")
 		]).then(function(data) {
 			context.dispatch("RECEIVE_ALL_DATA", data)
 			context.dispatch("LOADED", true);

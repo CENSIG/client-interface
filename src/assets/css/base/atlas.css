@@ -28,14 +28,4 @@
 	font-family: open_sansbold;
 }
 
-.search {
-	background: url("./img/search.svg") no-repeat 20px center;
-	margin: 10px 10px 0;
-}
 
-.search input {
-	background: none;
-	border: none;
-	width: 100%;
-	padding: 0 0 0 50px;
-}

@@ -49,8 +49,8 @@ class ApplicationStore extends BaseStore
 
 ApplicationStore.storeName = "ApplicationStore";
 ApplicationStore.handlers = {
-	"UPDATE_TITLE": "_handleTitle",
-	"LOADED": "_handleLoaded"
+	"UPDATE_TITLE"           : "_handleTitle",
+	"LOADED"                 : "_handleLoaded"
 };
 
 export default ApplicationStore;

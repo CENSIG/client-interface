@@ -14,7 +14,8 @@ class Api
 	 * @param uri The name of resource
 	 */
 	constructor(uri) {
-		this.uri = HOST+uri;	
+		this.uri            = HOST+uri;
+		this.requestPending = null;
 	}
 
 	/**
@@ -24,12 +25,11 @@ class Api
 	 * @param  option  Specific output for the resource
 	 * @return promise
 	 */
-	get(id, option=null) {
-		var url =	(option) ? `${this.uri}/${id}/${option}` : `${this.uri}/${id}`;
+	get(id, object=null, options=null) {
+		var url = this.buildUrl(id, object, options);
+		this.requestPending = request.get(url);
 		return new Promise(function(resolve, reject) {
-			request
-				.get(url)
-				.end(function(err, res) {
+			this.requestPending.end(function(err, res) {
 					if (err && err.status === 404) {
 						reject();
 					} else {
@@ -37,6 +37,28 @@ class Api
 					}
 				});
 		}.bind(this));
+	}
+
+	buildUrl(id, object, options) {
+		var url = `${this.uri}/${id}`;
+		url += (object) ? `/${object}` : "";
+		url += this.extractOption(options);
+		return url;
+	}
+
+	extractOption(options) {
+		if (!options) return "";
+		var params = "?";
+		var i = 1;
+		for (var k in options) {
+			params += k + "=" + options[k];
+			(i < options.length) ? params += "&" : "";
+		}
+		return params;
+	}
+
+	getRequestPending() {
+		return this.requestPending;	
 	}
 }
 
