@@ -23,6 +23,10 @@ class PanelInformations extends React.Component
 						<span>Espèces</span>
 					</li>
 					<li>
+						<span className="stats">{this.props.info.observateurs}</span>
+						<span>Observateurs</span>
+					</li>
+					<li>
 						<span className="stats">{this.props.info.communes}</span>
 						<span>Communes</span>
 					</li>

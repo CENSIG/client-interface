@@ -46,13 +46,13 @@ class SearchResultItemContent extends React.Component
 		var data = this.props.children;
 		return (
 			<ul className="search-result-item-content">
+				<li>
+					<em>{data.nameRef}</em>
+				</li>
 				<ItemContentName isref={data.isref}>
 					{data.name}
 				</ItemContentName>
 				<li className="search-content-obs">{data.observations}</li>
-				<li>
-					<em>{data.nameRef}</em>
-				</li>
 			</ul>
 		);	
 	}
@@ -89,9 +89,9 @@ class HeaderSearchResult extends React.Component
 		return (
 			<li className="search-result-header">
 				<ul className="search-result-item-content">
+					<li>Taxon référent</li>
 					<li>Nom</li>
 					<li className="search-content-obs">Nombre d'observations</li>
-					<li>Taxon référent</li>
 				</ul>
 			</li>
 		)	
