@@ -10,7 +10,10 @@ export default [
 		themes: [
 			{
 				title: "Papillons",
-				routeName: "papillons"
+				routeName: "atlas",
+				navParams: {
+					name: "papillons"
+				}
 			}	
 		]
 	}

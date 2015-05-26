@@ -16,7 +16,7 @@ class NavIndexItemTheme extends React.Component
 		var items = this.props.themes.map(item => {
 			return (
 				<li>
-					<NavLink routeName={item.routeName}>
+					<NavLink routeName={item.routeName} navParams={item.navParams}>
 						{item.title}
 					</NavLink>
 				</li>

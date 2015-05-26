@@ -1,12 +1,12 @@
-import Api from "../utils/Api";
+import Api				from "../utils/Api";
 
 const api = new Api("taxon");
 
 /**
- * Actions for taxon (get informations and geojson)
+ * Actions for atlas (get informations and geojson)
  * @author Jean BOUDET
  */
-class TaxonAction
+class AtlasAction
 {
 	/**
 	 * A promise for GET request
@@ -33,18 +33,15 @@ class TaxonAction
 	 */
 	static getData(context, payload) {
 		var cdnom = payload.cdnom;
-		var limit = payload.limit;
 		context.dispatch("LOADED", false);
-
 		return Promise.all([
-			TaxonAction.get(cdnom, "informations"),
-			TaxonAction.get(cdnom, "geojson"),
-			TaxonAction.get(cdnom, "parents", { limit: limit })
+			AtlasAction.get(cdnom, "informations"),
+			AtlasAction.get(cdnom, "geojson")
 		]).then(function(data) {
-			context.dispatch("ESPECE_DATA", data)
+			context.dispatch("ATLAS_DATA", data);
 			context.dispatch("LOADED", true);
 		});
 	}
 }
 
-export default TaxonAction;
+export default AtlasAction;

@@ -18,7 +18,7 @@ var define = new webpack.DefinePlugin({
 });
 
 module.exports = {
-	context: path.resolve(__dirname, "../src/"),
+	context: pathToSrc,
 	entry: "./client.js",
 	output: {
 		path: pathToDist,

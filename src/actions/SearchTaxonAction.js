@@ -32,7 +32,7 @@ class SearchTaxonAction
 	 * @param payload data
 	 */
 	static getSearchChild(context, payload) {
-		SearchTaxonAction.get(payload.id, "childs", payload.options)
+		SearchTaxonAction.get(payload.cdnom, "childs", payload.options)
 			.then(function(data) {
 				context.dispatch("RECEIVE_RESULTS", data);
 			});

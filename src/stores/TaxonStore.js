@@ -8,24 +8,9 @@ class TaxonStore extends BaseStore
 {
 	constructor(dispatcher) {
 		super(dispatcher);
-		this.info    = {};
-		this.geojson = {};
-		this.parents = [];
-	}
-
-	_handleInfo(taxon) {
-		this.info = taxon;	
-		this.emitChange();
-	}
-
-	_handleGeoJson(taxon) {
-		this.geojson = taxon.geojson;	
-		this.emitChange();
-	}
-
-	_handleParents(parents) {
-		this.parents = parents;
-		this.emitChange();
+		this.info           = {};
+		this.geojson        = {};
+		this.parents        = [];
 	}
 
 	_handleAllData(data) {
@@ -49,9 +34,9 @@ class TaxonStore extends BaseStore
 
 	getState() {
 		return {
-			info    : this.info,
-			geojson : this.geojson,
-			parents : this.parents
+			info           : this.info,
+			geojson        : this.geojson,
+			parents        : this.parents
 		}	
 	}
 
@@ -60,18 +45,15 @@ class TaxonStore extends BaseStore
 	}
 
 	rehydrate(state) {
-		this.info    = state.info;
-		this.geojson = state.geojson;
-		this.parents = state.parents;
+		this.info           = state.info;
+		this.geojson        = state.geojson;
+		this.parents        = state.parents;
 	}
 }
 
 TaxonStore.storeName = "TaxonStore";
 TaxonStore.handlers  = {
-	"RECEIVE_INFO"     : "_handleInfo",
-	"RECEIVE_GEOJSON"  : "_handleGeoJson",
-	"RECEIVE_PARENTS"  : "_handleParents",
-	"RECEIVE_ALL_DATA" : "_handleAllData"
+	"ESPECE_DATA" : "_handleAllData"
 }
 
 export default TaxonStore;

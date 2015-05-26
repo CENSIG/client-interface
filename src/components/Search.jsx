@@ -1,8 +1,9 @@
 import React						 from "react";
 import SearchTaxonAction from "../actions/SearchTaxonAction";
 import SearchTaxonStore	 from "../stores/SearchTaxonStore";
-import TaxonStore				 from "../stores/TaxonStore";
+import AtlasStore				 from "../stores/AtlasStore";
 import {connectToStores} from "fluxible/addons";
+import {NavLink}				 from "fluxible-router";
 
 if (process.env.BROWSER && typeof window !== "undefined") {
 	require("../assets/css/base/search.css");
@@ -71,9 +72,13 @@ class SearchResultItem extends React.Component
 	render() {
 		return (
 			<li>
-				<SearchResultItemContent>
-					{this.props.content}
-				</SearchResultItemContent>
+				<NavLink routeName="taxon" navParams={
+					{ name: "papillons", cdnom: this.props.content.cdnom }
+				}>
+					<SearchResultItemContent>
+						{this.props.content}
+					</SearchResultItemContent>
+				</NavLink>
 			</li>
 		);
 	}
@@ -160,9 +165,9 @@ class Search extends React.Component
 	_handleKeyUp(e) {
 		var q = e.target.value;
 		if (q.length > 3) {
-			var id = this.context.getStore(TaxonStore).getInfo().id;
+			var cdnom = this.props.parentsCdnom; 
 			this.context.executeAction(SearchTaxonAction.getSearchChild, {
-				id: id,
+				cdnom: cdnom,
 				options: { q: q }
 			});
 		}

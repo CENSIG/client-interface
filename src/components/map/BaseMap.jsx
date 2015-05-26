@@ -2,6 +2,7 @@ import React										 from "react";
 import Leaflet									 from "leaflet";
 import {Map, TileLayer, GeoJson} from "react-leaflet";
 import Legend										 from "./Legend";
+import MyGeojson						     from "./MyGeojson";
 
 if (process.env.BROWSER ) {
 	require("../../../node_modules/leaflet/dist/leaflet.css");
@@ -35,23 +36,26 @@ class BaseMap extends React.Component
 		}	
 	}
 
-	render() {
-		var geojson;
-
-		if (this.props.geojson.hasOwnProperty("type")) {
-			geojson = <GeoJson 
-				data={this.props.geojson} 
+	getGeojson(data) {
+		return (
+			<MyGeojson 
+				data={data} 
 				style={this._handleStyle.bind(this)}
 				onEachFeature={this._handleGeojsonPopup}
-			/>;
-		}
+			/>
+		);
+	}
+
+	render() {
+		var data    = this.props.geojson;
+		var geojson = data.hasOwnProperty("type") ? this.getGeojson(data) : null;
 
 		return (
 			<Map ref="map" className="map" center={center} zoom={8}>
 				<TileLayer
 					url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
 				/>
-				<Legend position="bottomright" theme={this.props.theme}/>
+				<Legend position="bottomright" theme={this.props.theme} />
 				{geojson}
 			</Map>
 		);
