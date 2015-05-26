@@ -1,4 +1,5 @@
 import Api				from "../utils/Api";
+import BaseAction from "./BaseAction";
 
 const api = new Api("taxon");
 
@@ -6,26 +7,8 @@ const api = new Api("taxon");
  * Actions for atlas (get informations and geojson)
  * @author Jean BOUDET
  */
-class AtlasAction
+class AtlasAction extends BaseAction
 {
-	/**
-	 * A promise for GET request
-	 * @param cdnom		identifiant
-	 * @param object	output
-	 * @param options request parameters
-	 * @return promise
-	 */
-	static get(cdnom, object, options=null) {
-		return new Promise(function(resolve, reject) {
-			api.get(cdnom, object, options)
-				.then(function(data) {
-					resolve(data);
-				}, function() {
-					reject();
-				});
-		});
-	}
-
 	/**
 	 * A promise for execute multiple GET request
 	 * @param context The context
@@ -35,8 +18,8 @@ class AtlasAction
 		var cdnom = payload.cdnom;
 		context.dispatch("LOADED", false);
 		return Promise.all([
-			AtlasAction.get(cdnom, "informations"),
-			AtlasAction.get(cdnom, "geojson")
+			AtlasAction.get(api, cdnom, "informations"),
+			AtlasAction.get(api, cdnom, "geojson")
 		]).then(function(data) {
 			context.dispatch("ATLAS_DATA", data);
 			context.dispatch("LOADED", true);

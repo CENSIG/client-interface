@@ -1,38 +1,21 @@
 import Api from "../utils/Api";
+import BaseAction from "./BaseAction";
 
-var api = new Api("taxon");
+const api = new Api("taxon");
 
 /**
  * An action for taxon search
  * @author Jean BOUDET
  */
-class SearchTaxonAction
+class SearchTaxonAction extends BaseAction
 {
-	/**
-	 * A promise for GET request
-	 * @param cdnom		identifiant
-	 * @param object	output
-	 * @param options request parameters
-	 * @return promise
-	 */
-	static get(cdnom, object, options=null) {
-		return new Promise(function(resolve, reject) {
-			api.get(cdnom, object, options)
-				.then(function(data) {
-					resolve(data);
-				}, function() {
-					reject();
-				});
-		});
-	}
-
 	/**
 	 * Research taxon. The payload contains data
 	 * @param content the context
 	 * @param payload data
 	 */
 	static getSearchChild(context, payload) {
-		SearchTaxonAction.get(payload.cdnom, "childs", payload.options)
+		SearchTaxonAction.get(api, payload.cdnom, "childs", payload.options)
 			.then(function(data) {
 				context.dispatch("RECEIVE_RESULTS", data);
 			});
