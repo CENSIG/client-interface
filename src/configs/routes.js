@@ -31,7 +31,7 @@ export default {
 		action  : (context, payload) => {
 			var atlasName = payload.get("params").get("name");
 			var cdnom = appConfig.atlas[atlasName].cdnom
-			if (context.getStore(AtlasStore).getInfo().id !== cdnom) {
+			if (context.getStore(AtlasStore).getInfo().get("id") !== cdnom) {
 				return AtlasAction.getData(context, { cdnom: cdnom})
 					.then(function() {
 						context.dispatch("UPDATE_TITLE", { label: "WebOb's | Atlas des " + atlasName });
@@ -47,13 +47,13 @@ export default {
 		label: "taxon",
 		page: "taxon",
 		action : (context, payload) => {
-			context.dispatch("RESET_SEARCH", { results: [], pendingRequest: null });
+			context.dispatch("RESET_SEARCH");
 			var atlasName = payload.get("params").get("name");
 			var cdnom = payload.get("params").get("cdnom");
 			var limit = appConfig.atlas[atlasName].limit;
-			if (cdnom !== context.getStore(TaxonStore).getInfo().id) {
+			if (context.getStore(TaxonStore).getInfo().get("id") !== cdnom) {
 				return TaxonAction.getData(context, { cdnom: cdnom, limit: limit }).then(function() {
-					var name = context.getStore(TaxonStore).getInfo().nom;
+					var name = context.getStore(TaxonStore).getInfo().get("nom");
 					context.dispatch("UPDATE_TITLE", { label: "WebOb's | " + name });
 				});
 			}

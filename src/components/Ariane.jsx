@@ -53,13 +53,13 @@ class Ariane extends React.Component
 	}
 
 	render() {
-		var n     = this.props.parents.length;
+		var n     = this.props.parents.size;
 		var items = this.props.parents.map((parent, i) => {
 			var res;
 			if (n === i + 1) {
-				res = <ArianeItemLast>{parent.name}</ArianeItemLast>;
+				res = <ArianeItemLast>{parent.get("name")}</ArianeItemLast>;
 			} else {
-				res = <ArianeItem>{parent.name}</ArianeItem>;
+				res = <ArianeItem>{parent.get("name")}</ArianeItem>;
 			}
 			return res; 
 		});

@@ -15,19 +15,19 @@ class PanelInformations extends React.Component
 			<div className="panel-info">
 				<ul className="card flex fjb">
 					<li>
-						<span className="stats">{this.props.info.observations}</span>
+						<span className="stats">{this.props.info.get("observations")}</span>
 						<span>Observations</span>
 					</li>
 					<li>
-						<span className="stats">{this.props.info.especes}</span>
+						<span className="stats">{this.props.info.get("especes")}</span>
 						<span>Espèces</span>
 					</li>
 					<li>
-						<span className="stats">{this.props.info.observateurs}</span>
+						<span className="stats">{this.props.info.get("observateurs")}</span>
 						<span>Observateurs</span>
 					</li>
 					<li>
-						<span className="stats">{this.props.info.communes}</span>
+						<span className="stats">{this.props.info.get("communes")}</span>
 						<span>Communes</span>
 					</li>
 				</ul>

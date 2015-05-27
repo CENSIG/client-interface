@@ -1,4 +1,5 @@
 import BaseStore from "fluxible/addons/BaseStore";
+import Immutable from "immutable";
 
 /**
  * A store for Atlas
@@ -8,13 +9,13 @@ class AtlasStore extends BaseStore
 {
 	constructor(dispatcher) {
 		super(dispatcher);
-		this.info    = {};
-		this.geojson = {};
+		this.info    = Immutable.Map();
+		this.geojson = Immutable.Map();
 	}
 
 	_handleData(data) {
-		this.info = data[0];
-		this.geojson = data[1];
+		this.info    = Immutable.fromJS(data[0]);
+		this.geojson = Immutable.fromJS(data[1]);
 		this.emitChange();
 	}
 
@@ -38,8 +39,8 @@ class AtlasStore extends BaseStore
 	}
 
 	rehydrate(state) {
-		this.info    = state.info;
-		this.geojson = state.geojson;
+		this.info    = Immutable.fromJS(state.info);
+		this.geojson = Immutable.fromJS(state.geojson);
 	}
 }
 

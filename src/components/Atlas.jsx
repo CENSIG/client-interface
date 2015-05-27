@@ -25,6 +25,10 @@ class Atlas extends React.Component
 		super(props);
 	}
 
+	shouldComponentUpdate(nextProps) {
+		return nextProps.info.get("id") !== this.props.info.get("id");
+	}
+
 	render() {
 		var map;
 		// if application is in browser then display BaseMap
@@ -38,11 +42,11 @@ class Atlas extends React.Component
 		return (
 			<article className="atlas">	
 				<Header>
-					<h1>Bienvenue sur l'atlas des {this.props.info.nom}</h1>
+					<h1>Bienvenue sur l'atlas des {this.props.info.get("nom")}</h1>
 				</Header>
 				<Search 
-					label={this.props.info.nom} 
-					parentsCdnom={this.props.info.id}
+					label={this.props.info.get("nom")} 
+					parentsCdnom={this.props.info.get("id")}
 				/>
 				<section className="flex fdrr fjb">
 					<PanelInformations info={this.props.info} />
@@ -52,6 +56,10 @@ class Atlas extends React.Component
 		)	
 	}
 }
+
+Atlas.contextTypes = {
+	executeAction: React.PropTypes.func
+};
 
 Atlas = connectToStores(Atlas, [ AtlasStore ], (stores, props) => {
 	return stores.AtlasStore.getState();

@@ -1,4 +1,5 @@
 import BaseStore from "fluxible/addons/BaseStore";
+import Immutable from "immutable";
 
 /**
  * Store for manage taxon research
@@ -8,7 +9,7 @@ class SearchTaxonStore extends BaseStore
 {
 	constructor(dispatcher) {
 		super(dispatcher);
-		this.results        = [];
+		this.results        = Immutable.List();
 		this.pendingRequest = null;
 	}
 
@@ -20,13 +21,13 @@ class SearchTaxonStore extends BaseStore
 	}
 
 	_handleResults(results) {
-		this.results = results;	
+		this.results = Immutable.fromJS(results);
 		this.emitChange();
 	}
 
-	_handleResetSearch(reset) {
-		this.results        = reset.results;
-		this.pendingRequest = reset.pendingRequest;
+	_handleResetSearch() {
+		this.results        = Immutable.List();
+		this.pendingRequest = null;
 		this.emitChange();
 	}
 

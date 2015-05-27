@@ -48,12 +48,12 @@ class SearchResultItemContent extends React.Component
 		return (
 			<ul className="search-result-item-content">
 				<li>
-					<em>{data.nameRef}</em>
+					<em>{data.get("nameRef")}</em>
 				</li>
-				<ItemContentName isref={data.isref}>
-					{data.name}
+				<ItemContentName isref={data.get("isref")}>
+					{data.get("name")}
 				</ItemContentName>
-				<li className="search-content-obs">{data.observations}</li>
+				<li className="search-content-obs">{data.get("observations")}</li>
 			</ul>
 		);	
 	}
@@ -73,7 +73,7 @@ class SearchResultItem extends React.Component
 		return (
 			<li>
 				<NavLink routeName="taxon" navParams={
-					{ name: "papillons", cdnom: this.props.content.cdnom }
+					{ name: "papillons", cdnom: this.props.content.get("cdref") }
 				}>
 					<SearchResultItemContent>
 						{this.props.content}
@@ -116,7 +116,7 @@ class SearchResult extends React.Component
 	render() {
 		var results = this.props.results;
 		var res;
-		if (results.length != 0) {
+		if (results.size != 0) {
 			var items = results.map(result => {
 				return <SearchResultItem content={result} />;
 			});
@@ -172,11 +172,8 @@ class Search extends React.Component
 			});
 		}
 
-		if (q.length == 0 && this.props.results.length > 0) {
-			this.context.executeAction(SearchTaxonAction.resetSearch, {
-				results: [],
-				pendingRequest: null
-			});
+		if (q.length == 0 && this.props.results.size > 0) {
+			this.context.executeAction(SearchTaxonAction.resetSearch);
 		}
 	}
 

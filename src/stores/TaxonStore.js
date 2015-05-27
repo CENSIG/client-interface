@@ -1,4 +1,5 @@
 import BaseStore from "fluxible/addons/BaseStore";
+import Immutable from "immutable";
 
 /**
  * A store for Taxon
@@ -8,15 +9,15 @@ class TaxonStore extends BaseStore
 {
 	constructor(dispatcher) {
 		super(dispatcher);
-		this.info           = {};
-		this.geojson        = {};
-		this.parents        = [];
+		this.info           = Immutable.Map();
+		this.geojson        = Immutable.Map();
+		this.parents        = Immutable.List();
 	}
 
 	_handleAllData(data) {
-		this.info    = data[0];
-		this.geojson = data[1];
-		this.parents = data[2];
+		this.info    = Immutable.fromJS(data[0]);
+		this.geojson = Immutable.fromJS(data[1]);
+		this.parents = Immutable.fromJS(data[2]);
 		this.emitChange();
 	}
 
@@ -45,9 +46,9 @@ class TaxonStore extends BaseStore
 	}
 
 	rehydrate(state) {
-		this.info           = state.info;
-		this.geojson        = state.geojson;
-		this.parents        = state.parents;
+		this.info           = Immutable.fromJS(state.info);
+		this.geojson        = Immutable.fromJS(state.geojson);
+		this.parents        = Immutable.fromJS(state.parents);
 	}
 }
 

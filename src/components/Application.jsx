@@ -3,6 +3,7 @@ import ApplicationStore from "../stores/ApplicationStore";
 import {provideContext, connectToStores} from "fluxible/addons";
 import {handleHistory}  from "fluxible-router";
 
+
 if (process.env.BROWSER) {
 	require('../assets/css/reset.css');
 	require('../assets/css/base/fonts/fonts.css');

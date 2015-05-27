@@ -39,7 +39,7 @@ class BaseMap extends React.Component
 	getGeojson(data) {
 		return (
 			<MyGeojson 
-				data={data} 
+				data={data.toJS()} 
 				style={this._handleStyle.bind(this)}
 				onEachFeature={this._handleGeojsonPopup}
 			/>
@@ -48,7 +48,7 @@ class BaseMap extends React.Component
 
 	render() {
 		var data    = this.props.geojson;
-		var geojson = data.hasOwnProperty("type") ? this.getGeojson(data) : null;
+		var geojson = data.has("type") ? this.getGeojson(data) : null;
 
 		return (
 			<Map ref="map" className="map" center={center} zoom={8}>
