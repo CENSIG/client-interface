@@ -69,6 +69,10 @@ class SearchResultItem extends React.Component
 		super(props);	
 	}
 
+	shouldComponentUpdate(nextProps) {
+		return nextProps.content.get("cdnom") !== this.props.content.get("cdnom");
+	}
+
 	render() {
 		return (
 			<li>
@@ -92,6 +96,10 @@ class HeaderSearchResult extends React.Component
 {
 	constructor(props) {
 		super(props);	
+	}
+
+	shouldComponentUpdate(nextProps) {
+		return false;	
 	}
 
 	render() {
@@ -147,6 +155,10 @@ class SearchInput extends React.Component
 		super(props);	
 	}
 
+	shouldComponentUpdate(nextProps) {
+		return nextProps.placeholder !== this.props.placeholder;	
+	}
+
 	render() {
 		return (
 			<div className="card search-input">
@@ -164,6 +176,13 @@ class Search extends React.Component
 {
 	constructor(props, context) {
 		super(props, context);
+	}
+
+	shouldComponentUpdate(nextProps) {
+		if (nextProps.results.size === 0) {
+			return true;	
+		}
+		return nextProps.results !== this.props.results;	
 	}
 
 	getChildContext() {

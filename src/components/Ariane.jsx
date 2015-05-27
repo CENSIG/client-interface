@@ -14,6 +14,10 @@ class ArianeItemLast extends React.Component
 		super(props);	
 	}
 
+	shouldComponentUpdate(nextProps) {
+		return nextProps.children !== this.props.children;	
+	}
+
 	render() {
 		return (
 			<span className="ariane-item-last">
@@ -33,6 +37,10 @@ class ArianeItem extends React.Component
 		super(props);	
 	}
 
+	shouldComponentUpdate(nextProps) {
+		return nextProps.children !== this.props.children;	
+	}
+
 	render() {
 		return (
 			<span className="ariane-item">
@@ -50,6 +58,10 @@ class Ariane extends React.Component
 {
 	constructor(props) {
 		super(props);
+	}
+
+	shouldComponentUpdate(nextProps) {
+		return nextProps.parents !== this.props.parents;	
 	}
 
 	render() {
