@@ -38,13 +38,13 @@ class Atlas extends React.Component
 				theme={base} 
 			/>
 		}
-
 		return (
 			<article className="atlas">	
 				<Header>
 					<h1>Bienvenue sur l'atlas des {this.props.info.get("nom")}</h1>
 				</Header>
 				<Search 
+					atlasUriName={this.props.uriName}
 					label={this.props.info.get("nom")} 
 					parentsCdnom={this.props.info.get("id")}
 				/>

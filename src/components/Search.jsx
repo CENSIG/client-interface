@@ -73,7 +73,7 @@ class SearchResultItem extends React.Component
 		return (
 			<li>
 				<NavLink routeName="taxon" navParams={
-					{ name: "papillons", cdnom: this.props.content.get("cdref") }
+					{ name: this.context.atlasUriName, cdnom: this.props.content.get("cdref") }
 				}>
 					<SearchResultItemContent>
 						{this.props.content}
@@ -82,6 +82,10 @@ class SearchResultItem extends React.Component
 			</li>
 		);
 	}
+}
+
+SearchResultItem.contextTypes = {
+	atlasUriName: React.PropTypes.string
 }
 
 class HeaderSearchResult extends React.Component
@@ -162,6 +166,12 @@ class Search extends React.Component
 		super(props, context);
 	}
 
+	getChildContext() {
+		return {
+			atlasUriName: this.props.atlasUriName	
+		}	
+	}
+
 	_handleKeyUp(e) {
 		var q = e.target.value;
 		if (q.length > 3) {
@@ -186,6 +196,10 @@ class Search extends React.Component
 			</div>
 		);
 	}
+}
+
+Search.childContextTypes = {
+	atlasUriName: React.PropTypes.string
 }
 
 Search.contextTypes = {

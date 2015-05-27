@@ -9,6 +9,7 @@ class AtlasStore extends BaseStore
 {
 	constructor(dispatcher) {
 		super(dispatcher);
+		this.uriName = null;
 		this.info    = Immutable.Map();
 		this.geojson = Immutable.Map();
 	}
@@ -17,6 +18,15 @@ class AtlasStore extends BaseStore
 		this.info    = Immutable.fromJS(data[0]);
 		this.geojson = Immutable.fromJS(data[1]);
 		this.emitChange();
+	}
+
+	_handleUriName(uriName) {
+		this.uriName = uriName.label;
+		this.emitChange();
+	}
+
+	getUriName() {
+		return this.uriName;	
 	}
 
 	getInfo() {
@@ -29,6 +39,7 @@ class AtlasStore extends BaseStore
 
 	getState() {
 		return {
+			uriName : this.uriName,	
 			info    : this.info,
 			geojson : this.geojson
 		}	
@@ -39,6 +50,7 @@ class AtlasStore extends BaseStore
 	}
 
 	rehydrate(state) {
+		this.uriName = state.uriName;
 		this.info    = Immutable.fromJS(state.info);
 		this.geojson = Immutable.fromJS(state.geojson);
 	}
@@ -46,7 +58,8 @@ class AtlasStore extends BaseStore
 
 AtlasStore.storeName = "AtlasStore";
 AtlasStore.handlers  = {
-	"ATLAS_DATA" : "_handleData"
+	"ATLAS_DATA"        : "_handleData",
+	"CHANGE_ATLAS_NAME" : "_handleUriName"
 }
 
 export default AtlasStore;
