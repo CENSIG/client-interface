@@ -1,12 +1,13 @@
-import React      from "react";
-import TaxonStore	from "../stores/TaxonStore";
-import AtlasStore	from "../stores/AtlasStore";
-import {connectToStores} from "fluxible/addons";
-import PanelInformations from "./PanelInformations";
-import Ariane						 from "./Ariane";
-import Header						 from "./Header";
-import Search						 from "./Search";
-import {base}						 from "../configs/themesForMap";
+import React							from "react";
+import TaxonStore					from "../stores/TaxonStore";
+import AtlasStore					from "../stores/AtlasStore";
+import {connectToStores}  from "fluxible/addons";
+import PanelInformations  from "./PanelInformations";
+import Ariane						  from "./Ariane";
+import Header						  from "./Header";
+import Search						  from "./Search";
+import BrothersNavigation from "./BrothersNavigation";
+import {base}						  from "../configs/themesForMap";
 
 if (process.env.BROWSER && typeof window !== "undefined") {
 	var BaseMap = require("./map/BaseMap");
@@ -55,6 +56,10 @@ class Taxon extends React.Component
 					atlasUriName={this.props.atlasUriName}
 					label={searchLabel} 
 					parentsCdnom={parentsCdnom}
+				/>
+				<BrothersNavigation 
+					brothers={this.props.taxon.brothers}
+					currentCdnom={info.id}
 				/>
 				<section className="flex fdrr fjb">
 					<PanelInformations info={info} />

@@ -22,7 +22,8 @@ class TaxonAction extends BaseAction
 		return Promise.all([
 			TaxonAction.get(api, cdnom, "informations"),
 			TaxonAction.get(api, cdnom, "geojson"),
-			TaxonAction.get(api, cdnom, "parents", { limit: limit })
+			TaxonAction.get(api, cdnom, "parents", { limit: limit }),
+			TaxonAction.get(api, cdnom, "brothers")
 		]).then(function(data) {
 			context.dispatch("ESPECE_DATA", data)
 			context.dispatch("LOADED", true);
