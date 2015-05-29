@@ -1,6 +1,7 @@
 import React							from "react";
 import TaxonStore					from "../stores/TaxonStore";
 import AtlasStore					from "../stores/AtlasStore";
+import BrothersNavigationStore from "../stores/BrothersNavigationStore";
 import {connectToStores}  from "fluxible/addons";
 import PanelInformations  from "./PanelInformations";
 import Ariane						  from "./Ariane";
@@ -48,18 +49,21 @@ class Taxon extends React.Component
 
 		return (
 			<article className="atlas">	
-				<Header>
-					<h1>{info.get("nom")}</h1>
-					<Ariane parents={parents} />
+				<Header className="flex fdc">
+					<div className="flex fjb">
+						<h1>{info.get("nom")}</h1>
+						<Ariane parents={parents} />
+					</div>
+					<BrothersNavigation 
+						brothers={this.props.taxon.brothers}
+						left={this.props.brothersNav.left}
+						right={this.props.brothersNav.right}
+					/>
 				</Header>
 				<Search 
 					atlasUriName={this.props.atlasUriName}
 					label={searchLabel} 
 					parentsCdnom={parentsCdnom}
-				/>
-				<BrothersNavigation 
-					brothers={this.props.taxon.brothers}
-					currentCdnom={info.id}
 				/>
 				<section className="flex fdrr fjb">
 					<PanelInformations info={info} />
@@ -70,10 +74,11 @@ class Taxon extends React.Component
 	}
 }
 
-Taxon = connectToStores(Taxon, [ TaxonStore, AtlasStore ], (stores, props) => {
+Taxon = connectToStores(Taxon, [ TaxonStore, AtlasStore, BrothersNavigationStore], (stores, props) => {
 	return {
 		taxon        : stores.TaxonStore.getState(),
-		atlasUriName : stores.AtlasStore.getUriName()
+		atlasUriName : stores.AtlasStore.getUriName(),
+		brothersNav  : stores.BrothersNavigationStore.getState()
 	}
 });
 

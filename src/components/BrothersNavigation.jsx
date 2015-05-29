@@ -1,77 +1,60 @@
 import React from "react";
 
+if (process.env.BROWSER && typeof window !== "undefined") {
+	require("../assets/css/base/brothersNavigation.css");
+}
+	
+/**
+ * A component which represent item of brothers
+ * navigation
+ * @author Jean BOUDET
+ */
+class ItemBrothersNavigation extends React.Component
+{
+	constructor(props) {
+		super(props);	
+	}
+
+	shouldComponentUpdate(nextProps) {
+		return nextProps.children !== this.props.children;	
+	}
+
+	render() {
+		return (
+			<li className={this.props.className}>
+				{this.props.children}
+			</li>
+		)	
+	}
+}
+
+/**
+ * A component which represent brothers navigation
+ * @author Jean BOUDET
+ */
 class BrothersNavigation extends React.Component
 {
 	constructor(props) {
 		super(props);	
-		this.state = {
-			left: null,
-			right: null,
-			current: null
-		};
-	}
-
-	shouldComponentUpdate(nextProps) {
-		return nextProps.brothers !== this.props.brothers;	
-	}	
-
-	componentWillUpdate(nextProps) {
-		console.log("will update");
-	}
-
-	componentDidUpdate(nextProps) {
-		console.log("did update");	
-	}
-
-	getLeftRight(brothers, currentCdnom) {
-
-		var currentIndex = this.state.current;
-
-		if (currentIndex === null) {
-			currentIndex = brothers.findIndex((value, i) => {
-				return value.cdnom = currentCdnom	
-			});
-		}
-
-		var left;
-		var right;
-		var last   = brothers.size - 1;
-		var before = currentIndex - 1;
-		var after  = currentIndex + 1;
-
-		if (currentIndex === 0) {
-			left  = last
-			right = after;
-		} else if (currentIndex === last) {
-			left  = before;
-			right = 0;
-		} else {
-			left  = before;
-			right = after;
-		}
-
-		this.setState({
-			left    : left,
-			right   : right,
-			current : currentIndex
-		});
-	}
-
-	componentWillMount() {
-		//this.getLeftRight(this.props.brothers, this.props.currentCdnom);
-		console.log(this.props.brothers);
 	}
 
 	render() {
-		if (this.props.brothers.size === 0) {
-			return null;	
+		var leftName, rightName;
+
+		if (this.props.brothers.size !== 0) {
+			leftName = this.props.brothers.get(this.props.left).get("name");
+			rightName = this.props.brothers.get(this.props.right).get("name");
 		}
 
 		return (
 			<nav>
-				<ul>
-					<li>{this.props.brothers.get(this.state.left).get("name")}</li>
-					<li>{this.props.brothers.get(this.state.right).get("name")}</li>
+				<ul className="brothers-navigation flex fjc">
+					<ItemBrothersNavigation className="brothers-left">
+						{leftName}
+					</ItemBrothersNavigation>
+					<ItemBrothersNavigation className="brothers-right">
+						{rightName}
+					</ItemBrothersNavigation>
 				</ul>
 			</nav>
 		);	

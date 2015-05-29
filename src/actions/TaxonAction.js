@@ -25,7 +25,8 @@ class TaxonAction extends BaseAction
 			TaxonAction.get(api, cdnom, "parents", { limit: limit }),
 			TaxonAction.get(api, cdnom, "brothers")
 		]).then(function(data) {
-			context.dispatch("ESPECE_DATA", data)
+			context.dispatch("BROTHERS_DATA", { brothers: data[3], cdnom: cdnom });
+			context.dispatch("ESPECE_DATA", data);
 			context.dispatch("LOADED", true);
 		});
 	}

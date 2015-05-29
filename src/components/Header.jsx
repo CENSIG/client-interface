@@ -1,5 +1,9 @@
 import React from "react";
 
+/**
+ * A simple component for header
+ * @author Jean BOUDET
+ */
 class Header extends React.Component
 {
 	constructor(props) {
@@ -8,7 +12,7 @@ class Header extends React.Component
 
 	render() {
 		return (
-			<header className="flex fjb fac">	
+			<header className={this.props.className}>	
 				{this.props.children}
 			</header>
 		);	

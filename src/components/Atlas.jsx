@@ -40,8 +40,8 @@ class Atlas extends React.Component
 		}
 		return (
 			<article className="atlas">	
-				<Header>
-					<h1>Bienvenue sur l'atlas des {this.props.info.get("nom")}</h1>
+				<Header className="flex fac">
+					<h1 className="mainTitle">Bienvenue sur l'atlas des {this.props.info.get("nom")}</h1>
 				</Header>
 				<Search 
 					atlasUriName={this.props.uriName}

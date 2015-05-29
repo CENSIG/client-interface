@@ -16,10 +16,16 @@ class TaxonStore extends BaseStore
 	}
 
 	_handleAllData(data) {
-		this.info     = Immutable.fromJS(data[0]);
-		this.geojson  = Immutable.fromJS(data[1]);
-		this.parents  = Immutable.fromJS(data[2]);
-		this.brothers = Immutable.fromJS(data[3]);
+		this.info    = Immutable.fromJS(data[0]);
+		this.geojson = Immutable.fromJS(data[1]);
+		this.parents = Immutable.fromJS(data[2]);
+		var brothers = Immutable.fromJS(data[3]);
+
+		// Change reference if data value don't equals
+		if (!Immutable.is(this.brothers, brothers)) {
+			this.brothers = brothers;	
+		}
+
 		this.emitChange();
 	}
 
