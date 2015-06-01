@@ -23,6 +23,12 @@ class Application extends React.Component
 		super(props);
 	}
 
+	getChildContext() {
+		return {
+			atlasUriName: this.props.currentRoute.get("params").get("name")
+		};
+	}
+
 	componentDidUpdate(prevProps) {
 		var newProps = this.props;
 		if (newProps.currentTitlePage === prevProps.currentTitlePage) {
@@ -46,6 +52,10 @@ class Application extends React.Component
 			</div>
 		);
 	}
+}
+
+Application.childContextTypes = {
+	atlasUriName: React.PropTypes.string
 }
 
 Application = connectToStores(Application, [ ApplicationStore ], (stores, props) => {

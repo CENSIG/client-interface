@@ -185,12 +185,6 @@ class Search extends React.Component
 		return nextProps.results !== this.props.results;	
 	}
 
-	getChildContext() {
-		return {
-			atlasUriName: this.props.atlasUriName	
-		}	
-	}
-
 	_handleKeyUp(e) {
 		var q = e.target.value;
 		if (q.length > 3) {
@@ -215,10 +209,6 @@ class Search extends React.Component
 			</div>
 		);
 	}
-}
-
-Search.childContextTypes = {
-	atlasUriName: React.PropTypes.string
 }
 
 Search.contextTypes = {

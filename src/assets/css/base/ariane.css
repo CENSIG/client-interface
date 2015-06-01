@@ -2,6 +2,10 @@
 	align-self: flex-end;
 }
 
+.ariane a {
+	color: inherit;
+}
+
 .ariane-item::after {
 	content				:"";
 	width         : 10px;

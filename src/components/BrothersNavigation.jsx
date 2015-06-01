@@ -1,4 +1,5 @@
 import React from "react";
+import {NavLink} from "fluxible-router";
 
 if (process.env.BROWSER && typeof window !== "undefined") {
 	require("../assets/css/base/brothersNavigation.css");
@@ -21,11 +22,18 @@ class ItemBrothersNavigation extends React.Component
 
 	render() {
 		return (
-			<li className={this.props.className}>
-				{this.props.children}
-			</li>
+			<NavLink routeName="taxon" 
+				navParams={{name: this.context.atlasUriName, cdnom: this.props.cdnom}}>
+					<li className={this.props.className}>
+						{this.props.children}
+					</li>
+			</NavLink>
 		)	
 	}
+}
+
+ItemBrothersNavigation.contextTypes = {
+	atlasUriName: React.PropTypes.string
 }
 
 /**
@@ -39,25 +47,31 @@ class BrothersNavigation extends React.Component
 	}
 
 	render() {
-		var leftName, rightName;
+		var leftBrother, rightBrother;
 
 		if (this.props.brothers.size !== 0) {
-			leftName = this.props.brothers.get(this.props.left).get("name");
-			rightName = this.props.brothers.get(this.props.right).get("name");
-		}
+			leftBrother   = this.props.brothers.get(this.props.left);
+			rightBrother  = this.props.brothers.get(this.props.right);
 
-		return (
-			<nav>
-				<ul className="brothers-navigation flex fjc">
-					<ItemBrothersNavigation className="brothers-left">
-						{leftName}
-					</ItemBrothersNavigation>
-					<ItemBrothersNavigation className="brothers-right">
-						{rightName}
-					</ItemBrothersNavigation>
-				</ul>
-			</nav>
-		);	
+			return (
+				<nav>
+					<ul className="brothers-navigation flex fjc">
+						<ItemBrothersNavigation 
+							className="brothers-left"
+							cdnom={leftBrother.get("cdnom")}>
+							{leftBrother.get("name")}
+						</ItemBrothersNavigation>
+
+						<ItemBrothersNavigation 
+							className="brothers-right"
+							cdnom={rightBrother.get("cdnom")}>
+							{rightBrother.get("name")}
+						</ItemBrothersNavigation>
+					</ul>
+				</nav>
+			);
+		}
+		return null;
 	}
 }
 

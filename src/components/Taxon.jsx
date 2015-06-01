@@ -61,7 +61,6 @@ class Taxon extends React.Component
 					/>
 				</Header>
 				<Search 
-					atlasUriName={this.props.atlasUriName}
 					label={searchLabel} 
 					parentsCdnom={parentsCdnom}
 				/>

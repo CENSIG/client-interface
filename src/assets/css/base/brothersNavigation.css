@@ -2,6 +2,10 @@
 	margin: 0 15px 0 15px;
 }
 
+.brothers-navigation a {
+	color: inherit;
+}
+
 .brothers-left::before {
 	content      : "";
 	width        : 10px;
