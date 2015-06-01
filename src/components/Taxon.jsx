@@ -1,6 +1,5 @@
 import React							from "react";
 import TaxonStore					from "../stores/TaxonStore";
-import AtlasStore					from "../stores/AtlasStore";
 import BrothersNavigationStore from "../stores/BrothersNavigationStore";
 import {connectToStores}  from "fluxible/addons";
 import PanelInformations  from "./PanelInformations";
@@ -73,10 +72,9 @@ class Taxon extends React.Component
 	}
 }
 
-Taxon = connectToStores(Taxon, [ TaxonStore, AtlasStore, BrothersNavigationStore], (stores, props) => {
+Taxon = connectToStores(Taxon, [ TaxonStore, BrothersNavigationStore ], (stores, props) => {
 	return {
 		taxon        : stores.TaxonStore.getState(),
-		atlasUriName : stores.AtlasStore.getUriName(),
 		brothersNav  : stores.BrothersNavigationStore.getState()
 	}
 });

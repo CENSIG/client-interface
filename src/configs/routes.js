@@ -30,10 +30,8 @@ export default {
 		handler : Atlas,
 		action  : (context, payload) => {
 			var atlasName = payload.get("params").get("name");
-			context.dispatch("CHANGE_ATLAS_NAME", { label: atlasName });
+			var cdnom     = appConfig.atlas[atlasName].cdnom
 
-			var cdnom = appConfig.atlas[atlasName].cdnom
-			
 			if (context.getStore(AtlasStore).getInfo().get("id") !== cdnom) {
 				return AtlasAction.getData(context, { cdnom: cdnom})
 					.then(function() {
@@ -52,7 +50,6 @@ export default {
 		action : (context, payload) => {
 			context.dispatch("RESET_SEARCH");
 			var atlasName = payload.get("params").get("name");
-			context.dispatch("CHANGE_ATLAS_NAME", { label: atlasName });
 
 			var cdnom = payload.get("params").get("cdnom");
 			var limit = appConfig.atlas[atlasName].limit;

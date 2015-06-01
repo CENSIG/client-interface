@@ -44,7 +44,6 @@ class Atlas extends React.Component
 					<h1 className="mainTitle">Bienvenue sur l'atlas des {this.props.info.get("nom")}</h1>
 				</Header>
 				<Search 
-					atlasUriName={this.props.uriName}
 					label={this.props.info.get("nom")} 
 					parentsCdnom={this.props.info.get("id")}
 				/>
