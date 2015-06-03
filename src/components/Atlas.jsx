@@ -39,7 +39,7 @@ class Atlas extends React.Component
 
 		if (this.props.firstChilds.size !== 0) {
 				chart = <BarChart
-					data={this.props.firstChilds.reverse().slice(0, 5).toJS()}
+					data={this.props.firstChilds.slice(0, 5).toJS()}
 					width={600}
 					height={200}
 					margins={{top: 10, right: 20, bottom: 60, left: 55}}

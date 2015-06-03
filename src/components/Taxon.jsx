@@ -45,7 +45,7 @@ class Taxon extends React.Component
 
 		if (firstChilds.size !== 0) {
 				chart = <BarChart
-					data={firstChilds.reverse().slice(0, 5).toJS()}
+					data={firstChilds.slice(0, 5).toJS()}
 					width={600}
 					height={200}
 					margins={{top: 10, right: 20, bottom: 60, left: 55}}

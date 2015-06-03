@@ -25,7 +25,6 @@ class TaxonAction extends BaseAction
 			TaxonAction.get(api, cdnom, "parents", { limit: limit }),
 			TaxonAction.get(api, cdnom, "brothers"),
 			TaxonAction.get(api, cdnom, "first_child_obs", {
-				ordre: payload.ordre,
 				format: "chart"
 			})
 		]).then(function(data) {

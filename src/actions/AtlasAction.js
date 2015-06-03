@@ -21,7 +21,6 @@ class AtlasAction extends BaseAction
 			AtlasAction.get(api, cdnom, "informations"),
 			AtlasAction.get(api, cdnom, "geojson"),
 			AtlasAction.get(api, cdnom, "first_child_obs", {
-				ordre: payload.ordre,
 				format: "chart"
 			})
 		]).then(function(data) {
