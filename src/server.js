@@ -41,6 +41,7 @@ server.use(function(req, res, next) {
 			} else {
 				next(err);
 			}
+			res.send("Erreur la page n'existe pas");
 			return;
 		}
 
