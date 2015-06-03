@@ -52,7 +52,8 @@ class Api
 		var i = 1;
 		for (var k in options) {
 			params += k + "=" + options[k];
-			(i < options.length) ? params += "&" : "";
+			(i < Object.keys(options).length) ? params += "&" : "";
+			i++;
 		}
 		return params;
 	}

@@ -19,7 +19,11 @@ class AtlasAction extends BaseAction
 		context.dispatch("LOADED", false);
 		return Promise.all([
 			AtlasAction.get(api, cdnom, "informations"),
-			AtlasAction.get(api, cdnom, "geojson")
+			AtlasAction.get(api, cdnom, "geojson"),
+			AtlasAction.get(api, cdnom, "first_child_obs", {
+				ordre: payload.ordre,
+				format: "chart"
+			})
 		]).then(function(data) {
 			context.dispatch("ATLAS_DATA", data);
 			context.dispatch("LOADED", true);

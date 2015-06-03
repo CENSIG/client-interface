@@ -9,10 +9,11 @@ class TaxonStore extends BaseStore
 {
 	constructor(dispatcher) {
 		super(dispatcher);
-		this.info     = Immutable.Map();
-		this.geojson  = Immutable.Map();
-		this.parents  = Immutable.List();
-		this.brothers = Immutable.List();
+		this.info        = Immutable.Map();
+		this.geojson     = Immutable.Map();
+		this.parents     = Immutable.List();
+		this.brothers    = Immutable.List();
+		this.firstChilds = Immutable.List();
 	}
 
 	_handleAllData(data) {
@@ -26,6 +27,7 @@ class TaxonStore extends BaseStore
 			this.brothers = brothers;	
 		}
 
+		this.firstChilds = Immutable.fromJS(data[4]);
 		this.emitChange();
 	}
 
@@ -47,10 +49,11 @@ class TaxonStore extends BaseStore
 
 	getState() {
 		return {
-			info     : this.info,
-			geojson  : this.geojson,
-			parents  : this.parents,
-			brothers : this.brothers
+			info        : this.info,
+			geojson     : this.geojson,
+			parents     : this.parents,
+			brothers    : this.brothers,
+			firstChilds : this.firstChilds
 		}	
 	}
 
@@ -59,10 +62,11 @@ class TaxonStore extends BaseStore
 	}
 
 	rehydrate(state) {
-		this.info     = Immutable.fromJS(state.info);
-		this.geojson  = Immutable.fromJS(state.geojson);
-		this.parents  = Immutable.fromJS(state.parents);
-		this.brothers = Immutable.fromJS(state.brothers);
+		this.info        = Immutable.fromJS(state.info);
+		this.geojson     = Immutable.fromJS(state.geojson);
+		this.parents     = Immutable.fromJS(state.parents);
+		this.brothers    = Immutable.fromJS(state.brothers);
+		this.firstChilds = Immutable.fromJS(state.firstChilds);
 	}
 }
 

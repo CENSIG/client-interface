@@ -1,4 +1,5 @@
 import React							from "react";
+import {BarChart}				  from "react-d3/barchart"
 import TaxonStore					from "../stores/TaxonStore";
 import BrothersNavigationStore from "../stores/BrothersNavigationStore";
 import {connectToStores}  from "fluxible/addons";
@@ -28,10 +29,11 @@ class Taxon extends React.Component
 	}
 
 	render() {
-		var map;
-		var parents = this.props.taxon.parents;
-		var geojson = this.props.taxon.geojson;
-		var info		= this.props.taxon.info;
+		var map, chart;
+		var parents     = this.props.taxon.parents;
+		var geojson     = this.props.taxon.geojson;
+		var info        = this.props.taxon.info;
+		var firstChilds = this.props.taxon.firstChilds;
 
 		// if application is in browser then display BaseMap
 		if (process.env.BROWSER && typeof window !== "undefined") {
@@ -39,6 +41,17 @@ class Taxon extends React.Component
 				geojson={geojson} 
 				theme={base} 
 			/>
+		}
+
+		if (firstChilds.size !== 0) {
+				chart = <BarChart
+					data={firstChilds.reverse().slice(0, 5).toJS()}
+					width={600}
+					height={200}
+					margins={{top: 10, right: 20, bottom: 60, left: 55}}
+					fill="#3182bd"
+					title="Répartition des taxon enfants"
+				/>;
 		}
 
 		// It's the atlas taxon
@@ -64,7 +77,10 @@ class Taxon extends React.Component
 					parentsCdnom={parentsCdnom}
 				/>
 				<section className="flex fdrr fjb">
-					<PanelInformations info={info} />
+					<div className="panel-right">
+						<PanelInformations info={info} />
+						{chart}
+					</div>
 					{map}
 				</section>
 			</article>

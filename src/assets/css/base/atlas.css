@@ -26,8 +26,12 @@
 	margin: 20px 10px 0px 10px;
 }
 
-.atlas .panel-info {
+.atlas .panel-right {
 	flex-basis: 700px;
+}
+
+.atlas .panel-right div:last-child {
+	margin: 20px 0 0 0;	
 }
 
 .panel-info li span {

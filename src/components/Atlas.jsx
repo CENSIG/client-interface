@@ -1,10 +1,8 @@
 import React						 from "react";
+import {BarChart}				 from "react-d3/barchart"
 import AtlasStore				 from "../stores/AtlasStore";
-import AtlasAction			 from "../actions/AtlasAction";
-import ApplicationStore	 from "../stores/ApplicationStore";
 import {connectToStores} from "fluxible/addons";
 import PanelInformations from "./PanelInformations";
-import Ariane						 from "./Ariane";
 import Header						 from "./Header";
 import Search						 from "./Search";
 import {base}						 from "../configs/themesForMap";
@@ -30,7 +28,7 @@ class Atlas extends React.Component
 	}
 
 	render() {
-		var map;
+		var map, chart;
 		// if application is in browser then display BaseMap
 		if (process.env.BROWSER && typeof window !== "undefined") {
 			map = <BaseMap 
@@ -38,6 +36,18 @@ class Atlas extends React.Component
 				theme={base} 
 			/>
 		}
+
+		if (this.props.firstChilds.size !== 0) {
+				chart = <BarChart
+					data={this.props.firstChilds.reverse().slice(0, 5).toJS()}
+					width={600}
+					height={200}
+					margins={{top: 10, right: 20, bottom: 60, left: 55}}
+					fill="#3182bd"
+					title="Répartition des taxon enfants"
+				/>;
+		}
+
 		return (
 			<article className="atlas">	
 				<Header className="flex fac">
@@ -48,7 +58,10 @@ class Atlas extends React.Component
 					parentsCdnom={this.props.info.get("id")}
 				/>
 				<section className="flex fdrr fjb">
-					<PanelInformations info={this.props.info} />
+					<div className="panel-right">
+						<PanelInformations info={this.props.info} />
+						{chart}
+					</div>
 					{map}
 				</section>
 			</article>

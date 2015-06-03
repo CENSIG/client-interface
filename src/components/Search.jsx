@@ -53,7 +53,6 @@ class SearchResultItemContent extends React.Component
 				<ItemContentName isref={data.get("isref")}>
 					{data.get("name")}
 				</ItemContentName>
-				<li className="search-content-obs">{data.get("observations")}</li>
 			</ul>
 		);	
 	}
@@ -108,7 +107,6 @@ class HeaderSearchResult extends React.Component
 				<ul className="search-result-item-content">
 					<li>Taxon référent</li>
 					<li>Nom</li>
-					<li className="search-content-obs">Nombre d'observations</li>
 				</ul>
 			</li>
 		)	

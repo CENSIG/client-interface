@@ -23,7 +23,11 @@ class TaxonAction extends BaseAction
 			TaxonAction.get(api, cdnom, "informations"),
 			TaxonAction.get(api, cdnom, "geojson"),
 			TaxonAction.get(api, cdnom, "parents", { limit: limit }),
-			TaxonAction.get(api, cdnom, "brothers")
+			TaxonAction.get(api, cdnom, "brothers"),
+			TaxonAction.get(api, cdnom, "first_child_obs", {
+				ordre: payload.ordre,
+				format: "chart"
+			})
 		]).then(function(data) {
 			context.dispatch("BROTHERS_DATA", { brothers: data[3], cdnom: cdnom });
 			context.dispatch("ESPECE_DATA", data);
