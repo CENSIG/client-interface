@@ -13,14 +13,7 @@ class BaseAction
 	 * @return promise
 	 */
 	static get(api, cdnom, object, options=null) {
-		return new Promise(function(resolve, reject) {
-			api.get(cdnom, object, options)
-				.then(function(data) {
-					resolve(data);
-				}, function() {
-					reject();
-				});
-		});
+		return api.get(cdnom, object, options);
 	}
 }
 

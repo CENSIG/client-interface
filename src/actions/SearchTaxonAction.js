@@ -15,7 +15,7 @@ class SearchTaxonAction extends BaseAction
 	 * @param payload data
 	 */
 	static getSearchChild(context, payload) {
-		SearchTaxonAction.get(api, payload.cdnom, "childs", payload.options)
+		api.get(payload.cdnom, "childs", payload.options)
 			.then(function(data) {
 				context.dispatch("RECEIVE_RESULTS", data);
 			});

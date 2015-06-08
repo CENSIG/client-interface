@@ -16,6 +16,7 @@
   },
   "homepage": "https://github.com/CENSIG/client-interface",
   "dependencies": {
+    "bluebird": "^2.9.27",
     "dispatchr": "^0.3.2",
     "express": "^4.12.3",
     "express-state": "^1.2.0",

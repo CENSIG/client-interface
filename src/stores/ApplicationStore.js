@@ -13,7 +13,7 @@ class ApplicationStore extends BaseStore
 	}
 	
 	_handleTitle(title) {
-		this.currentTitlePage = title.label;	
+		this.currentTitlePage = title;
 		this.emitChange();
 	}
 

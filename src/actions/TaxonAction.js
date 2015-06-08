@@ -1,5 +1,6 @@
 import Api from "../utils/Api";
 import BaseAction from "./BaseAction";
+import promise		from "bluebird"; 
 
 const api = new Api("taxon");
 
@@ -19,18 +20,20 @@ class TaxonAction extends BaseAction
 		var limit = payload.limit;
 		context.dispatch("LOADED", false);
 
-		return Promise.all([
-			TaxonAction.get(api, cdnom, "informations"),
-			TaxonAction.get(api, cdnom, "geojson"),
-			TaxonAction.get(api, cdnom, "parents", { limit: limit }),
-			TaxonAction.get(api, cdnom, "brothers"),
-			TaxonAction.get(api, cdnom, "first_child_obs", {
+		return promise.all([
+			api.get(cdnom, "informations"),
+			api.get(cdnom, "geojson"),
+			api.get(cdnom, "parents", { limit: limit }),
+			api.get(cdnom, "brothers"),
+			api.get(cdnom, "first_child_obs", {
 				format: "chart"
 			})
 		]).then(function(data) {
 			context.dispatch("BROTHERS_DATA", { brothers: data[3], cdnom: cdnom });
 			context.dispatch("ESPECE_DATA", data);
 			context.dispatch("LOADED", true);
+		}).catch(err => {
+			console.log(err);	
 		});
 	}
 }

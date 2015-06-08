@@ -41,13 +41,12 @@ class Application extends React.Component
 		var spin;
 		var Handler = this.props.currentRoute.get("handler");
 
-		if (!this.props.loaded && typeof window !== "undefined") {
+		/*if (!this.props.loaded && typeof window !== "undefined") {
 			spin = <Spin name="three-bounce" />;
-		}
+		}*/
 
 		return (
 			<div>
-				{spin}
 				<Handler />	
 			</div>
 		);

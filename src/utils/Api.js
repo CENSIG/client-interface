@@ -1,4 +1,5 @@
 import request from "superagent";
+import promise from "bluebird"; 
 
 const IP   = (process.env.BROWSER) ? "127.0.0.1" : process.env.API_PORT_9000_TCP_ADDR;
 const PORT = process.env.API_PORT_9000_TCP_PORT || 9000;
@@ -26,17 +27,17 @@ class Api
 	 * @return promise
 	 */
 	get(id, object=null, options=null) {
-		var url = this.buildUrl(id, object, options);
-		this.requestPending = request.get(url);
-		return new Promise(function(resolve, reject) {
-			this.requestPending.end(function(err, res) {
-					if (err && err.status === 404) {
-						reject();
-					} else {
-						resolve(res.body);
-					}
-				});
-		}.bind(this));
+		return new promise((resolve, reject) => {
+			var url = this.buildUrl(id, object, options);
+			this.requestPending = request.get(url);
+			this.requestPending.end((err, res) => {
+				if (err) {
+					reject(res.body.error);
+				} else {
+					resolve(res.body);
+				}
+			});
+		});
 	}
 
 	buildUrl(id, object, options) {

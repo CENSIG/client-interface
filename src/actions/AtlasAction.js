@@ -1,5 +1,6 @@
 import Api				from "../utils/Api";
 import BaseAction from "./BaseAction";
+import promise		from "bluebird"; 
 
 const api = new Api("taxon");
 
@@ -17,15 +18,17 @@ class AtlasAction extends BaseAction
 	static getData(context, payload) {
 		var cdnom = payload.cdnom;
 		context.dispatch("LOADED", false);
-		return Promise.all([
-			AtlasAction.get(api, cdnom, "informations"),
-			AtlasAction.get(api, cdnom, "geojson"),
-			AtlasAction.get(api, cdnom, "first_child_obs", {
+		return promise.all([
+			api.get(cdnom, "informations"),
+			api.get(cdnom, "geojson"),
+			api.get(cdnom, "first_child_obs", {
 				format: "chart"
 			})
-		]).then(function(data) {
+		]).then(data => {
 			context.dispatch("ATLAS_DATA", data);
 			context.dispatch("LOADED", true);
+		}).catch(err => {
+			console.log(err);	
 		});
 	}
 }
