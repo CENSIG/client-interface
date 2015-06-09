@@ -1,19 +1,33 @@
+import promise from "bluebird"; 
+import Immutable from "immutable";
+
 /**
- * A class for action. Contain the main method
- * for an action class
+ * Base class for action
  * @author Jean BOUDET
  */
 class BaseAction
 {
 	/**
-	 * A promise for GET request
-	 * @param cdnom		identifiant
-	 * @param object	output
-	 * @param options request parameters
-	 * @return promise
+	 * Reduce array of promise
+	 * @author Jean BOUDET
 	 */
-	static get(api, cdnom, object, options=null) {
-		return api.get(cdnom, object, options);
+	static reduce(context, arrayRequestAction) {
+		return promise.all(arrayRequestAction)
+			.call("reduce", (total, item) => {
+				return item.req.then(data => {
+					var res      = Immutable.fromJS(data);
+					var baseData = item.baseData;
+
+					if (baseData) {
+						var newRes = baseData.set("res", res);		
+						context.dispatch(item.event, newRes);
+					} else {
+						context.dispatch(item.event, res);
+					}
+				}).catch(err => {
+					context.dispatch(item.eventError);
+				});
+			}, 0);
 	}
 }
 

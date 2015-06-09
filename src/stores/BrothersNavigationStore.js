@@ -9,9 +9,10 @@ class BrothersNavigationStore extends BaseStore
 {
 	constructor(dispatcher) {
 		super(dispatcher);	
-		this.current = null;
-		this.left    = null;
-		this.right   = null;
+		this.brothers = Immutable.List();
+		this.current  = null;
+		this.left     = null;
+		this.right    = null;
 	}
 
 	/**
@@ -19,7 +20,7 @@ class BrothersNavigationStore extends BaseStore
 	 * left and right
 	 */
 	_handleBrothers(data) {
-		var brothers     = Immutable.fromJS(data.brothers);
+		var brothers     = data.get("res");
 		var cdnom        = data.cdnom;
 		var currentIndex = brothers.findIndex(value => {
 			return value.get("cdnom") === cdnom;
@@ -37,6 +38,12 @@ class BrothersNavigationStore extends BaseStore
 		this.left    = left;
 		this.right   = right;
 		this.current = currentIndex;
+		
+		// Change reference if data value don't equals
+		if (!Immutable.is(this.brothers, brothers)) {
+			this.brothers = brothers;	
+		}
+
 		this.emitChange();
 	}
 
@@ -44,7 +51,8 @@ class BrothersNavigationStore extends BaseStore
 		return {
 			left    : this.left,
 			right   : this.right,
-			current : this.current
+			current : this.current,
+			brothers: this.brothers
 		};	
 	}
 
@@ -56,6 +64,7 @@ class BrothersNavigationStore extends BaseStore
 		this.left    = state.left;
 		this.right   = state.right;
 		this.current = state.current;
+		this.brothers= Immutable.fromJS(state.brothers);
 	}
 }
 

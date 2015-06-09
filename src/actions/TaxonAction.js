@@ -1,6 +1,6 @@
 import Api from "../utils/Api";
 import BaseAction from "./BaseAction";
-import promise		from "bluebird"; 
+import {taxonActionRequest} from "../configs/routesActions";
 
 const api = new Api("taxon");
 
@@ -16,25 +16,8 @@ class TaxonAction extends BaseAction
 	 * @param payload data
 	 */
 	static getData(context, payload) {
-		var cdnom = payload.cdnom;
-		var limit = payload.limit;
 		context.dispatch("LOADED", false);
-
-		return promise.all([
-			api.get(cdnom, "informations"),
-			api.get(cdnom, "geojson"),
-			api.get(cdnom, "parents", { limit: limit }),
-			api.get(cdnom, "brothers"),
-			api.get(cdnom, "first_child_obs", {
-				format: "chart"
-			})
-		]).then(function(data) {
-			context.dispatch("BROTHERS_DATA", { brothers: data[3], cdnom: cdnom });
-			context.dispatch("ESPECE_DATA", data);
-			context.dispatch("LOADED", true);
-		}).catch(err => {
-			console.log(err);	
-		});
+		return TaxonAction.reduce(context, taxonActionRequest(api, payload));
 	}
 }
 

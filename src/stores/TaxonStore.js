@@ -9,25 +9,40 @@ class TaxonStore extends BaseStore
 {
 	constructor(dispatcher) {
 		super(dispatcher);
+		this.current     = null;
 		this.info        = Immutable.Map();
 		this.geojson     = Immutable.Map();
 		this.parents     = Immutable.List();
-		this.brothers    = Immutable.List();
 		this.firstChilds = Immutable.List();
 	}
 
-	_handleAllData(data) {
-		this.info    = Immutable.fromJS(data[0]);
-		this.geojson = Immutable.fromJS(data[1]);
-		this.parents = Immutable.fromJS(data[2]);
-		var brothers = Immutable.fromJS(data[3]);
+	_handleInfo(info) {
+		this.info = info;
+		this.emitChange();
+	}
 
-		// Change reference if data value don't equals
-		if (!Immutable.is(this.brothers, brothers)) {
-			this.brothers = brothers;	
-		}
+	_handleGeojson(geojson) {
+		this.geojson = geojson;
+		this.emitChange();
+	}
 
-		this.firstChilds = Immutable.fromJS(data[4]);
+	_handleParents(parents) {
+		this.parents = parents;
+		this.emitChange();
+	}
+
+	_handleChilds(childs) {
+		this.firstChilds = childs;
+		this.emitChange();
+	}
+
+	_handleCurrent(current) {
+		this.current = current;
+		this.emitChange();
+	}
+
+	_handleNotChilds() {
+		this.firstChilds = Immutable.List();
 		this.emitChange();
 	}
 
@@ -43,16 +58,12 @@ class TaxonStore extends BaseStore
 		return this.parents;	
 	}
 
-	getBrothers() {
-		return this.brothers;	
-	}
-
 	getState() {
 		return {
+			current			: this.current,
 			info        : this.info,
 			geojson     : this.geojson,
 			parents     : this.parents,
-			brothers    : this.brothers,
 			firstChilds : this.firstChilds
 		}	
 	}
@@ -62,17 +73,22 @@ class TaxonStore extends BaseStore
 	}
 
 	rehydrate(state) {
+		this.current		 = state.current;
 		this.info        = Immutable.fromJS(state.info);
 		this.geojson     = Immutable.fromJS(state.geojson);
 		this.parents     = Immutable.fromJS(state.parents);
-		this.brothers    = Immutable.fromJS(state.brothers);
 		this.firstChilds = Immutable.fromJS(state.firstChilds);
 	}
 }
 
 TaxonStore.storeName = "TaxonStore";
 TaxonStore.handlers  = {
-	"ESPECE_DATA" : "_handleAllData"
+	"TAXON_CURRENT": "_handleCurrent",
+	"TAXON_INFORMATIONS": "_handleInfo",
+	"TAXON_GEOJSON": "_handleGeojson",
+	"TAXON_CHILDS": "_handleChilds",
+	"TAXON_PARENTS": "_handleParents",
+	"NOT_CHILDS": "_handleNotChilds"
 }
 
 export default TaxonStore;

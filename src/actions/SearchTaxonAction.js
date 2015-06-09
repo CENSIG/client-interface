@@ -1,5 +1,4 @@
 import Api from "../utils/Api";
-import BaseAction from "./BaseAction";
 
 const api = new Api("taxon");
 
@@ -7,7 +6,7 @@ const api = new Api("taxon");
  * An action for taxon search
  * @author Jean BOUDET
  */
-class SearchTaxonAction extends BaseAction
+class SearchTaxonAction 
 {
 	/**
 	 * Research taxon. The payload contains data

@@ -36,7 +36,7 @@ export default {
 			if (context.getStore(AtlasStore).getInfo().get("id") !== cdnom) {
 				return AtlasAction.getData(context, { cdnom: cdnom })
 					.then(() => {
-
+						context.dispatch("ATLAS_CURRENT", cdnom);
 					});
 			}
 		}
@@ -62,6 +62,7 @@ export default {
 				}).then(function() {
 					var name = context.getStore(TaxonStore).getInfo().get("nom");
 					context.dispatch("UPDATE_TITLE", "WebOb's | " + name);
+					context.dispatch("TAXON_CURRENT", cdnom);
 				});
 			}
 		}

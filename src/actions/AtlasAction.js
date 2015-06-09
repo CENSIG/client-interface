@@ -1,4 +1,5 @@
 import Api				from "../utils/Api";
+import {atlasActionRequest} from "../configs/routesActions";
 import BaseAction from "./BaseAction";
 import promise		from "bluebird"; 
 
@@ -16,20 +17,8 @@ class AtlasAction extends BaseAction
 	 * @param payload data
 	 */
 	static getData(context, payload) {
-		var cdnom = payload.cdnom;
 		context.dispatch("LOADED", false);
-		return promise.all([
-			api.get(cdnom, "informations"),
-			api.get(cdnom, "geojson"),
-			api.get(cdnom, "first_child_obs", {
-				format: "chart"
-			})
-		]).then(data => {
-			context.dispatch("ATLAS_DATA", data);
-			context.dispatch("LOADED", true);
-		}).catch(err => {
-			console.log(err);	
-		});
+		return AtlasAction.reduce(context, atlasActionRequest(api, payload));
 	}
 }
 

@@ -46,6 +46,10 @@ class BrothersNavigation extends React.Component
 		super(props);	
 	}
 
+	shouldComponentUpdate(nextProps) {
+		return nextProps.brothers !== this.props.brothers;	
+	}
+
 	render() {
 		var leftBrother, rightBrother;
 

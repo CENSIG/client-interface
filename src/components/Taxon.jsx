@@ -25,7 +25,10 @@ class Taxon extends React.Component
 	}
 
 	shouldComponentUpdate(nextProps) {
-		return nextProps.taxon.info.get("id") !== this.props.taxon.info.get("id");
+		if (this.props.taxon.current === null) {
+			return true;	
+		}
+		return nextProps.taxon.current !== this.props.taxon.current;
 	}
 
 	render() {
@@ -67,7 +70,7 @@ class Taxon extends React.Component
 						<Ariane parents={parents} />
 					</div>
 					<BrothersNavigation 
-						brothers={this.props.taxon.brothers}
+						brothers={this.props.brothersNav.brothers}
 						left={this.props.brothersNav.left}
 						right={this.props.brothersNav.right}
 					/>
