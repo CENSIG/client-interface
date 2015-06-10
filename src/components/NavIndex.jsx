@@ -13,9 +13,9 @@ class NavIndexItemTheme extends React.Component
 	}
 
 	render() {
-		var items = this.props.themes.map(item => {
+		var items = this.props.themes.map((item, i) => {
 			return (
-				<li>
+				<li key={i}>
 					<NavLink routeName={item.routeName} navParams={item.navParams}>
 						{item.title}
 					</NavLink>
@@ -66,14 +66,14 @@ class NavIndex extends React.Component
 	}
 
 	render() {
-		var linkHTML = this.props.elements.map(element => {
+		var linkHTML = this.props.elements.map((element, i)=> {
 			var themes = element.themes;
 			var linkTheme;
 
 			if (themes) linkTheme = <NavIndexItemTheme themes={themes} />;
 
 			return (
-				<NavIndexItem className={element.className} title={element.title} themes={linkTheme}>
+				<NavIndexItem key={i} className={element.className} title={element.title} themes={linkTheme}>
 					{element.description}
 				</NavIndexItem>
 			);

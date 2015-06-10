@@ -48,7 +48,7 @@ class SearchResultItemContent extends React.Component
 		return (
 			<ul className="search-result-item-content">
 				<li>
-					<em>{data.get("nameRef")}</em>
+					<em><strong>{data.get("nameRef")}</strong></em>
 				</li>
 				<ItemContentName isref={data.get("isref")}>
 					{data.get("name")}

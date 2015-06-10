@@ -21,6 +21,7 @@
     "express": "^4.12.3",
     "express-state": "^1.2.0",
     "extract-text-webpack-plugin": "^0.7.0",
+    "fluxible": "^0.4.10",
     "fluxible-router": "^0.1.1",
     "immutable": "^3.7.3",
     "leaflet": "^0.7.3",

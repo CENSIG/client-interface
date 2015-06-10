@@ -77,14 +77,14 @@ class Ariane extends React.Component
 			switch (i) {
 				case 0:
 					res = (
-						<ArianeItem route="atlas" navParams={{name: atlasUriName}}>
+						<ArianeItem key={i} route="atlas" navParams={{name: atlasUriName}}>
 							{parent.get("name")}
 						</ArianeItem>
 					);
 					break;
 				case n - 1:
 					res = (
-						<ArianeItemLast route="taxon" 
+						<ArianeItemLast key={i} route="taxon" 
 							navParams={{name: atlasUriName, cdnom: parent.get("cdnom")}}>
 							{parent.get("name")}
 						</ArianeItemLast>
@@ -92,7 +92,7 @@ class Ariane extends React.Component
 					break;
 				default:
 					res = (
-						<ArianeItem route="taxon" 
+						<ArianeItem key={i} route="taxon" 
 							navParams={{name: atlasUriName, cdnom: parent.get("cdnom")}}>
 							{parent.get("name")}
 						</ArianeItem>
@@ -100,7 +100,7 @@ class Ariane extends React.Component
 					break;
 			}
 			return res; 
-		}.bind(this));
+		});
 
 		return (
 			<div className="ariane">
