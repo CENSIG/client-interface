@@ -1,17 +1,10 @@
 .ariane {
 	align-self: flex-end;
+	display: inline-block;
 }
 
 .ariane a {
 	color: inherit;
-}
-
-.ariane-explore {
-	background-color: #03a9f4;
-	border-radius: 2px;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
-	margin: 0 0 0 20px;
-	padding:10px;
 }
 
 .ariane-item::after {

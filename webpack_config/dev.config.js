@@ -28,11 +28,7 @@ module.exports = {
 		loaders: [
 			{
 				test: /\.jsx?$/, 
-				//exclude: /node_modules/, 
-				/*include: [
-					pathToSrc,
-					path.resolve(__dirname, "../node_modules/react-d3/src/")
-				],*/
+				exclude: /node_modules/, 
 				loader: "jsx-loader!babel-loader"
 			},
 			{test: /\.css$/, loader: "style!css!cssnext-loader"},

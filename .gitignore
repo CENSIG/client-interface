@@ -1,2 +1,4 @@
 node_modules/
 src/assets/dist/
+!src/thirdparty/.gitkeep
+src/thirdparty/

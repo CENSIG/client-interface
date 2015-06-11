@@ -1,5 +1,5 @@
 import React						 from "react";
-import {BarChart}				 from "react-d3/barchart"
+import BarChart				   from "../thirdparty/react-d3/src/barchart/BarChart"
 import AtlasStore				 from "../stores/AtlasStore";
 import {connectToStores} from "fluxible/addons";
 import PanelInformations from "./PanelInformations";
@@ -30,8 +30,8 @@ class Atlas extends React.Component
 		return nextProps.current !== this.props.current;
 	}
 
-	render() {
-		var map, chart;
+	_getMap() {
+		var map;
 		// if application is in browser then display BaseMap
 		if (process.env.BROWSER && typeof window !== "undefined") {
 			map = <BaseMap 
@@ -39,18 +39,26 @@ class Atlas extends React.Component
 				theme={base} 
 			/>
 		}
+		return map;
+	}
 
+	_getChart() {
+		var chart;
 		if (this.props.firstChilds.size !== 0) {
-				chart = <BarChart
-					data={this.props.firstChilds.slice(0, 5).toJS()}
-					width={600}
-					height={200}
-					margins={{top: 10, right: 20, bottom: 60, left: 55}}
-					fill="#3182bd"
-					title="Répartition des taxon enfants"
-				/>;
+			chart = <BarChart
+				className="card"
+				data={this.props.firstChilds.slice(0, 5).toJS()}
+				width={600}
+				height={200}
+				margins={{top: 10, right: 20, bottom: 60, left: 55}}
+				fill="#3182bd"
+				title="Répartition des taxon enfants"
+			/>;
 		}
+		return chart;
+	}
 
+	render() {
 		return (
 			<article className="atlas">	
 				<Header className="flex fac">
@@ -63,12 +71,12 @@ class Atlas extends React.Component
 				<section className="flex fdrr fjb">
 					<div className="panel-right">
 						<PanelInformations info={this.props.info} />
-						{chart}
+						{this._getChart()}
 					</div>
-					{map}
+					{this._getMap()}
 				</section>
 			</article>
-		)	
+		);
 	}
 }
 
