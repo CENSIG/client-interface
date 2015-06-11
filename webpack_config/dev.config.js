@@ -29,10 +29,10 @@ module.exports = {
 			{
 				test: /\.jsx?$/, 
 				//exclude: /node_modules/, 
-				include: [
+				/*include: [
 					pathToSrc,
 					path.resolve(__dirname, "../node_modules/react-d3/src/")
-				],
+				],*/
 				loader: "jsx-loader!babel-loader"
 			},
 			{test: /\.css$/, loader: "style!css!cssnext-loader"},
