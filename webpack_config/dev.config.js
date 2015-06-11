@@ -26,7 +26,15 @@ module.exports = {
 	},
 	module: {
 		loaders: [
-			{test: /\.jsx?$/, exclude: /node_modules/, loader: "jsx-loader!babel-loader"},
+			{
+				test: /\.jsx?$/, 
+				//exclude: /node_modules/, 
+				include: [
+					pathToSrc,
+					path.resolve(__dirname, "../node_modules/react-d3/src/")
+				],
+				loader: "jsx-loader!babel-loader"
+			},
 			{test: /\.css$/, loader: "style!css!cssnext-loader"},
 			{test :/\.(jpe?g|png|woff2?|ttf|eot|svg)$/i, loader: "url-loader?prefix=static/"},
 		]	
