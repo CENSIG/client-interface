@@ -5,6 +5,19 @@ if (process.env.BROWSER) {
 	require('../assets/css/base/ariane.css');
 }
 
+class ArianeExplore extends React.Component
+{
+	constructor(props) {
+		super(props);	
+	}
+
+	render() {
+		return (
+			<span className="ariane-explore">Explorer</span>	
+		);
+	}
+}
+
 /**
  * Last item for breadcrumb
  * @author Jean BOUDET
@@ -69,10 +82,10 @@ class Ariane extends React.Component
 		return nextProps.parents !== this.props.parents;	
 	}
 
-	render() {
+	_createItems() {
 		var n            = this.props.parents.size;
 		var atlasUriName = this.context.atlasUriName;
-		var items        = this.props.parents.map((parent, i) => {
+		return this.props.parents.map((parent, i) => {
 			var res;
 			switch (i) {
 				case 0:
@@ -101,10 +114,23 @@ class Ariane extends React.Component
 			}
 			return res; 
 		});
+	}
 
+	_createExplore() {
+		var res;
+		if (this.props.firstChilds.size !== 0) {
+			res	= <ArianeExplore />;
+		}	
+		return res;
+	}
+
+	render() {
+		var items = this._createItems();
+		var explore = this._createExplore();
 		return (
 			<div className="ariane">
 				{items}	
+				{explore}
 			</div>
 		);	
 	}

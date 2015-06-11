@@ -67,7 +67,9 @@ class Taxon extends React.Component
 				<Header className="flex fdc">
 					<div className="flex fjb">
 						<h1>{info.get("nom")}</h1>
-						<Ariane parents={parents} />
+						<Ariane parents={parents} 
+							firstChilds={firstChilds.slice(0,5)}	
+						/>
 					</div>
 					<BrothersNavigation 
 						brothers={this.props.brothersNav.brothers}
