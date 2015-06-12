@@ -17,8 +17,8 @@
 	overflow-y: scroll;
 }
 
-.explore-sub-taxon-view li {
-	margin: 10px 0 10px 0;
+.explore-sub-taxon-view .explore-results {
+	margin: 10px 10px 10px 0;
 }
 
 .button-explore {

@@ -19,6 +19,23 @@ class ButtonExploreSubTaxon extends React.Component
 	}
 }
 
+class ButtonExploreSubTaxonView extends React.Component
+{
+	constructor(props) {
+		super(props);	
+	}
+
+	render() {
+		return (
+			<span onClick={this.context.subTaxonViewCallback}>Explorer les fils</span>
+		);
+	}
+}
+
+ButtonExploreSubTaxonView.contextTypes = {
+	subTaxonViewCallback: React.PropTypes.func
+}
+
 class ExploreSubTaxonView extends React.Component
 {
 	constructor(props) {
@@ -26,13 +43,22 @@ class ExploreSubTaxonView extends React.Component
 	}
 
 	_getFirstChilds() {
-		return this.context.firstChilds.map(child => {
+		var childs = this.context.firstChilds.map(child => {
+			var navParams = {
+				name: this.context.atlasUriName,
+				cdnom: child.get("cdnom")
+			};
 			return (
-				<li>
-					<NavLink>{child.get("name")}</NavLink>
+				<li className="flex fjb explore-results">
+					<NavLink routeName="taxon" navParams={navParams}>
+						{child.get("name")}
+					</NavLink>
+					<ButtonExploreSubTaxonView />
 				</li>
 			);
 		});
+
+		return childs.size !== 0 ? <ul>{childs}</ul> : <p>Il n'y a pas de fils observés</p>;
 	}
 
 	render () {
@@ -44,9 +70,7 @@ class ExploreSubTaxonView extends React.Component
 		return (
 			<div className={className}>
 				<Ariane	parents={this.context.parents} />
-				<ul>
-					{this._getFirstChilds()}
-				</ul>
+				{this._getFirstChilds()}
 			</div>	
 		)
 	}
@@ -71,7 +95,8 @@ class ExploreSubTaxon extends React.Component
 	getChildContext() {
 		return {
 			firstChilds: this.props.firstChilds,
-			parents: this.props.parents
+			parents: this.props.parents,
+			subTaxonViewCallback: this._handleSubTaxonViewClick.bind(this)
 		}	
 	}
 
@@ -87,6 +112,10 @@ class ExploreSubTaxon extends React.Component
 		thisElt.addEventListener("mouseover", this._handleWindowOver.bind(this));	
 		thisElt.addEventListener("mouseout", this._handleWindowOut.bind(this));	
 		window.removeEventListener("mouseup", this._handleWindowClick.bind(this));	
+	}
+
+	_handleSubTaxonViewClick(e) {
+		console.log(e.target.parentNode.children[0].textContent);
 	}
 
 	_handleWindowOver(e) {
@@ -119,29 +148,27 @@ class ExploreSubTaxon extends React.Component
 	}
 
 	render() {
-		if (this.props.firstChilds.size !== 0) {
-			return (
-				<div ref="explore" className="explore-sub-taxon" 
-					onMouseDown={this._handleMouseDown}
-					onMouseUp={this._handleMouseUp}
-				>
-					<ButtonExploreSubTaxon 
-						hasFirstChilds={this.props.hasFirstChilds} 
-						callBackClick={this._handleClickButton.bind(this)}	
-					/>
-					<ExploreSubTaxonView 
-						displaying={this.state.displaying} 
-					/>
-				</div>
-			);
-		}
-		return false;
+		return (
+			<div ref="explore" className="explore-sub-taxon" 
+				onMouseDown={this._handleMouseDown}
+				onMouseUp={this._handleMouseUp}
+			>
+				<ButtonExploreSubTaxon 
+					hasFirstChilds={this.props.hasFirstChilds} 
+					callBackClick={this._handleClickButton.bind(this)}	
+				/>
+				<ExploreSubTaxonView 
+					displaying={this.state.displaying} 
+				/>
+			</div>
+		);
 	}
 }
 
 ExploreSubTaxon.childContextTypes = {
 	firstChilds: React.PropTypes.object,
-	parents: React.PropTypes.object
+	parents: React.PropTypes.object,
+	subTaxonViewCallback: React.PropTypes.func
 }
 
 export default ExploreSubTaxon;
