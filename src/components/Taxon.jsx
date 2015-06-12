@@ -8,7 +8,7 @@ import Ariane						  from "./Ariane";
 import Header						  from "./Header";
 import Search						  from "./Search";
 import BrothersNavigation from "./BrothersNavigation";
-import {ButtonExploreSubTaxon} from "./ExploreSubTaxon";
+import ExploreSubTaxon from "./ExploreSubTaxon";
 import {base}						  from "../configs/themesForMap";
 
 if (process.env.BROWSER && typeof window !== "undefined") {
@@ -50,6 +50,8 @@ class Taxon extends React.Component
 		if (firstChilds.size !== 0) {
 			chart = <BarChart
 				data={firstChilds.slice(0,5).toJS()}
+				nameLabelProp="name"
+				nameValueProp="observations"
 				width={600}
 				height={200}
 				margins={{top: 10, right: 20, bottom: 60, left: 55}}
@@ -78,7 +80,10 @@ class Taxon extends React.Component
 						<h1>{this.props.taxon.info.get("nom")}</h1>
 						<div>
 							<Ariane parents={this.props.taxon.parents} />
-							<ButtonExploreSubTaxon hasFirstChilds={this.props.taxon.firstChilds.size !== 0} />
+							<ExploreSubTaxon 
+								firstChilds={this.props.taxon.firstChilds} 
+								parents={this.props.taxon.parents}
+							/>
 						</div>
 					</div>
 					<BrothersNavigation 

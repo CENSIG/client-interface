@@ -47,6 +47,8 @@ class Atlas extends React.Component
 		if (this.props.firstChilds.size !== 0) {
 			chart = <BarChart
 				className="card"
+				nameLabelProp="name"
+				nameValueProp="observations"
 				data={this.props.firstChilds.slice(0, 5).toJS()}
 				width={600}
 				height={200}

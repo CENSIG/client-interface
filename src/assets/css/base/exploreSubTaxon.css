@@ -1,3 +1,26 @@
+.explore-sub-taxon {
+	display: inline-block;
+}
+
+.explore-sub-taxon .explore-sub-taxon-view {
+	margin: 20px 0 0;
+	max-height: 500px;
+	min-width: 500px;
+	position: absolute;
+	right: 20px;
+	color: #000;
+}
+
+.explore-sub-taxon-view ul {
+	margin: 15px 0 0 0;
+	max-height: inherit;
+	overflow-y: scroll;
+}
+
+.explore-sub-taxon-view li {
+	margin: 10px 0 10px 0;
+}
+
 .button-explore {
 	background-color: #03a9f4;
 	border-radius: 2px;

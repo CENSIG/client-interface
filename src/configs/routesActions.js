@@ -18,9 +18,7 @@ export function taxonActionRequest(api, payload) {
 			req: api.get(cdnom, "brothers")
 		},
 		{event: "TAXON_CHILDS", eventError: "NOT_CHILDS",
-			req: api.get(cdnom, "first_child_obs", {
-				format: "chart"	
-			})
+			req: api.get(cdnom, "first_child_obs")
 		},
 		{event: "TAXON_INFORMATIONS", req: api.get(cdnom, "informations")},
 		{event: "TAXON_GEOJSON", req: api.get(cdnom, "geojson")}
@@ -40,9 +38,7 @@ export function atlasActionRequest(api, payload) {
 
 	return [
 		{event: "ATLAS_CHILDS", eventError: "NOT_CHILDS",
-			req: api.get(cdnom, "first_child_obs", {
-				format: "chart"	
-			})
+			req: api.get(cdnom, "first_child_obs")
 		},
 		{event: "ATLAS_INFORMATIONS", req: api.get(cdnom, "informations")},
 		{event: "ATLAS_GEOJSON", req: api.get(cdnom, "geojson")}
