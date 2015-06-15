@@ -37,6 +37,7 @@ export function atlasActionRequest(api, payload) {
 	var cdnom = payload.cdnom;
 
 	return [
+		{event: "ATLAS_PARENTS", req: api.get(cdnom, "parents", { limit: "OR" })},
 		{event: "ATLAS_CHILDS", eventError: "NOT_CHILDS",
 			req: api.get(cdnom, "first_child_obs")
 		},
