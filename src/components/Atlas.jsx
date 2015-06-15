@@ -3,6 +3,7 @@ import BarChart				   from "../thirdparty/react-d3/src/barchart/BarChart"
 import AtlasStore				 from "../stores/AtlasStore";
 import {connectToStores} from "fluxible/addons";
 import PanelInformations from "./PanelInformations";
+import ExploreSubTaxon	 from "./ExploreSubTaxon";
 import Header						 from "./Header";
 import Search						 from "./Search";
 import {base}						 from "../configs/themesForMap";
@@ -63,8 +64,11 @@ class Atlas extends React.Component
 	render() {
 		return (
 			<article className="atlas">	
-				<Header className="flex fac">
-					<h1 className="mainTitle">Bienvenue sur l'atlas des {this.props.info.get("nom")}</h1>
+				<Header className="flex fdc">
+					<div className="flex fjb">
+						<h1 className="mainTitle">Bienvenue sur l'atlas des {this.props.info.get("nom")}</h1>
+						<ExploreSubTaxon />
+					</div>
 				</Header>
 				<Search 
 					label={this.props.info.get("nom")} 
