@@ -58,13 +58,13 @@ class ExploreSubTaxonView extends React.Component
 	}
 
 	_getFirstChilds() {
-		var childs = this.context.firstChilds.map(child => {
+		var childs = this.context.firstChilds.map((child, i) => {
 			var navParams = {
 				name: this.context.atlasUriName,
 				cdnom: child.get("cdnom")
 			};
 			return (
-				<li className="flex fjb explore-results">
+				<li key={i} className="flex fjb explore-results">
 					<NavLink routeName="taxon" navParams={navParams}>
 						{child.get("name")}
 					</NavLink>
@@ -112,8 +112,14 @@ class ExploreSubTaxon extends React.Component
 		}
 	}
 
-	shouldComponentUpdate(nextProps) {
-		return nextProps.firstChilds !== this.props.firstChilds;		
+	shouldComponentUpdate(nextProps, nextState) {
+		return (
+			nextProps.firstChilds !== this.props.firstChilds
+			||
+			nextProps.parents !== this.props.parents
+			||
+			nextState.displaying !== this.state.displaying
+		);
 	}
 
 	getChildContext() {
