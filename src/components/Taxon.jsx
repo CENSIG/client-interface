@@ -8,7 +8,7 @@ import Ariane						  from "./Ariane";
 import Header						  from "./Header";
 import Search						  from "./Search";
 import BrothersNavigation from "./BrothersNavigation";
-import ExploreSubTaxon from "./ExploreSubTaxon";
+import ExploreSubTaxon    from "./ExploreSubTaxon";
 import {base}						  from "../configs/themesForMap";
 
 if (process.env.BROWSER && typeof window !== "undefined") {
@@ -79,11 +79,8 @@ class Taxon extends React.Component
 					<div className="flex fjb">
 						<h1>{this.props.taxon.info.get("nom")}</h1>
 						<div>
-							<Ariane parents={this.props.taxon.parents} />
-							<ExploreSubTaxon 
-								firstChilds={this.props.taxon.firstChilds} 
-								parents={this.props.taxon.parents}
-							/>
+							<Ariane withLink={true} parents={this.props.taxon.parents} />
+							<ExploreSubTaxon />
 						</div>
 					</div>
 					<BrothersNavigation 
@@ -110,8 +107,8 @@ class Taxon extends React.Component
 
 Taxon = connectToStores(Taxon, [ TaxonStore, BrothersNavigationStore ], (stores, props) => {
 	return {
-		taxon        : stores.TaxonStore.getState(),
-		brothersNav  : stores.BrothersNavigationStore.getState()
+		taxon       : stores.TaxonStore.getState(),
+		brothersNav : stores.BrothersNavigationStore.getState()
 	}
 });
 
