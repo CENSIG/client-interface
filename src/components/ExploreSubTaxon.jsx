@@ -1,11 +1,18 @@
 import React from "react";
 import Ariane from "./Ariane";
 import {NavLink} from "fluxible-router";
+import ExploreSubTaxonAction from "../actions/ExploreSubTaxonAction";
+import ExploreSubTaxonStore from "../stores/ExploreSubTaxonStore";
+import {connectToStores}  from "fluxible/addons";
 
 if (process.env.BROWSER) {
 	require('../assets/css/base/exploreSubTaxon.css');
 }
 
+/**
+ * Button explore. Display list of taxon childs
+ * @author Jean BOUDET
+ */
 class ButtonExploreSubTaxon extends React.Component
 {
 	constructor(props) {
@@ -19,6 +26,10 @@ class ButtonExploreSubTaxon extends React.Component
 	}
 }
 
+/**
+ * Button explore sub taxon.
+ * @author Jean BOUDET
+ */
 class ButtonExploreSubTaxonView extends React.Component
 {
 	constructor(props) {
@@ -27,8 +38,8 @@ class ButtonExploreSubTaxonView extends React.Component
 
 	render() {
 		return (
-			<span onClick={this.context.subTaxonViewCallback}>Explorer les fils</span>
-		);
+			<span data-cdnom={this.props.cdnom} 
+				onClick={this.context.subTaxonViewCallback}>Explorer les fils</span>);
 	}
 }
 
@@ -36,6 +47,10 @@ ButtonExploreSubTaxonView.contextTypes = {
 	subTaxonViewCallback: React.PropTypes.func
 }
 
+/**
+ * List childs of specific taxon
+ * @author Jean BOUDET
+ */
 class ExploreSubTaxonView extends React.Component
 {
 	constructor(props) {
@@ -53,7 +68,7 @@ class ExploreSubTaxonView extends React.Component
 					<NavLink routeName="taxon" navParams={navParams}>
 						{child.get("name")}
 					</NavLink>
-					<ButtonExploreSubTaxonView />
+					<ButtonExploreSubTaxonView cdnom={navParams.cdnom}/>
 				</li>
 			);
 		});
@@ -82,6 +97,11 @@ ExploreSubTaxonView.contextTypes = {
 	atlasUriName: React.PropTypes.string
 }
 
+/**
+ * Component for display a explore button
+ * for display childs of specific taxon
+ * @author Jean BOUDET
+ */
 class ExploreSubTaxon extends React.Component
 {
 	constructor(props) {
@@ -92,11 +112,16 @@ class ExploreSubTaxon extends React.Component
 		}
 	}
 
+	shouldComponentUpdate(nextProps) {
+		return nextProps.firstChilds !== this.props.firstChilds;		
+	}
+
 	getChildContext() {
 		return {
 			firstChilds: this.props.firstChilds,
 			parents: this.props.parents,
-			subTaxonViewCallback: this._handleSubTaxonViewClick.bind(this)
+			subTaxonViewCallback: this._handleSubTaxonViewClick.bind(this),
+			arianeCallback: this._handleArianeCallback.bind(this)
 		}	
 	}
 
@@ -114,8 +139,28 @@ class ExploreSubTaxon extends React.Component
 		window.removeEventListener("mouseup", this._handleWindowClick.bind(this));	
 	}
 
+	// When "Explorer les fils" is clicked
 	_handleSubTaxonViewClick(e) {
-		console.log(e.target.parentNode.children[0].textContent);
+		var target = e.target;
+		var taxonSupString = target.parentNode.children[0].textContent;
+		var cdnom = target.getAttribute("data-cdnom");
+		this.context.executeAction(ExploreSubTaxonAction.exploreSubTaxon, {
+			event: "sub",
+			name: taxonSupString,
+			cdnom: cdnom
+		});
+	}
+
+	// When an taxon sup is clicked
+	_handleArianeCallback(e) {
+		var target = e.target;
+		var taxonSupString = e.target.textContent;
+		var cdnom = target.parentNode.getAttribute("data-cdnom") || target.getAttribute("data-cdnom");
+		this.context.executeAction(ExploreSubTaxonAction.exploreSubTaxon, {
+			event:"sup",
+			name: taxonSupString,
+			cdnom: cdnom
+		});
 	}
 
 	_handleWindowOver(e) {
@@ -141,6 +186,7 @@ class ExploreSubTaxon extends React.Component
 		}
 	}
 
+	// When button explore is clicked
 	_handleClickButton(e) {
 		this.setState({
 			displaying: true
@@ -154,7 +200,6 @@ class ExploreSubTaxon extends React.Component
 				onMouseUp={this._handleMouseUp}
 			>
 				<ButtonExploreSubTaxon 
-					hasFirstChilds={this.props.hasFirstChilds} 
 					callBackClick={this._handleClickButton.bind(this)}	
 				/>
 				<ExploreSubTaxonView 
@@ -168,7 +213,16 @@ class ExploreSubTaxon extends React.Component
 ExploreSubTaxon.childContextTypes = {
 	firstChilds: React.PropTypes.object,
 	parents: React.PropTypes.object,
-	subTaxonViewCallback: React.PropTypes.func
+	subTaxonViewCallback: React.PropTypes.func,
+	arianeCallback: React.PropTypes.func
 }
+
+ExploreSubTaxon.contextTypes = {
+	executeAction: React.PropTypes.func	
+}
+
+ExploreSubTaxon = connectToStores(ExploreSubTaxon, [ ExploreSubTaxonStore ], (stores, props) => {
+	return stores.ExploreSubTaxonStore.getState();
+});
 
 export default ExploreSubTaxon;
