@@ -24,18 +24,38 @@ var extract = new ExtractText("bundle.css");
 // Uglify javascript
 var uglify = new webpack.optimize.UglifyJsPlugin();
 
+// Deduplication
+var dedup = new webpack.optimize.DedupePlugin();
+
+// Vendors
+var vendors = new webpack.optimize.CommonsChunkPlugin("vendors", "vendor.bundle.js");
+
 module.exports = {
 	context: pathToSrc,
-	entry: "./client.js",
+	entry: {
+		app: path.join(pathToSrc, "client.js"),
+		vendors: [
+			"react", "fluxible", "bluebird", 
+			"fluxible-router", "immutable", "leaflet",
+			"object-assign", "react-leaflet", "superagent" 	
+		]
+	},
 	output: {
 		path: pathToDist, 
-		filename: "bundle.js"
+		filename: "app.bundle.js"
 	},
 	module: {
 		loaders: [
-			{test: /\.jsx?$/, loader: "jsx-loader?harmony"},
-			{test: /\.css$/, loader: ExtractText.extract("style-loader", "css-loader", "cssnext-loader")},
-			{test :/\.(jpe?g|png|woff?2|tff|eot|svg)$/i, loader: "url-loader?prefix=static/"}
+			{test: /\.jsx?$/, exclude: /node_modules/, loader: "babel-loader"},
+			{test: /\.css$/, loader: ExtractText.extract("style-loader", "css-loader!cssnext-loader")},
+			{test: /\.png$/,  loader: "url?prefix=static/&limit=10000&mimetype=image/png" },
+			{test: /\.jpg$/,  loader: "url?prefix=static/&limit=10000&mimetype=image/jpg" },
+			{test: /\.jpeg$/,  loader: "url?prefix=static/&limit=10000&mimetype=image/jpeg" },
+			{test: /\.woff$/, loader: "url?prefix=static/&limit=10000&mimetype=application/font-woff" },
+			{test: /\.woff2$/, loader: "url?prefix=static/&limit=10000&mimetype=application/font-woff2" },
+			{test: /\.ttf$/,  loader: "url?prefix=static/&limit=10000&mimetype=application/octet-stream" },
+			{test: /\.eot$/,  loader: "file" },
+			{test: /\.svg$/,  loader: "url?prefix=static/&limit=10000&mimetype=image/svg+xml" }
 		]	
 	},
 	resolve: {
@@ -43,5 +63,5 @@ module.exports = {
 		root: pathToSrc,
 		modulesDirectories:	["node_modules"]
 	},
-	plugins: [define, extract, uglify]
+	plugins: [define, dedup, extract, uglify, vendors]
 };

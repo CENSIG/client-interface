@@ -13,7 +13,7 @@ var pathToDist = path.join(pathToSrc, "assets/dist");
 var define = new webpack.DefinePlugin({
 	"process.env": {
 		BROWSER: JSON.stringify(true),
-		PROD_MODE: JSON.stringify(false)
+		DEV_MODE: JSON.stringify(true)
 	}
 });
 
