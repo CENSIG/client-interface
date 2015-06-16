@@ -51,7 +51,7 @@ class Html extends React.Component
 		return (
 			<html lang="fr">
 				<head>
-					<meta charset="UTF-8" />
+					<meta charSet="UTF-8" />
 					{this._getLink()}
 					<title>{this.props.context.getStore(ApplicationStore).getCurrentTitlePage()}</title>
 				</head>
