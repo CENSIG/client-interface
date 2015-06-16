@@ -34,6 +34,11 @@ class ExploreSubTaxonStore extends BaseStore
 		this.emitChange();
 	}
 
+	_handleNotChilds() {
+		this.firstChilds = Immutable.List();	
+		this.emitChange();
+	}
+
 	getState() {
 		return {
 			parents  : this.parents,
@@ -60,7 +65,8 @@ ExploreSubTaxonStore.handlers  = {
 	"ATLAS_CHILDS"   : "_handleExploreChilds",
 	"EXPLORE_CHILDS" : "_handleExploreChilds",
 	"EXPLORE_SUB"    : "_handleExploreSub",
-	"EXPLORE_SUP"    : "_handleExploreSup"
+	"EXPLORE_SUP"    : "_handleExploreSup",
+	"NOT_CHILDS"		 : "_handleNotChilds"
 };
 
 export default ExploreSubTaxonStore;
