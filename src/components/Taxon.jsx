@@ -56,7 +56,7 @@ class Taxon extends React.Component
 				height={200}
 				margins={{top: 10, right: 20, bottom: 60, left: 55}}
 				fill="#3182bd"
-				title="Répartition des taxon enfants"
+				title="Répartition des principaux taxons enfants observés"
 			/>;
 		}
 		return chart;
