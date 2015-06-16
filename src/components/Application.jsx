@@ -9,7 +9,6 @@ if (process.env.BROWSER) {
 	require('../assets/css/base/fonts/fonts.css');
 	require('../assets/css/base/utils.css');
 	require('../assets/css/base/main.css');
-	var Spin = require("./Spin");
 }
 
 /**
@@ -40,10 +39,6 @@ class Application extends React.Component
 	render() {
 		var spin;
 		var Handler = this.props.currentRoute.get("handler");
-
-		/*if (!this.props.loaded && typeof window !== "undefined") {
-			spin = <Spin name="three-bounce" />;
-		}*/
 
 		return (
 			<div>
