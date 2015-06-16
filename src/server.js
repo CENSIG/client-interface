@@ -52,6 +52,7 @@ server.use(function(req, res, next) {
 		var html = React.renderToStaticMarkup(HtmlComponent({
 			markup: React.renderToString(context.createElement()),
 			context: context.getComponentContext(),
+			mode: process.env.NODE_ENV,
 			state: res.locals.state
 		}));
 		res.send(html);
