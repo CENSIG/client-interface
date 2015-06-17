@@ -2,7 +2,7 @@ import React						from "react";
 import ApplicationStore from "../stores/ApplicationStore";
 
 const scriptsProdName = [
-	"/static/vendors.bundle.js",
+	"/static/vendor.bundle.js",
 	"/static/app.bundle.js"
 ];
 
