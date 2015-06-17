@@ -1,7 +1,8 @@
 import request from "superagent";
 import promise from "bluebird"; 
+import appConfig from "../configs/appConfig";
 
-const IP   = (process.env.BROWSER) ? "127.0.0.1" : process.env.API_PORT_9000_TCP_ADDR;
+const IP   = (process.env.BROWSER) ? appConfig.api.ip : process.env.API_PORT_9000_TCP_ADDR;
 const PORT = process.env.API_PORT_9000_TCP_PORT || 9000;
 const HOST = `http://${IP}:${PORT}/apiv1/`;
 
