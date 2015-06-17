@@ -38,7 +38,7 @@ class ArianeItem extends React.Component
 	 */
 	_withNoLink() {
 		return (
-			<span data-cdnom={this.props.navParams.cdnom} className="ariane-item" onClick={this.context.arianeCallback}>
+			<span data-cdnom={this.props.navParams.cdnom} className="pointer ariane-item" onClick={this.context.arianeCallback}>
 				{this._isLast()}
 			</span>
 		);
