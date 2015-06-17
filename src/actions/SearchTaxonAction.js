@@ -17,6 +17,8 @@ class SearchTaxonAction
 		api.get(payload.cdnom, "childs", payload.options)
 			.then(function(data) {
 				context.dispatch("RECEIVE_RESULTS", data);
+			}).catch(err => {
+				context.dispatch("NOT_RESULTS", payload.options.q)
 			});
 		context.dispatch("REQUEST_SEARCH_PENDING", api.getRequestPending());
 	}

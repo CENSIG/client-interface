@@ -125,8 +125,9 @@ class SearchResult extends React.Component
 
 	render() {
 		var results = this.props.results;
-		var res;
-		if (results.size != 0) {
+		var notResults = this.props.notResults;
+		var res = null;
+		if (results.size !== 0) {
 			var items = results.map(result => {
 				return <SearchResultItem content={result} />;
 			});
@@ -136,8 +137,9 @@ class SearchResult extends React.Component
 					{items}
 				</ul>
 			);
-		} else {
-			res = null;	
+		} else if (notResults !== null){
+			var error = "Aucun résultat pour la recherche " + this.props.notResults;
+			res = <p className="card search-results">{error}</p>;
 		}
 		return res;
 	}
@@ -193,7 +195,7 @@ class Search extends React.Component
 			});
 		}
 
-		if (q.length == 0 && this.props.results.size > 0) {
+		if (q.length == 0) {
 			this.context.executeAction(SearchTaxonAction.resetSearch);
 		}
 	}
@@ -203,7 +205,10 @@ class Search extends React.Component
 		return (
 			<div className="search">
 				<SearchInput placeholder={placeholder} _onKeyUp={this._handleKeyUp.bind(this)} />
-				<SearchResult results={this.props.results} />
+				<SearchResult 
+					results={this.props.results} 
+					notResults={this.props.notResults}
+				/>
 			</div>
 		);
 	}
@@ -215,9 +220,7 @@ Search.contextTypes = {
 }
 
 Search = connectToStores(Search, [ SearchTaxonStore ], (stores, props) => {
-	return {
-		results: stores.SearchTaxonStore.getResults()
-	}
+	return stores.SearchTaxonStore.getState();
 });
 
 export default Search;
