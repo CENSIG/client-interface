@@ -14,7 +14,7 @@ class ExploreSubTaxonAction
 		}).then(data => {
 			context.dispatch("EXPLORE_CHILDS", Immutable.fromJS(data));
 		}).catch(err => {
-			console.log(err);	
+			context.dispatch("NOT_CHILDS");
 		});
 	}
 }
