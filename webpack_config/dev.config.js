@@ -32,7 +32,7 @@ var config = {
 			{
 				test: /\.jsx?$/, 
 				exclude: /node_modules/, 
-				loader: "jsx-loader!babel-loader"
+				loader: "jsx-loader!babel-loader?stage=1"
 			},
 			{test: /\.css$/, loader: "style!css!cssnext-loader"},
 			{test :/\.(jpe?g|png|woff2?|ttf|eot|svg)$/i, loader: "url-loader?prefix=static/"},
