@@ -12,5 +12,7 @@ export default {
 			"cdnom":"185214",
 			"limit": "OR"
 		}
-	}
+	},
+
+	"template": "base"
 };
