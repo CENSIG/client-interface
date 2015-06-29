@@ -1,0 +1,46 @@
+.atlas header {
+	background-color:  #4caf50;
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.26);
+	color: #fff;
+	min-height: 70px;
+}
+
+.atlas header > div:first-child {
+	margin: 20px;
+}
+
+.atlas header h1 {
+	font-size: 1.2em;
+	font-family: open_sansbold;
+}
+
+.atlas .mainTitle {
+	margin: 0 0 0 10px;
+}
+
+.atlas nav {
+	margin: 0 0 20px 0;
+}
+
+.atlas section {
+	margin: 20px 10px 0px 10px;
+}
+
+.atlas .panel-right {
+	flex-basis: 700px;
+}
+
+.atlas .panel-right div:last-child {
+	margin: 20px 0 0 0;	
+}
+
+.panel-info li span {
+	display: block;
+	text-align: center;
+}
+
+.stats {
+	font-family: open_sansbold;
+}
+
+

@@ -1,40 +1,8 @@
 import React from "react";
-import {NavLink} from "fluxible-router";
+import Radium from "radium";
+import ItemBrothersNavigation from "./ItemBrothersNavigation";
 
-if (process.env.BROWSER && typeof window !== "undefined") {
-	require("../assets/css/base/brothersNavigation.css");
-}
-	
-/**
- * A component which represent item of brothers
- * navigation
- * @author Jean BOUDET
- */
-class ItemBrothersNavigation extends React.Component
-{
-	constructor(props) {
-		super(props);	
-	}
-
-	shouldComponentUpdate(nextProps) {
-		return nextProps.children !== this.props.children;	
-	}
-
-	render() {
-		return (
-			<NavLink routeName="taxon" 
-				navParams={{name: this.context.atlasUriName, cdnom: this.props.cdnom}}>
-					<li className={this.props.className}>
-						{this.props.children}
-					</li>
-			</NavLink>
-		)	
-	}
-}
-
-ItemBrothersNavigation.contextTypes = {
-	atlasUriName: React.PropTypes.string
-}
+import style from "../style";
 
 /**
  * A component which represent brothers navigation
@@ -61,13 +29,15 @@ class BrothersNavigation extends React.Component
 				<nav>
 					<ul className="brothers-navigation flex fjc">
 						<ItemBrothersNavigation 
-							className="brothers-left"
+							right={false}
+							style={style.left}
 							cdnom={leftBrother.get("cdnom")}>
 							{leftBrother.get("name")}
 						</ItemBrothersNavigation>
 
 						<ItemBrothersNavigation 
-							className="brothers-right"
+							right={true}
+							style={style.right}
 							cdnom={rightBrother.get("cdnom")}>
 							{rightBrother.get("name")}
 						</ItemBrothersNavigation>

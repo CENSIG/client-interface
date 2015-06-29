@@ -1,101 +1,12 @@
 import React from "react";
-import Ariane from "./Ariane";
-import {NavLink} from "fluxible-router";
-import ExploreSubTaxonAction from "../actions/ExploreSubTaxonAction";
-import ExploreSubTaxonStore from "../stores/ExploreSubTaxonStore";
+import Radium from "radium";
+import ButtonExploreSubTaxon from "./ButtonExploreSubTaxon";
+import ExploreSubTaxonView from "./ExploreSubTaxonView";
+import ExploreSubTaxonAction from "../../../actions/ExploreSubTaxonAction";
+import ExploreSubTaxonStore from "../../../stores/ExploreSubTaxonStore";
 import {connectToStores}  from "fluxible/addons";
 
-if (process.env.BROWSER) {
-	require('../assets/css/base/exploreSubTaxon.css');
-}
-
-/**
- * Button explore. Display list of taxon childs
- * @author Jean BOUDET
- */
-class ButtonExploreSubTaxon extends React.Component
-{
-	constructor(props) {
-		super(props);	
-	}
-
-	render () {
-		return (
-			<span className="button-explore" onClick={this.props.callBackClick}>Explorer</span>	
-		);
-	}
-}
-
-/**
- * Button explore sub taxon.
- * @author Jean BOUDET
- */
-class ButtonExploreSubTaxonView extends React.Component
-{
-	constructor(props) {
-		super(props);	
-	}
-
-	render() {
-		return (
-			<span className="pointer" data-cdnom={this.props.cdnom} 
-				onClick={this.context.subTaxonViewCallback}>Explorer les fils</span>);
-	}
-}
-
-ButtonExploreSubTaxonView.contextTypes = {
-	subTaxonViewCallback: React.PropTypes.func
-}
-
-/**
- * List childs of specific taxon
- * @author Jean BOUDET
- */
-class ExploreSubTaxonView extends React.Component
-{
-	constructor(props) {
-		super(props);	
-	}
-
-	_getFirstChilds() {
-		var childs = this.context.firstChilds.map((child, i) => {
-			var navParams = {
-				name: this.context.atlasUriName,
-				cdnom: child.get("cdnom")
-			};
-			return (
-				<li key={i} className="flex fjb explore-results">
-					<NavLink routeName="taxon" navParams={navParams}>
-						{child.get("name")}
-					</NavLink>
-					<ButtonExploreSubTaxonView cdnom={navParams.cdnom}/>
-				</li>
-			);
-		});
-
-		return childs.size !== 0 ? <ul>{childs}</ul> : <p>Il n'y a pas de fils observés</p>;
-	}
-
-	render () {
-		var className = "card explore-sub-taxon-view";
-
-		if (!this.props.displaying) {
-			className += " hidden";
-		} 
-		return (
-			<div className={className}>
-				<Ariane	parents={this.context.parents} />
-				{this._getFirstChilds()}
-			</div>	
-		)
-	}
-}
-
-ExploreSubTaxonView.contextTypes = {
-	firstChilds: React.PropTypes.object,
-	parents: React.PropTypes.object,
-	atlasUriName: React.PropTypes.string
-}
+import style from "../style";
 
 /**
  * Component for display a explore button
@@ -201,7 +112,8 @@ class ExploreSubTaxon extends React.Component
 
 	render() {
 		return (
-			<div ref="explore" className="explore-sub-taxon" 
+			<div ref="explore" 
+				style={style.explore}
 				onMouseDown={this._handleMouseDown}
 				onMouseUp={this._handleMouseUp}
 			>
@@ -231,4 +143,7 @@ ExploreSubTaxon = connectToStores(ExploreSubTaxon, [ ExploreSubTaxonStore ], (st
 	return stores.ExploreSubTaxonStore.getState();
 });
 
+ExploreSubTaxon = Radium(ExploreSubTaxon);
+
 export default ExploreSubTaxon;
+

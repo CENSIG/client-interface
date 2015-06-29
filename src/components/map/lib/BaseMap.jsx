@@ -1,13 +1,11 @@
 import React										 from "react";
+import Radium									   from "radium";
 import Leaflet									 from "leaflet";
 import {Map, TileLayer, GeoJson} from "react-leaflet";
 import Legend										 from "./Legend";
 import MyGeojson						     from "./MyGeojson";
 
-if (process.env.BROWSER ) {
-	require("../../../node_modules/leaflet/dist/leaflet.css");
-	require("../../assets/css/base/map.css");
-}
+import style from "../style";
 
 const center = [43.6831302,3.6105679];
 
@@ -51,7 +49,7 @@ class BaseMap extends React.Component
 		var geojson = data.has("type") ? this.getGeojson(data) : null;
 
 		return (
-			<Map ref="map" className="map" center={center} zoom={8}>
+			<Map ref="map" style={style.base} center={center} zoom={8}>
 				<TileLayer
 					url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
 				/>
@@ -61,6 +59,8 @@ class BaseMap extends React.Component
 		);
 	}
 }
+
+BaseMap = Radium(BaseMap);
 
 export default BaseMap;
 
