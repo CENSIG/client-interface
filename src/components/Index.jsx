@@ -1,10 +1,5 @@
 import React					 from "react";
-import NavIndex				 from "./NavIndex";
-import elementNavIndex from "../configs/elementNavIndex";
-
-if (process.env.BROWSER) {
-	require("../assets/css/base/index.css");
-}
+import Template				 from "../templates/Template";
 
 /**
  * A component for display first page
@@ -18,18 +13,7 @@ class Index extends React.Component
 	}
 
 	render() {
-		return (
-			<div className="index">
-				<div className="wrapper flex fdc fas">
-					<div className="title card">
-						<h1 className="logo">
-							<span>Conservatoire d'espaces naturels</span>
-						</h1>
-					</div>
-					<NavIndex elements={elementNavIndex} />
-				</div>
-			</div>
-		);
+		return <Template component="index" {...this.props} />
 	}
 }
 
