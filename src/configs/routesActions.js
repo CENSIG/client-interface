@@ -1,4 +1,6 @@
 import Immutable from "immutable";
+import Event from "../utils/Event";
+import {api} from "../configs/appConfig";
 
 /**
  * Return array of object with:
@@ -8,20 +10,20 @@ import Immutable from "immutable";
  *	This array is use for taxon action reduce
  * @author Jean BOUDET
  */
-export function taxonActionRequest(api, payload) {
+export function taxonActionRequest(resource, payload) {
 	var cdnom = payload.cdnom;
 	var limit = payload.limit;
 
 	return [
-		{event: "TAXON_PARENTS", req: api.get(cdnom, "parents", { limit: limit })},
-		{event: "BROTHERS_DATA", baseData: Immutable.Map({cdnom: cdnom}), 
-			req: api.get(cdnom, "brothers")
+		{event: Event.PARENTS, req: api.get(resource, cdnom, "parents", { limit: limit })},
+		{event: Event.BROTHERS, baseData: Immutable.Map({cdnom: cdnom}), 
+			req: api.get(resource, cdnom, "brothers")
 		},
-		{event: "TAXON_CHILDS", eventError: "NOT_CHILDS",
-			req: api.get(cdnom, "first_child_obs")
+		{event: Event.FIRST_CHILDS, eventError: Event.NOT_FIRST_CHILDS,
+			req: api.get(resource, cdnom, "first_child_obs")
 		},
-		{event: "TAXON_INFORMATIONS", req: api.get(cdnom, "informations")},
-		{event: "TAXON_GEOJSON", req: api.get(cdnom, "geojson")}
+		{event: Event.INFO, req: api.get(resource, cdnom, "informations")},
+		{event: Event.GRILLE_10, req: api.get(resource, cdnom, "geojson")}
 	];
 }
 
@@ -33,16 +35,16 @@ export function taxonActionRequest(api, payload) {
  *	This array is use for atlas action reduce
  * @author Jean BOUDET
  */
-export function atlasActionRequest(api, payload) {
+export function atlasActionRequest(resource, payload) {
 	var cdnom = payload.cdnom;
 
 	return [
-		{event: "ATLAS_PARENTS", req: api.get(cdnom, "parents", { limit: "OR" })},
-		{event: "ATLAS_CHILDS", eventError: "NOT_CHILDS",
-			req: api.get(cdnom, "first_child_obs")
+		{event: Event.PARENTS, req: api.get(resource, cdnom, "parents", { limit: "OR" })},
+		{event: Event.FIRST_CHILDS, eventError: Event.NOT_FIRST_CHILDS,
+			req: api.get(resource, cdnom, "first_child_obs")
 		},
-		{event: "ATLAS_INFORMATIONS", req: api.get(cdnom, "informations")},
-		{event: "ATLAS_GEOJSON", req: api.get(cdnom, "geojson")}
+		{event: Event.INFO, req: api.get(resource, cdnom, "informations")},
+		{event: Event.GRILLE_10, req: api.get(resource, cdnom, "geojson")}
 	];
 
 }
