@@ -7,21 +7,29 @@ import BaseRouteStore		from "./stores/BaseRouteStore";
 import Application			from "./components/Application";
 import ApplicationStore from "./stores/ApplicationStore";
 import TaxonStore				from "./stores/TaxonStore";
-import SearchTaxonStore	from "./stores/SearchTaxonStore";
+import SearchStore	from "./stores/SearchStore";
 import AtlasStore				from "./stores/AtlasStore";
 import BrothersNavigationStore from "./stores/BrothersNavigationStore";
-import ExploreSubTaxonStore from "./stores/ExploreSubTaxonStore";
+import ExploreStore from "./stores/ExploreStore";
+import ParentsStore from "./stores/ParentsStore";
+import FirstChildsStore from "./stores/FirstChildsStore";
+import InfoStore from "./stores/InfoStore";
+import GeoStore from "./stores/GeoStore";
 
 var app = new Fluxible({
 	component: Application // Top component context
 });
 
 app.registerStore(ApplicationStore);
+app.registerStore(ParentsStore);
 app.registerStore(BaseRouteStore);
 app.registerStore(TaxonStore);
-app.registerStore(SearchTaxonStore);
+app.registerStore(SearchStore);
 app.registerStore(AtlasStore);
 app.registerStore(BrothersNavigationStore);
-app.registerStore(ExploreSubTaxonStore);
+app.registerStore(ExploreStore);
+app.registerStore(FirstChildsStore);
+app.registerStore(InfoStore);
+app.registerStore(GeoStore);
 
 export default app;
