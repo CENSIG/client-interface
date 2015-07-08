@@ -3,7 +3,7 @@ import {atlasActionRequest} from "../configs/routesActions";
 import BaseAction from "./BaseAction";
 import promise		from "bluebird"; 
 
-const api = new Api("taxon");
+const resource = "taxon";
 
 /**
  * Actions for atlas (get informations and geojson)
@@ -18,7 +18,7 @@ class AtlasAction extends BaseAction
 	 */
 	static getData(context, payload) {
 		context.dispatch("LOADED", false);
-		return AtlasAction.reduce(context, atlasActionRequest(api, payload));
+		return AtlasAction.reduce(context, atlasActionRequest(resource, payload));
 	}
 }
 

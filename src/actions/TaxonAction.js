@@ -2,7 +2,7 @@ import Api from "../utils/Api";
 import BaseAction from "./BaseAction";
 import {taxonActionRequest} from "../configs/routesActions";
 
-const api = new Api("taxon");
+const resource = "taxon";
 
 /**
  * Actions for taxon (get informations and geojson)
@@ -17,7 +17,7 @@ class TaxonAction extends BaseAction
 	 */
 	static getData(context, payload) {
 		context.dispatch("LOADED", false);
-		return TaxonAction.reduce(context, taxonActionRequest(api, payload));
+		return TaxonAction.reduce(context, taxonActionRequest(resource, payload));
 	}
 }
 
