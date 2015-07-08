@@ -1,10 +1,5 @@
 import request from "superagent";
 import promise from "bluebird"; 
-import appConfig from "../configs/appConfig";
-
-const IP   = (process.env.BROWSER) ? appConfig.api.ip : process.env.API_PORT_9000_TCP_ADDR;
-const PORT = process.env.API_PORT_9000_TCP_PORT || 9000;
-const HOST = `http://${IP}:${PORT}/apiv1/`;
 
 /**
  * A class for manage request with API
@@ -13,10 +8,10 @@ const HOST = `http://${IP}:${PORT}/apiv1/`;
 class Api
 {
 	/**
-	 * @param uri The name of resource
+	 * @param params object with (ip, port, name)
 	 */
-	constructor(uri) {
-		this.uri            = HOST+uri;
+	constructor(params) {
+		this.baseUri        = `http://${params.ip}:${params.port}/${params.name}`;
 		this.requestPending = null;
 	}
 
@@ -27,9 +22,9 @@ class Api
 	 * @param  option  Specific output for the resource
 	 * @return promise
 	 */
-	get(id, object=null, options=null) {
+	get(resource, id, object=null, options=null) {
 		return new promise((resolve, reject) => {
-			var url = this.buildUrl(id, object, options);
+			var url = this.buildUrl(resource, id, object, options);
 			this.requestPending = request.get(url);
 			this.requestPending.end((err, res) => {
 				if (err) {
@@ -41,8 +36,8 @@ class Api
 		});
 	}
 
-	buildUrl(id, object, options) {
-		var url = `${this.uri}/${id}`;
+	buildUrl(resource, id, object, options) {
+		var url = `${this.baseUri}/${resource}/${id}`;
 		url += (object) ? `/${object}` : "";
 		url += this.extractOption(options);
 		return url;
