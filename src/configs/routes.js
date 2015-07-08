@@ -1,6 +1,6 @@
 import TaxonAction from "../actions/TaxonAction";
 import AtlasAction from "../actions/AtlasAction";
-import TaxonStore	 from "../stores/TaxonStore";
+import InfoStore from "../stores/InfoStore";
 import AtlasStore	 from "../stores/AtlasStore";
 import Index		   from "../components/Index";
 import Atlas		   from "../components/Atlas";
@@ -19,7 +19,7 @@ export default {
 		page: "index",
 		handler: Index,
 		action: (context, payload, done) => {
-			context.dispatch("UPDATE_TITLE", { label: "Bienvenue sur l'application WebOb's"});
+			context.dispatch("UPDATE_TITLE", "Bienvenue sur l'application WebOb's");
 			done();
 		}
 	},
@@ -33,12 +33,13 @@ export default {
 			var cdnom     = appConfig.atlas[atlasName].cdnom;
 
 			context.dispatch("UPDATE_TITLE", "Atlas des " + atlasName);
-			if (context.getStore(AtlasStore).getInfo().get("id") !== cdnom) {
+			//if (context.getStore(AtlasStore).getState().id !== cdnom) {
 				return AtlasAction.getData(context, { cdnom: cdnom })
 					.then(() => {
-						context.dispatch("ATLAS_CURRENT", cdnom);
+						//context.dispatch("ATLAS_CURRENT", cdnom);
+						console.log("foo");
 					});
-			}
+			//}
 		}
 	},
 
@@ -55,16 +56,13 @@ export default {
 			var cdnom = payload.get("params").get("cdnom");
 			var limit = appConfig.atlas[atlasName].limit;
 
-			if (context.getStore(TaxonStore).getInfo().get("id") !== cdnom) {
-				return TaxonAction.getData(context, { 
-					cdnom: cdnom, 
-					limit: limit
-				}).then(function() {
-					var name = context.getStore(TaxonStore).getInfo().get("nom");
-					context.dispatch("UPDATE_TITLE", "WebOb's | " + name);
-					context.dispatch("TAXON_CURRENT", cdnom);
-				});
-			}
+			return TaxonAction.getData(context, { 
+				cdnom: cdnom, 
+				limit: limit
+			}).then(function() {
+				var name = context.getStore(InfoStore).getState().get("nom");
+				context.dispatch("UPDATE_TITLE", "WebOb's | " + name);
+			});
 		}
 	}
 };
