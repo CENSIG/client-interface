@@ -2,7 +2,7 @@ import React						from "react";
 import ApplicationStore from "../stores/ApplicationStore";
 import {provideContext, connectToStores} from "fluxible/addons";
 import {handleHistory}  from "fluxible-router";
-
+import {api} from "../configs/appConfig";
 /**
  * Top component. This component handles
  * display application
@@ -16,7 +16,8 @@ class Application extends React.Component
 
 	getChildContext() {
 		return {
-			atlasUriName: this.props.currentRoute.get("params").get("name")
+			atlasUriName: this.props.currentRoute.get("params").get("name"),
+			api: api
 		};
 	}
 
@@ -41,8 +42,9 @@ class Application extends React.Component
 }
 
 Application.childContextTypes = {
-	atlasUriName: React.PropTypes.string
-}
+	atlasUriName: React.PropTypes.string,
+	api: React.PropTypes.object
+};
 
 Application = connectToStores(Application, [ ApplicationStore ], (stores, props) => {
 		return stores.ApplicationStore.getState();

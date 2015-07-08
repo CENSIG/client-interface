@@ -4,6 +4,9 @@ import Leaflet									 from "leaflet";
 import {Map, TileLayer, GeoJson} from "react-leaflet";
 import Legend										 from "./Legend";
 import MyGeojson						     from "./MyGeojson";
+import {connectToStores} from "fluxible/addons";
+import GeoStore from "../../../stores/GeoStore";
+
 
 import style from "../style";
 
@@ -45,8 +48,8 @@ class BaseMap extends React.Component
 	}
 
 	render() {
-		var data    = this.props.geojson;
-		var geojson = data.has("type") ? this.getGeojson(data) : null;
+		var grille10 = this.props.grille10;
+		var geojson  = grille10.has("type") ? this.getGeojson(grille10) : null;
 
 		return (
 			<Map ref="map" style={style.base} center={center} zoom={8}>
@@ -59,6 +62,12 @@ class BaseMap extends React.Component
 		);
 	}
 }
+
+BaseMap = connectToStores(BaseMap, [ GeoStore ], (stores, props) => {
+	return {
+		grille10: stores.GeoStore.getState().grille10
+	}
+});
 
 BaseMap = Radium(BaseMap);
 

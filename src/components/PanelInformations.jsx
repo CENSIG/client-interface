@@ -1,4 +1,6 @@
 import React	from "react";
+import {connectToStores} from "fluxible/addons";
+import InfoStore from "../stores/InfoStore";
 
 /**
  * Display informations about taxon
@@ -35,6 +37,12 @@ class PanelInformations extends React.Component
 		);
 	}
 }
+
+PanelInformations = connectToStores(PanelInformations, [ InfoStore ], (stores, props) => {
+		return {
+			info: stores.InfoStore.getState()	
+		}
+});
 
 export default PanelInformations;
 

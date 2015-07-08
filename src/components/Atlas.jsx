@@ -17,7 +17,7 @@ class Atlas extends React.Component
 		if (this.props.current === null) {
 			return true;	
 		}
-		return nextProps.current !== this.props.current;
+		return nextProps.id !== this.props.id;
 	}
 
 	render() {
