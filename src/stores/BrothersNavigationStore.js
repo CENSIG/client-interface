@@ -1,5 +1,6 @@
 import BaseStore from "fluxible/addons/BaseStore";
 import Immutable from "immutable";
+import Event from "../utils/Event";
 
 /**
  * A store for manage brothers navigation
@@ -21,7 +22,7 @@ class BrothersNavigationStore extends BaseStore
 	 */
 	_handleBrothers(data) {
 		var brothers     = data.get("res");
-		var cdnom        = data.cdnom;
+		var cdnom        = data.get("cdnom");
 		var currentIndex = brothers.findIndex(value => {
 			return value.get("cdnom") === cdnom;
 		});
@@ -69,8 +70,7 @@ class BrothersNavigationStore extends BaseStore
 }
 
 BrothersNavigationStore.storeName = "BrothersNavigationStore";
-BrothersNavigationStore.handlers  = {
-	"BROTHERS_DATA" : "_handleBrothers"
-};
+BrothersNavigationStore.handlers  = {};
+BrothersNavigationStore.handlers[Event.BROTHERS] = "_handleBrothers"
 
 export default BrothersNavigationStore;
