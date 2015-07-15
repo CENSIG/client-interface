@@ -18,5 +18,5 @@ export default {
 		}
 	},
 
-	"template": "base"
+	"templateName": "simpleDashBoard"
 };
