@@ -1,5 +1,5 @@
 import React					 from "react";
-import Template				 from "../templates/Template";
+import Template				 from "./Template";
 
 /**
  * A component for display first page
