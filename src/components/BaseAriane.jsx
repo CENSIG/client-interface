@@ -3,7 +3,6 @@ import {Ariane} from "client-interface-components";
 import {connectToStores}  from "fluxible/addons";
 import ParentsStore from "../stores/ParentsStore";
 
-
 class BaseAriane extends React.Component
 {
 	constructor(props) {

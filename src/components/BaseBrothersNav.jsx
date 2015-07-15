@@ -3,7 +3,7 @@ import BrothersNavigationStore from "../stores/BrothersNavigationStore";
 import {connectToStores}  from "fluxible/addons";
 import {BrothersNavigation} from "client-interface-components";
 
-class BaseBrtohersNav extends React.Component
+class BaseBrothersNav extends React.Component
 {
 	constructor(props) {
 		super(props);	
@@ -11,7 +11,7 @@ class BaseBrtohersNav extends React.Component
 
 	render() {
 		return (
-			<div style={{alignSelf: "center"}}>
+			<div>
 				<BrothersNavigation
 					brothers={this.props.brothers}
 					left={this.props.left}
@@ -22,8 +22,8 @@ class BaseBrtohersNav extends React.Component
 	}
 }
 
-BaseBrtohersNav = connectToStores(BaseBrtohersNav, [ BrothersNavigationStore ], (stores, props) => {
+BaseBrothersNav = connectToStores(BaseBrothersNav, [ BrothersNavigationStore ], (stores, props) => {
 	return stores.BrothersNavigationStore.getState();
 });
 
-export default BaseBrtohersNav;
+export default BaseBrothersNav;

@@ -30,8 +30,9 @@ class BaseExplorer extends React.Component
 
 	render() {
 		return (
-			<div style={{display: "inline-block"}}>
+			<div className={this.props.className}>
 				<ExploreSubTaxon 
+					buttonMaterial={this.props.buttonMaterial}
 					parents={this.props.parents}
 					firstChilds={this.props.firstChilds}
 					actionClickSup={this._actionClickSup.bind(this)}	
@@ -42,10 +43,14 @@ class BaseExplorer extends React.Component
 	}
 }
 
+BaseExplorer.defaultProps = {
+	buttonMaterial: false
+};
+
 BaseExplorer.contextTypes = {
 	executeAction: React.PropTypes.func,
 	api: React.PropTypes.object
-}
+};
 
 BaseExplorer = connectToStores(BaseExplorer, [ ExploreStore ], (stores, props) => {
 	return stores.ExploreStore.getState();

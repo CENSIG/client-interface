@@ -8,6 +8,9 @@ class BaseSearch extends React.Component
 {
 	constructor(props) {
 		super(props);	
+		this.state = {
+			backDropShow: false	
+		}
 	}
 
 	_actionSearch(q, cdnom) {
@@ -26,18 +29,30 @@ class BaseSearch extends React.Component
 		req.abort();	
 	}
 
+	_handleOnFocus(e) {
+		this.setState({
+			backDropShow: true	
+		});
+	}
+
+	_handleOnBlur(e) {
+		e.target.value = "";
+		this.setState({
+			backDropShow: false
+		});
+	}
+
 	render() {
 		return (
 			<div>
 				<Search
-					label={this.props.label}
-					parentsCdnom={this.props.parentsCdnom}
-					results={this.props.results}
-					notResults={this.props.notResults}
-					pendingRequest={this.props.pendingRequest}
+					backDropShow={this.state.backDropShow}
 					actionSearch={this._actionSearch.bind(this)}
 					actionReset={this._actionReset.bind(this)}
 					actionAbort={this._actionAbort}
+					_onFocus={this._handleOnFocus.bind(this)}
+					_onBlur={this._handleOnBlur.bind(this)}
+					{...this.props}
 				/>
 			</div>
 		);	
