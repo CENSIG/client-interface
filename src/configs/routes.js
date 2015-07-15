@@ -6,6 +6,7 @@ import Index		   from "../components/Index";
 import Atlas		   from "../components/Atlas";
 import Taxon			 from "../components/Taxon";
 import appConfig	 from "../configs/appConfig";
+import Event from "../utils/Event";
 
 /**
  * Routes
@@ -50,7 +51,7 @@ export default {
 		label: "taxon",
 		page: "taxon",
 		action : (context, payload) => {
-			context.dispatch("RESET_SEARCH");
+			context.dispatch(Event.RESET_SEARCH_CHILDS);
 			var atlasName = payload.get("params").get("name");
 
 			var cdnom = payload.get("params").get("cdnom");
