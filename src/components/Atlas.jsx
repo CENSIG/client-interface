@@ -1,7 +1,7 @@
 import React						 from "react";
 import AtlasStore				 from "../stores/AtlasStore";
 import {connectToStores} from "fluxible/addons";
-import Template					 from "../templates/Template";
+import Template					 from "./Template";
 
 /**
  * A component for Atlas

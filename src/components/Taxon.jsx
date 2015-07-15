@@ -4,7 +4,7 @@ import AtlasStore from "../stores/AtlasStore";
 import InfoStore  from "../stores/InfoStore";
 import ParentsStore  from "../stores/ParentsStore";
 import {connectToStores}  from "fluxible/addons";
-import Template					  from "../templates/Template";
+import Template					  from "./Template";
 
 /**
  * A component to display a taxon of atlas
