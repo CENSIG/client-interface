@@ -8,7 +8,10 @@ var webpack     = require("webpack"),
 
 // Path
 var pathToSrc  = path.resolve(__dirname, "../src/");
-var pathToDist = path.join(pathToSrc, "assets/dist");
+var pathToDist = path.join(
+	path.resolve(__dirname, "../dist/")
+	, "assets/dist"
+);
 
 // Define global variable for include css file
 var define = new webpack.DefinePlugin({
@@ -37,7 +40,8 @@ module.exports = {
 		vendors: [
 			"react", "fluxible", "bluebird", 
 			"fluxible-router", "immutable", "leaflet",
-			"object-assign", "react-leaflet", "superagent" 	
+			"object-assign", "react-leaflet", "superagent",
+			"client-interface-components"
 		]
 	},
 	output: {
