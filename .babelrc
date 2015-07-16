@@ -1,0 +1,15 @@
+{
+	"stage":1,
+	"env": {
+		"prod": {
+			"optional": ["optimisation", "minification"]	
+		}	
+	},
+	"ignore": [
+		"src/thirdparty/react-d3/dist/",
+		"src/thirdparty/react-d3/docs/",
+		"src/thirdparty/react-d3/tests/",
+		"src/thirdparty/react-d3/node_modules/",
+		"src/thirdparty/react-d3/*.js"
+	]
+}
