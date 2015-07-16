@@ -14,12 +14,12 @@ require("babel/register")({
 });
 
 // Dependencies
-var express       = require("express");
-		expstate      = require("express-state");
-		server        = express();
-		React         = require("react");
-		app           = require("./app");
-		navigation    = require("fluxible-router").navigateAction;
+var express       = require("express"),
+		expstate      = require("express-state"),
+		server        = express(),
+		React         = require("react"),
+		app           = require("./app"),
+		navigation    = require("fluxible-router").navigateAction,
 		HtmlComponent = React.createFactory(require("./components/Html"));
 
 // Use expose function
