@@ -9,9 +9,11 @@ require("node-jsx").install({
 	extension: ".jsx"
 });
 
-require("babel/register")({
-	stage: 1
-});
+if (process.env.NODE_ENV !== "prod") {
+	require("babel/register")({
+		stage: 1
+	});
+}
 
 // Dependencies
 var express       = require("express"),
