@@ -58,12 +58,12 @@ export default function(props) {
 						</Col>
 						<Col md={11}>
 							<Row>
-								<Col md={5}>
+								<Col lg={5}>
 									<Panel header={mapTitle}>
 										{map}
 									</Panel>
 								</Col>
-								<Col md={7}>
+								<Col lg={7}>
 									<Row>
 										<Col lg={12}>
 											<Panel header={galeriePhoto}>
@@ -79,7 +79,7 @@ export default function(props) {
 								</Col>
 							</Row>
 							<Row>
-								<Col md={5}>
+								<Col lg={5}>
 									<Panel header={firstChildTitle}>
 										<FirstChildsChart />	
 									</Panel>
