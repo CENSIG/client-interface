@@ -13,14 +13,14 @@ class FirstChildsChart extends React.Component
 		var chart = null;
 		if (this.props.data.size !== 0) {
 			chart = <BarChart
-				className="card"
 				nameLabelProp="name"
 				nameValueProp="observations"
 				data={this.props.data.slice(0, 5).toJS()}
-				width={600}
-				height={200}
 				margins={{top: 10, right: 20, bottom: 60, left: 55}}
 				fill="#3182bd"
+				width={600}
+				height={200}
+				viewBox="0 0 590 200"
 			/>;
 		}
 		return chart;
