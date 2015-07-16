@@ -16,7 +16,7 @@ class FirstChildsChart extends React.Component
 				nameLabelProp="name"
 				nameValueProp="observations"
 				data={this.props.data.slice(0, 5).toJS()}
-				margins={{top: 10, right: 20, bottom: 60, left: 55}}
+				margins={{top: 15, right: 20, bottom: 60, left: 70}}
 				fill="#3182bd"
 				width={600}
 				height={200}

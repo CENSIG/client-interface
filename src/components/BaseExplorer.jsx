@@ -4,6 +4,13 @@ import ExploreAction from "../actions/ExploreAction";
 import ExploreStore from "../stores/ExploreStore";
 import {connectToStores}  from "fluxible/addons";
 
+var style = {
+	position: "fixed",
+	right: "10px",
+	top: "20px",
+	zIndex: 1030
+};
+
 class BaseExplorer extends React.Component
 {
 	constructor(props) {
@@ -30,7 +37,7 @@ class BaseExplorer extends React.Component
 
 	render() {
 		return (
-			<div className={this.props.className}>
+			<div style={style}>
 				<ExploreSubTaxon 
 					buttonMaterial={this.props.buttonMaterial}
 					parents={this.props.parents}
