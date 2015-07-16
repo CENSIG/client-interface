@@ -1,5 +1,4 @@
 import React										 from "react";
-import Radium									   from "radium";
 import Leaflet									 from "leaflet";
 import {Map, TileLayer, GeoJson} from "react-leaflet";
 import Legend										 from "./Legend";
@@ -78,7 +77,7 @@ BaseMap = connectToStores(BaseMap, [ GeoStore ], (stores, props) => {
 	}
 });
 
-BaseMap = Radium(BaseMap);
+BaseMap = BaseMap;
 
 export default BaseMap;
 
