@@ -1,6 +1,7 @@
 import React from "react";
 import {Navbar, Nav, NavItem, Row, Col} from "react-bootstrap"; 
 import {Panel, Grid, ListGroup, ListGroupItem} from "react-bootstrap";
+import {CollapsibleNav} from "react-bootstrap";
 
 import BaseExplorer from "../../components/BaseExplorer";
 import BaseSearch from "../../components/BaseSearch";
@@ -37,58 +38,60 @@ export default function(props) {
 
 	return (
 		<div>
-			<Grid fluid>
-				<Row>
-					<Col md={12}>
-						<Navbar brand={title} fixedTop fluid></Navbar>
-						<BaseExplorer className="explorer" buttonMaterial={true} />
-					</Col>
-				</Row>
-				<div className="content">
-					<Row>
-						<Col md={1}>
-							<nav style={{position: "fixed"}}>
-								<BaseSearch
-									withBackdrop={true}
-									divInput={searchStyle.divInput}
-									label={props.name}
-									parentsCdnom={props.id}
-								/>
-							</nav>
-						</Col>
-						<Col md={11}>
-							<Row>
-								<Col lg={5}>
-									<Panel header={mapTitle}>
-										{map}
-									</Panel>
-								</Col>
-								<Col lg={7}>
-									<Row>
-										<Col lg={12}>
-											<Panel header={galeriePhoto}>
-												PHOTO	
-											</Panel>
-										</Col>
-										<Col lg={12}>
-											<Panel header={infoTitle}>
-												<PanelInfo />
-											</Panel>
-										</Col>
-									</Row>
-								</Col>
-							</Row>
-							<Row>
-								<Col lg={5}>
-									<Panel header={firstChildTitle}>
-										<FirstChildsChart />	
-									</Panel>
-								</Col> 
-							</Row>
-						</Col>
-					</Row>
+			<nav className="navbar navbar-default navbar-fixed-top" role="navigation">
+				<div className="navbar-header">
+					<a className="navbar-brand" href="#">{title}</a>
+				</div>
+				<div className="navbar-default sidebar">
+					<div className="sidebar-nav navbar-collapse">
+						<ul className="side-menu">
+							<BaseSearch
+								withBackdrop={true}
+								divInput={searchStyle.divInput}
+								label={props.name}
+								parentsCdnom={props.id}
+							/>
+						</ul>
 					</div>
-				</Grid>
+				</div>
+			</nav>
+			<BaseExplorer className="explorer" buttonMaterial={true} />
+			<div className="content">
+				<Grid fluid>
+						<Row>
+							<Col md={12}>
+								<Row>
+									<Col lg={5}>
+										<Panel header={mapTitle}>
+											{map}
+										</Panel>
+									</Col>
+									<Col lg={7}>
+										<Row>
+											<Col lg={12}>
+												<Panel header={galeriePhoto}>
+													PHOTO	
+												</Panel>
+											</Col>
+											<Col lg={12}>
+												<Panel header={infoTitle}>
+													<PanelInfo />
+												</Panel>
+											</Col>
+										</Row>
+									</Col>
+								</Row>
+								<Row>
+									<Col lg={5}>
+										<Panel header={firstChildTitle}>
+											<FirstChildsChart />	
+										</Panel>
+									</Col> 
+								</Row>
+							</Col>
+						</Row>
+					</Grid>
+				</div>
 		</div>
 	);
 }

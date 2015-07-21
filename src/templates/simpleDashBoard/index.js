@@ -1,4 +1,8 @@
 if (process.env.BROWSER) {
+
+	global.jQuery = require("jquery/dist/jquery.js");
+	require("bootstrap");
+
 	require("./css/main.css")
 	require("bootstrap/dist/css/bootstrap.min.css");
 	require("./css/reset.css");

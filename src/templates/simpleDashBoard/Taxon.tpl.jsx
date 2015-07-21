@@ -46,26 +46,29 @@ export default function(props) {
 
 	return (
 		<div>
-			<Grid fluid>
-				<Row>
-					<Col md={12}>
-						<Navbar brand={brand} fixedTop fluid></Navbar>
-						<BaseExplorer className="explorer" buttonMaterial={true} />
-					</Col>
-				</Row>
-				<div className="content">
-					<Row>
-						<Col md={1}>
-							<nav style={{position: "fixed"}}>
-								<BaseSearch
-									withBackdrop={true}
-									divInput={searchStyle.divInput}
-									label={props.atlas.name}
-									parentsCdnom={props.atlas.id}
-								/>
-							</nav>
-						</Col>
-						<Col md={11}>
+			<nav className="navbar navbar-default navbar-fixed-top" role="navigation">
+				<div className="navbar-header">
+					<a className="navbar-brand" href="#">{title}</a>
+				</div>
+				<div className="nav-align navbar-right">
+					<BaseAriane />	
+				</div>
+				<div className="navbar-default sidebar">
+					<div className="sidebar-nav navbar-collapse">
+						<ul className="side-menu">
+							<BaseSearch
+								withBackdrop={true}
+								divInput={searchStyle.divInput}
+								label={props.atlas.name}
+								parentsCdnom={props.atlas.id}
+							/>
+						</ul>
+					</div>
+				</div>
+			</nav>
+			<BaseExplorer className="explorer" buttonMaterial={true} />
+			<div className="content">
+				<Grid fluid>
 							<Row>
 								<Col md={12}>
 									<Panel header={brothersTitle}>
@@ -101,10 +104,8 @@ export default function(props) {
 									</Panel>
 								</Col> 
 							</Row>
-						</Col>
-					</Row>
-					</div>
 				</Grid>
+			</div>
 		</div>
 	);
 }
