@@ -32,15 +32,10 @@ export default {
 		action  : (context, payload) => {
 			var atlasName = payload.get("params").get("name");
 			var cdnom     = appConfig.atlas[atlasName].cdnom;
-
 			context.dispatch("UPDATE_TITLE", "Atlas des " + atlasName);
-			//if (context.getStore(AtlasStore).getState().id !== cdnom) {
-				return AtlasAction.getData(context, { cdnom: cdnom })
-					.then(() => {
-						//context.dispatch("ATLAS_CURRENT", cdnom);
-						console.log("foo");
-					});
-			//}
+			return AtlasAction.getData(context, { cdnom: cdnom })
+				.then(() => {
+				});
 		}
 	},
 
