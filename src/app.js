@@ -15,6 +15,7 @@ import ParentsStore from "./stores/ParentsStore";
 import FirstChildsStore from "./stores/FirstChildsStore";
 import InfoStore from "./stores/InfoStore";
 import GeoStore from "./stores/GeoStore";
+import PhotoStore from "./stores/PhotoStore";
 
 var app = new Fluxible({
 	component: Application // Top component context
@@ -31,5 +32,6 @@ app.registerStore(ExploreStore);
 app.registerStore(FirstChildsStore);
 app.registerStore(InfoStore);
 app.registerStore(GeoStore);
+app.registerStore(PhotoStore);
 
 export default app;
