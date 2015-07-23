@@ -14,6 +14,11 @@ class GeoStore extends BaseStore
 		this.emitChange();
 	}
 
+	_handleNotGrille10() {
+		this.grille10 = Immutable.Map();
+		this.emitChange();
+	}
+
 	getState() {
 		return {
 			grille10: this.grille10	
@@ -32,6 +37,7 @@ class GeoStore extends BaseStore
 GeoStore.storeName = "GeoStore";
 GeoStore.handlers = {};
 GeoStore.handlers[Event.GRILLE_10] = "_handleGrille10";
+GeoStore.handlers[Event.NOT_GRILLE_10] = "_handleNotGrille10";
 
 export default GeoStore;
 
