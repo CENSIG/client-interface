@@ -23,7 +23,8 @@ export function taxonActionRequest(resource, payload) {
 			req: api.get(resource, cdnom, "first_child_obs")
 		},
 		{event: Event.INFO, req: api.get(resource, cdnom, "informations")},
-		{event: Event.GRILLE_10, req: api.get(resource, cdnom, "geojson")}
+		{event: Event.PHOTO, eventError: Event.NOT_PHOTO, req: api.get(resource, cdnom, "photos")},
+		{event: Event.GRILLE_10, eventError: Event.NOT_GRILLE_10, req: api.get(resource, cdnom, "geojson")}
 	];
 }
 
@@ -43,8 +44,8 @@ export function atlasActionRequest(resource, payload) {
 		{event: Event.FIRST_CHILDS, eventError: Event.NOT_FIRST_CHILDS,
 			req: api.get(resource, cdnom, "first_child_obs")
 		},
+		{event: Event.PHOTO, req: api.get(resource, cdnom, "photos")},
 		{event: Event.INFO, req: api.get(resource, cdnom, "informations")},
 		{event: Event.GRILLE_10, req: api.get(resource, cdnom, "geojson")}
 	];
-
 }
