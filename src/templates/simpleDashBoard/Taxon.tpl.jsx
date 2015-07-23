@@ -8,6 +8,7 @@ import PanelInfo from "./components/PanelInfo";
 import FirstChildsChart from "../../components/FirstChildsChart";
 import BaseAriane from "../../components/BaseAriane";
 import BaseBrothersNav from "../../components/BaseBrothersNav";
+import CarouselPhoto from "../../components/carousel/CarouselPhoto";
 
 import {base} from "../../configs/themesForMap";
 import searchStyle from "./components/styles/searchStyle";
@@ -25,7 +26,7 @@ if (process.env.BROWSER && window !== "undefined") {
 export default function(props) {
 	const title           = props.info.get("nom");
 	const mapTitle        = (<h3>Répartition en maille 10km des <strong>{title}</strong></h3>);
-	const galeriePhoto    = (<h3>Galerie photo</h3>);
+	const galeriePhoto    = (<h3>Photos de <strong>{title}</strong></h3>);
 	const infoTitle       = (<h3>Informations générales sur <strong>{title}</strong></h3>);
 	const firstChildTitle = (<h3>Répartitions des principaux enfants de <strong>{title}</strong></h3>);
 	const brothersTitle   = (<h3>Taxon frères de <strong>{title}</strong></h3>);
@@ -69,41 +70,31 @@ export default function(props) {
 			<BaseExplorer className="explorer" buttonMaterial={true} />
 			<div className="content">
 				<Grid fluid>
-							<Row>
-								<Col md={12}>
-									<Panel header={brothersTitle}>
-										<BaseBrothersNav />
-									</Panel>
-								</Col>
-							</Row>
-							<Row>
-								<Col lg={5}>
-									<Panel header={mapTitle}>
-										{map}
-									</Panel>
-								</Col>
-								<Col lg={7}>
-									<Row>
-										<Col lg={12}>
-											<Panel header={galeriePhoto}>
-												PHOTO	
-											</Panel>
-										</Col>
-										<Col lg={12}>
-											<Panel header={infoTitle}>
-												<PanelInfo />
-											</Panel>
-										</Col>
-									</Row>
-								</Col>
-							</Row>
-							<Row>
-								<Col lg={5}>
-									<Panel header={firstChildTitle}>
-										<FirstChildsChart />	
-									</Panel>
-								</Col> 
-							</Row>
+					<Row>
+						<Col md={12}>
+							<Panel header={brothersTitle}>
+								<BaseBrothersNav />
+							</Panel>
+						</Col>
+					</Row>
+					<Row>
+						<Col lg={5}>
+							<Panel header={mapTitle}>
+								{map}
+							</Panel>
+							<Panel header={firstChildTitle}>
+								<FirstChildsChart />	
+							</Panel>
+						</Col>
+						<Col lg={7}>
+							<Panel header={galeriePhoto}>
+								<CarouselPhoto />
+							</Panel>
+							<Panel header={infoTitle}>
+								<PanelInfo />
+							</Panel>
+						</Col>
+					</Row>
 				</Grid>
 			</div>
 		</div>

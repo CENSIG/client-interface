@@ -5,8 +5,10 @@ import {CollapsibleNav} from "react-bootstrap";
 
 import BaseExplorer from "../../components/BaseExplorer";
 import BaseSearch from "../../components/BaseSearch";
-import PanelInfo from "./components/PanelInfo";
 import FirstChildsChart from "../../components/FirstChildsChart";
+
+import PanelInfo from "./components/PanelInfo";
+import CarouselPhoto from "../../components/carousel/CarouselPhoto";
 
 import {base} from "../../configs/themesForMap";
 import searchStyle from "./components/styles/searchStyle";
@@ -24,7 +26,7 @@ if (process.env.BROWSER && window !== "undefined") {
 export default function(props) {
 	const title           = "Atlas des " + props.name;
 	const mapTitle        = (<h3>Répartition en maille 10km des <strong>{props.name}</strong></h3>);
-	const galeriePhoto    = (<h3>Galerie photo</h3>);
+	const galeriePhoto    = (<h3>Photo de <strong>{props.name}</strong></h3>);
 	const infoTitle       = (<h3>Informations générales sur <strong>{props.name}</strong></h3>);
 	const firstChildTitle = (<h3>Répartitions des principaux enfants de <strong>{props.name}</strong></h3>);
 
@@ -59,37 +61,23 @@ export default function(props) {
 			<div className="content">
 				<Grid fluid>
 						<Row>
-							<Col md={12}>
-								<Row>
 									<Col lg={5}>
 										<Panel header={mapTitle}>
 											{map}
 										</Panel>
-									</Col>
-									<Col lg={7}>
-										<Row>
-											<Col lg={12}>
-												<Panel header={galeriePhoto}>
-													PHOTO	
-												</Panel>
-											</Col>
-											<Col lg={12}>
-												<Panel header={infoTitle}>
-													<PanelInfo />
-												</Panel>
-											</Col>
-										</Row>
-									</Col>
-								</Row>
-								<Row>
-									<Col lg={5}>
 										<Panel header={firstChildTitle}>
 											<FirstChildsChart />	
 										</Panel>
-									</Col> 
+									</Col>
+									<Col lg={7}>
+												<Panel header={galeriePhoto}>
+													<CarouselPhoto />
+												</Panel>
+												<Panel header={infoTitle}>
+													<PanelInfo />
+												</Panel>
+									</Col>
 								</Row>
-							</Col>
-						</Row>
 					</Grid>
 				</div>
 		</div>
