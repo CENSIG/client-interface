@@ -72,6 +72,7 @@ ExploreStore.handlers  = {
 };
 ExploreStore.handlers[Event.PARENTS] = "_handleExploreParents";
 ExploreStore.handlers[Event.FIRST_CHILDS] = "_handleExploreChilds";
+ExploreStore.handlers[Event.NOT_FIRST_CHILDS] = "_handleNotChilds";
 
 export default ExploreStore;
 
