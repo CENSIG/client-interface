@@ -27,15 +27,17 @@ class FirstChildsChart extends React.Component
 	}
 
 	render() {
-		return (
-			<div>{this._getChart()}</div>
-		);	
+		let render = this._getChart();
+		
+		return (render)
+			? (<div>{render}</div>)
+			: (<div>Il n'y a pas de fils observés</div>);
 	}
 }
 
-FirstChildsChart = connectToStores(FirstChildsChart, [ FirstChildsStore ], (stores, props) => {
+FirstChildsChart = connectToStores(FirstChildsChart, [ FirstChildsStore ], (context, props) => {
 	return {
-		data: stores.FirstChildsStore.getState()	
+		data: context.getStore(FirstChildsStore).getState()	
 	};
 });
 

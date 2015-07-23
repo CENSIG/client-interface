@@ -29,8 +29,8 @@ Atlas.contextTypes = {
 	executeAction: React.PropTypes.func
 };
 
-Atlas = connectToStores(Atlas, [ AtlasStore ], (stores, props) => {
-	return stores.AtlasStore.getState();
+Atlas = connectToStores(Atlas, [ AtlasStore ], (context, props) => {
+	return context.getStore(AtlasStore).getState();
 });
 
 export default Atlas;

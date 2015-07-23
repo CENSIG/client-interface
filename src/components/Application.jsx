@@ -3,6 +3,11 @@ import ApplicationStore from "../stores/ApplicationStore";
 import {provideContext, connectToStores} from "fluxible/addons";
 import {handleHistory}  from "fluxible-router";
 import {api} from "../configs/appConfig";
+
+if (process.env.BROWSER) {
+	var Loading = require("./Loading");
+}
+
 /**
  * Top component. This component handles
  * display application
@@ -30,12 +35,18 @@ class Application extends React.Component
 	}
 
 	render() {
-		var spin;
-		var Handler = this.props.currentRoute.get("handler");
+		let content;
+		let Handler = this.props.currentRoute.get("handler");
+
+		if (this.props.isNavigateComplete) {
+			content = <Handler />
+		} else {
+			content = <Loading />
+		}
 
 		return (
 			<div>
-				<Handler />	
+				{content}
 			</div>
 		);
 	}
@@ -46,8 +57,8 @@ Application.childContextTypes = {
 	api: React.PropTypes.object
 };
 
-Application = connectToStores(Application, [ ApplicationStore ], (stores, props) => {
-		return stores.ApplicationStore.getState();
+Application = connectToStores(Application, [ ApplicationStore ], (context, props) => {
+		return context.getStore(ApplicationStore).getState();
 });
 
 Application = handleHistory(Application);

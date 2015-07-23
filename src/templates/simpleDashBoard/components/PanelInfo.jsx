@@ -20,9 +20,9 @@ class PanelInfo extends React.Component
 	render() {
 		return (
 			<ListGroup>
-			{displayInfo.map(info => {
+			{displayInfo.map((info, index) => {
 				return (
-					<ListGroupItem header={info.label}>
+					<ListGroupItem key={index} header={info.label}>
 						<strong>{this.props.info.get(info.key)}</strong>
 					</ListGroupItem>
 				);
@@ -32,9 +32,9 @@ class PanelInfo extends React.Component
 	}
 }
 
-PanelInfo = connectToStores(PanelInfo, [ InfoStore ], (stores, props) => {
+PanelInfo = connectToStores(PanelInfo, [ InfoStore ], (context, props) => {
 	return {
-		info: stores.InfoStore.getState()
+		info: context.getStore(InfoStore).getState()
 	}
 });
 

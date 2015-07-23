@@ -21,9 +21,9 @@ class BaseAriane extends React.Component
 	}
 }
 
-BaseAriane = connectToStores(BaseAriane, [ ParentsStore ], (stores, props) => {
+BaseAriane = connectToStores(BaseAriane, [ ParentsStore ], (context, props) => {
 	return {
-		parents: stores.ParentsStore.getState()
+		parents: context.getStore(ParentsStore).getState()
 	};
 });
 

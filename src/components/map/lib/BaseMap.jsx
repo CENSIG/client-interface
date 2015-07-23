@@ -48,21 +48,21 @@ class BaseMap extends React.Component
 
 	render() {
 		var grille10 = this.props.grille10;
-		var geojson  = grille10.has("type") ? this.getGeojson(grille10) : null;
 		var style = {
 			height : this.props.height,
 			width  : this.props.width
 		};
 
-		return (
-			<Map ref="map" style={style} center={center} zoom={7}>
-				<TileLayer
-					url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
-				/>
-				<Legend position="bottomright" theme={this.props.theme} />
-				{geojson}
-			</Map>
-		);
+		return (grille10.has("type"))
+			? ( <Map ref="map" style={style} center={center} zoom={7}>
+						<TileLayer
+							url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
+						/>
+						<Legend position="bottomright" theme={this.props.theme} />
+						{this.getGeojson(grille10)}
+					</Map>
+				)
+			: <p>Il n'y a pas d'observation</p>;
 	}
 }
 
@@ -71,9 +71,9 @@ BaseMap.defaultProps = {
 	width  : style.width
 }
 
-BaseMap = connectToStores(BaseMap, [ GeoStore ], (stores, props) => {
+BaseMap = connectToStores(BaseMap, [ GeoStore ], (context, props) => {
 	return {
-		grille10: stores.GeoStore.getState().grille10
+		grille10: context.getStore(GeoStore).getState().grille10
 	}
 });
 

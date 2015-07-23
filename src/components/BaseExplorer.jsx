@@ -59,8 +59,8 @@ BaseExplorer.contextTypes = {
 	api: React.PropTypes.object
 };
 
-BaseExplorer = connectToStores(BaseExplorer, [ ExploreStore ], (stores, props) => {
-	return stores.ExploreStore.getState();
+BaseExplorer = connectToStores(BaseExplorer, [ ExploreStore ], (context, props) => {
+	return context.getStore(ExploreStore).getState();
 });
 
 export default BaseExplorer;

@@ -22,8 +22,8 @@ class BaseBrothersNav extends React.Component
 	}
 }
 
-BaseBrothersNav = connectToStores(BaseBrothersNav, [ BrothersNavigationStore ], (stores, props) => {
-	return stores.BrothersNavigationStore.getState();
+BaseBrothersNav = connectToStores(BaseBrothersNav, [ BrothersNavigationStore ], (context, props) => {
+	return context.getStore(BrothersNavigationStore).getState();
 });
 
 export default BaseBrothersNav;

@@ -64,8 +64,8 @@ BaseSearch.contextTypes = {
 	api           : React.PropTypes.object
 }
 
-BaseSearch = connectToStores(BaseSearch, [ SearchStore ], (stores, props) => {
-	return stores.SearchStore.getState();
+BaseSearch = connectToStores(BaseSearch, [ SearchStore ], (context, props) => {
+	return context.getStore(SearchStore).getState();
 });
 
 export default BaseSearch;
