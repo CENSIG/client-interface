@@ -4,7 +4,7 @@ import {Panel, Grid, ListGroup, ListGroupItem} from "react-bootstrap";
 
 import BaseExplorer from "../../components/BaseExplorer";
 import BaseSearch from "../../components/BaseSearch";
-import PanelInfo from "./components/PanelInfo";
+import Monographies from "./components/Monographies";
 import FirstChildsChart from "../../components/FirstChildsChart";
 import BaseAriane from "../../components/BaseAriane";
 import BaseBrothersNav from "../../components/BaseBrothersNav";
@@ -27,7 +27,7 @@ export default function(props) {
 	const title           = props.info.get("nom");
 	const mapTitle        = (<h3>Répartition en maille 10km des <strong>{title}</strong></h3>);
 	const galeriePhoto    = (<h3>Photos de <strong>{title}</strong></h3>);
-	const infoTitle       = (<h3>Informations générales sur <strong>{title}</strong></h3>);
+	const infoTitle       = (<h3>Informations sur <strong>{title}</strong></h3>);
 	const firstChildTitle = (<h3>Répartitions des principaux enfants de <strong>{title}</strong></h3>);
 	const brothersTitle   = (<h3>Taxon frères de <strong>{title}</strong></h3>);
 
@@ -91,7 +91,7 @@ export default function(props) {
 								<CarouselPhoto />
 							</Panel>
 							<Panel header={infoTitle}>
-								<PanelInfo />
+								<Monographies />
 							</Panel>
 						</Col>
 					</Row>

@@ -7,7 +7,7 @@ import BaseExplorer from "../../components/BaseExplorer";
 import BaseSearch from "../../components/BaseSearch";
 import FirstChildsChart from "../../components/FirstChildsChart";
 
-import PanelInfo from "./components/PanelInfo";
+import Monographies from "./components/Monographies";
 import CarouselPhoto from "../../components/carousel/CarouselPhoto";
 
 import {base} from "../../configs/themesForMap";
@@ -27,7 +27,7 @@ export default function(props) {
 	const title           = "Atlas des " + props.name;
 	const mapTitle        = (<h3>Répartition en maille 10km des <strong>{props.name}</strong></h3>);
 	const galeriePhoto    = (<h3>Photo de <strong>{props.name}</strong></h3>);
-	const infoTitle       = (<h3>Informations générales sur <strong>{props.name}</strong></h3>);
+	const infoTitle       = (<h3>Informations sur <strong>{props.name}</strong></h3>);
 	const firstChildTitle = (<h3>Répartitions des principaux enfants de <strong>{props.name}</strong></h3>);
 
 	if (process.env.BROWSER && window !== "undefined") {
@@ -74,7 +74,7 @@ export default function(props) {
 													<CarouselPhoto />
 												</Panel>
 												<Panel header={infoTitle}>
-													<PanelInfo />
+													<Monographies />
 												</Panel>
 									</Col>
 								</Row>

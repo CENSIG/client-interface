@@ -9,7 +9,7 @@ if (process.env.BROWSER) {
 export default function(props) {
 	return (
 		<div className="index">
-			<div className="wrapper flex fdc fas">
+			<div className="wrapper">
 				<div className="title card">
 					<h1 className="logo">
 						<span>Conservatoire d'espaces naturels</span>
