@@ -31,7 +31,7 @@ class Taxon extends React.Component
 Taxon = connectToStores(Taxon, [ AtlasStore, InfoStore, ParentsStore ], (context, props) => {
 	return {
 		atlas: context.getStore(AtlasStore).getState(),
-		info: context.getStore(InfoStore).getState(),
+		info: context.getStore(InfoStore).getState().general,
 		parents: context.getStore(ParentsStore).getState()
 	}
 });
