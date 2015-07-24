@@ -56,7 +56,7 @@ export default {
 				cdnom: cdnom, 
 				limit: limit
 			}).then(function() {
-				var name = context.getStore(InfoStore).getState().get("nom");
+				var name = context.getStore(InfoStore).getState().general.get("nom");
 				context.dispatch("UPDATE_TITLE", "WebOb's | " + name);
 			});
 		}
