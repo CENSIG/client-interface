@@ -22,6 +22,17 @@ class BrothersNavigationStore extends BaseStore
 	 */
 	_handleBrothers(data) {
 		var brothers     = data.get("res");
+
+		// Only one item so not brothers
+		if (brothers.size == 1) {
+			this.brothers = Immutable.List();
+			this.left     = null;
+			this.right    = null;
+			this.current  = null;
+			this.emitChange();
+			return;
+		};
+
 		var cdnom        = data.get("cdnom");
 		var currentIndex = brothers.findIndex(value => {
 			return value.get("cdnom") === cdnom;
