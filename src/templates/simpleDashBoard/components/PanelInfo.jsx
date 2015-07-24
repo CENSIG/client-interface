@@ -1,7 +1,5 @@
 import React from "react";
 import {ListGroup, ListGroupItem} from "react-bootstrap";
-import InfoStore from "../../../stores/InfoStore";
-import {connectToStores}  from "fluxible/addons";
 
 const displayInfo = [
 	{ key: "nomVern", label: "Nom vernaculaire:" },
@@ -31,11 +29,5 @@ class PanelInfo extends React.Component
 		);	
 	}
 }
-
-PanelInfo = connectToStores(PanelInfo, [ InfoStore ], (context, props) => {
-	return {
-		info: context.getStore(InfoStore).getState()
-	}
-});
 
 export default PanelInfo;
