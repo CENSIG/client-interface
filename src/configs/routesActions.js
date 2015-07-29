@@ -22,6 +22,7 @@ export function taxonActionRequest(resource, payload) {
 		{event: Event.FIRST_CHILDS, eventError: Event.NOT_FIRST_CHILDS,
 			req: api.get(resource, cdnom, "first_child_obs")
 		},
+		{event: Event.PHENOLOGIE, req: api.get(resource, cdnom, "phenologie")},
 		{event: Event.MONOGRAPHIES, eventError: Event.NOT_MONOGRAPHIES,
 			req: api.get(resource, cdnom, "monographies")},
 		{event: Event.INFO, req: api.get(resource, cdnom, "informations")},
@@ -42,14 +43,15 @@ export function atlasActionRequest(resource, payload) {
 	var cdnom = payload.cdnom;
 
 	return [
-		{event: Event.PARENTS, req: api.get(resource, cdnom, "parents", { limit: "OR" })},
+		{event: Event.PHOTO, req: api.get(resource, cdnom, "photos")},
 		{event: Event.FIRST_CHILDS, eventError: Event.NOT_FIRST_CHILDS,
 			req: api.get(resource, cdnom, "first_child_obs")
 		},
-		{event: Event.PHOTO, req: api.get(resource, cdnom, "photos")},
+		{event: Event.PARENTS, req: api.get(resource, cdnom, "parents", { limit: "OR" })},
 		{event: Event.INFO, req: api.get(resource, cdnom, "informations")},
 		{event: Event.MONOGRAPHIES, eventError: Event.NOT_MONOGRAPHIES,
 			req: api.get(resource, cdnom, "monographies")},
+		{event: Event.PHENOLOGIE, req: api.get(resource, cdnom, "phenologie")},
 		{event: Event.GRILLE_10, req: api.get(resource, cdnom, "geojson")}
 	];
 }
