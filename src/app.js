@@ -16,22 +16,18 @@ import FirstChildsStore from "./stores/FirstChildsStore";
 import InfoStore from "./stores/InfoStore";
 import GeoStore from "./stores/GeoStore";
 import PhotoStore from "./stores/PhotoStore";
+import PhenologieStore from "./stores/PhenologieStore";
+
+const stores = [
+	ApplicationStore, ParentsStore, BaseRouteStore,
+	TaxonStore, SearchStore, AtlasStore,
+	BrothersNavigationStore, ExploreStore, FirstChildsStore,
+	InfoStore, GeoStore, PhotoStore, PhenologieStore
+];
 
 var app = new Fluxible({
 	component: Application // Top component context
 });
 
-app.registerStore(ApplicationStore);
-app.registerStore(ParentsStore);
-app.registerStore(BaseRouteStore);
-app.registerStore(TaxonStore);
-app.registerStore(SearchStore);
-app.registerStore(AtlasStore);
-app.registerStore(BrothersNavigationStore);
-app.registerStore(ExploreStore);
-app.registerStore(FirstChildsStore);
-app.registerStore(InfoStore);
-app.registerStore(GeoStore);
-app.registerStore(PhotoStore);
-
+stores.forEach(store => app.registerStore(store));
 export default app;
