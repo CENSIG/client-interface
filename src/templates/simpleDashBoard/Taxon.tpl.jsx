@@ -6,6 +6,7 @@ import BaseExplorer from "../../components/BaseExplorer";
 import BaseSearch from "../../components/BaseSearch";
 import Monographies from "./components/Monographies";
 import FirstChildsChart from "../../components/FirstChildsChart";
+import PhenologieChart from "../../components/PhenologieChart";
 import BaseAriane from "../../components/BaseAriane";
 import BaseBrothersNav from "../../components/BaseBrothersNav";
 import CarouselPhoto from "../../components/carousel/CarouselPhoto";
@@ -29,6 +30,7 @@ export default function(props) {
 	const galeriePhoto    = (<h3>Photos de <strong>{title}</strong></h3>);
 	const infoTitle       = (<h3>Informations sur <strong>{title}</strong></h3>);
 	const firstChildTitle = (<h3>Répartitions des principaux enfants de <strong>{title}</strong></h3>);
+	const phenologieTitle = (<h3>Phénologie de <strong>{title}</strong></h3>);
 	const brothersTitle   = (<h3>Taxon frères de <strong>{title}</strong></h3>);
 
 	const brand = (
@@ -84,6 +86,9 @@ export default function(props) {
 							</Panel>
 							<Panel header={firstChildTitle}>
 								<FirstChildsChart />	
+							</Panel>
+							<Panel header={phenologieTitle}>
+								<PhenologieChart />
 							</Panel>
 						</Col>
 						<Col lg={7}>

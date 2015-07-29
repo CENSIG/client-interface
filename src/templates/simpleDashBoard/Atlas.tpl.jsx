@@ -6,6 +6,7 @@ import {CollapsibleNav} from "react-bootstrap";
 import BaseExplorer from "../../components/BaseExplorer";
 import BaseSearch from "../../components/BaseSearch";
 import FirstChildsChart from "../../components/FirstChildsChart";
+import PhenologieChart from "../../components/PhenologieChart";
 
 import Monographies from "./components/Monographies";
 import CarouselPhoto from "../../components/carousel/CarouselPhoto";
@@ -29,6 +30,7 @@ export default function(props) {
 	const galeriePhoto    = (<h3>Photo de <strong>{props.name}</strong></h3>);
 	const infoTitle       = (<h3>Informations sur <strong>{props.name}</strong></h3>);
 	const firstChildTitle = (<h3>Répartitions des principaux enfants de <strong>{props.name}</strong></h3>);
+	const phenologieTitle = (<h3>Phénologie de <strong>{props.name}</strong></h3>);
 
 	if (process.env.BROWSER && window !== "undefined") {
 		map = <BaseMap
@@ -67,6 +69,9 @@ export default function(props) {
 										</Panel>
 										<Panel header={firstChildTitle}>
 											<FirstChildsChart />	
+										</Panel>
+										<Panel header={phenologieTitle}>
+											<PhenologieChart />
 										</Panel>
 									</Col>
 									<Col lg={7}>
