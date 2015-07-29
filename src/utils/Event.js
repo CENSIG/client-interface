@@ -8,6 +8,7 @@ export default keyMirror({
 	BROTHERS               : null,
 	PHOTO                  : null,
 	MONOGRAPHIES           : null,
+	PHENOLOGIE             : null,
 	NOT_PARENTS            : null,
 	NOT_FIRST_CHILDS       : null,
 	NOT_INFO               : null,
