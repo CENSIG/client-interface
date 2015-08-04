@@ -7,11 +7,12 @@ import BaseExplorer from "../../components/BaseExplorer";
 import BaseSearch from "../../components/BaseSearch";
 import FirstChildsChart from "../../components/FirstChildsChart";
 import PhenologieChart from "../../components/PhenologieChart";
+import Title from "../../components/Title";
 
 import Monographies from "./components/Monographies";
 import CarouselPhoto from "../../components/carousel/CarouselPhoto";
 
-import {base} from "../../configs/themesForMap";
+import {themesForMap} from "../../configs/appConfig";
 import searchStyle from "./components/styles/searchStyle";
 
 var map;
@@ -25,18 +26,24 @@ if (process.env.BROWSER && window !== "undefined") {
 }
 
 export default function(props) {
-	const title           = "Atlas des " + props.name;
-	const mapTitle        = (<h3>Répartition en maille 10km des <strong>{props.name}</strong></h3>);
-	const galeriePhoto    = (<h3>Photo de <strong>{props.name}</strong></h3>);
-	const infoTitle       = (<h3>Informations sur <strong>{props.name}</strong></h3>);
-	const firstChildTitle = (<h3>Répartitions des principaux enfants de <strong>{props.name}</strong></h3>);
-	const phenologieTitle = (<h3>Phénologie de <strong>{props.name}</strong></h3>);
+	const name = <em>{props.current.get("name")}</em>;
+	const title = (
+		<h1>
+			<span>Atlas des {props.current.get("nomVern")} </span>
+			<span>({name})</span>
+		</h1>
+	);
+	const mapTitle        = (<h3>Répartition en maille 10km des {name}</h3>);
+	const galeriePhoto    = (<h3>Photo de {name}</h3>);
+	const infoTitle       = (<h3>Informations sur {name}</h3>);
+	const firstChildTitle = <Title name={name} rang={props.current.get("rang")} type="firstChild" />
+	const phenologieTitle = (<h3>Phénologie de {name}</h3>);
 
 	if (process.env.BROWSER && window !== "undefined") {
 		map = <BaseMap
 			height={500}
 			width="100%"
-			theme={base}
+			theme={themesForMap.base}
 		/>
 	}
 
@@ -52,8 +59,8 @@ export default function(props) {
 							<BaseSearch
 								withBackdrop={true}
 								divInput={searchStyle.divInput}
-								label={props.name}
-								parentsCdnom={props.id}
+								label={props.current.get("nomVern")}
+								parentsCdnom={props.current.get("cdnom")}
 							/>
 						</ul>
 					</div>

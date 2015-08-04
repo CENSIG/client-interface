@@ -10,8 +10,9 @@ import PhenologieChart from "../../components/PhenologieChart";
 import BaseAriane from "../../components/BaseAriane";
 import BaseBrothersNav from "../../components/BaseBrothersNav";
 import CarouselPhoto from "../../components/carousel/CarouselPhoto";
+import Title from "../../components/Title";
 
-import {base} from "../../configs/themesForMap";
+import {themesForMap} from "../../configs/appConfig";
 import searchStyle from "./components/styles/searchStyle";
 
 var map;
@@ -25,13 +26,19 @@ if (process.env.BROWSER && window !== "undefined") {
 }
 
 export default function(props) {
-	const title           = props.info.get("nom");
-	const mapTitle        = (<h3>Répartition en maille 10km des <strong>{title}</strong></h3>);
-	const galeriePhoto    = (<h3>Photos de <strong>{title}</strong></h3>);
-	const infoTitle       = (<h3>Informations sur <strong>{title}</strong></h3>);
-	const firstChildTitle = (<h3>Répartitions des principaux enfants de <strong>{title}</strong></h3>);
-	const phenologieTitle = (<h3>Phénologie de <strong>{title}</strong></h3>);
-	const brothersTitle   = (<h3>Taxon frères de <strong>{title}</strong></h3>);
+	const name = <em>{props.info.get("nom")}</em>;
+	const title = (
+		<h1>
+			<span>{name}</span>
+			<span> ({props.info.get("nomVern")})</span>
+		</h1>
+	);
+	const mapTitle        = (<h3>Répartition en maille 10km des {name}</h3>);
+	const galeriePhoto    = (<h3>Photos de {name}</h3>);
+	const infoTitle       = (<h3>Informations sur {name}</h3>);
+	const firstChildTitle =	<Title name={name} rang={props.info.get("rang")} type="firstChild" />
+	const phenologieTitle = (<h3>Phénologie de {name}</h3>);
+	const brothersTitle   = <Title name={name} rang={props.info.get("rang")} type="brothersNav" />
 
 	const brand = (
 			<div className="navbar-brand">
@@ -43,7 +50,7 @@ export default function(props) {
 		map = <BaseMap
 			height={500}
 			width="100%"
-			theme={base}
+			theme={themesForMap.base}
 		/>
 	}
 
@@ -62,8 +69,8 @@ export default function(props) {
 							<BaseSearch
 								withBackdrop={true}
 								divInput={searchStyle.divInput}
-								label={props.atlas.name}
-								parentsCdnom={props.atlas.id}
+								label={props.atlas.current.get("name")}
+								parentsCdnom={props.atlas.current.get("cdnom")}
 							/>
 						</ul>
 					</div>

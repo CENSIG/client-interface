@@ -1,6 +1,6 @@
 import React from "react";
 import NavIndex				 from "../../components/NavIndex";
-import elementNavIndex from "../../configs/elementNavIndex";
+import {elementNavIndex} from "../../configs/appConfig";
 
 if (process.env.BROWSER) {
 	require("./css/index.css");
