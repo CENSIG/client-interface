@@ -5,7 +5,7 @@ import AtlasStore	 from "../stores/AtlasStore";
 import Index		   from "../components/Index";
 import Atlas		   from "../components/Atlas";
 import Taxon			 from "../components/Taxon";
-import appConfig	 from "../configs/appConfig";
+import {atlas}	 from "../configs/appConfig";
 import Event from "../utils/Event";
 
 /**
@@ -31,10 +31,16 @@ export default {
 		handler : Atlas,
 		action  : (context, payload) => {
 			var atlasName = payload.get("params").get("name");
-			var cdnom     = appConfig.atlas[atlasName].cdnom;
+			var cdnom     = atlas[atlasName].cdnom;
 			context.dispatch("UPDATE_TITLE", "Atlas des " + atlasName);
 			return AtlasAction.getData(context, { cdnom: cdnom })
 				.then(() => {
+					context.dispatch(Event.ATLAS, {
+						cdnom   : cdnom,
+						name    : context.getStore(InfoStore).getState().general.get("nom"),
+						nomVern : context.getStore(InfoStore).getState().general.get("nomVern"),
+						rang    : context.getStore(InfoStore).getState().general.get("rang")
+					});
 				});
 		}
 	},
@@ -50,7 +56,8 @@ export default {
 			var atlasName = payload.get("params").get("name");
 
 			var cdnom = payload.get("params").get("cdnom");
-			var limit = appConfig.atlas[atlasName].limit;
+			var atlasCdnom = atlas[atlasName].cdnom;
+			var limit = atlas[atlasName].limit;
 
 			return TaxonAction.getData(context, { 
 				cdnom: cdnom, 
@@ -58,6 +65,10 @@ export default {
 			}).then(function() {
 				var name = context.getStore(InfoStore).getState().general.get("nom");
 				context.dispatch("UPDATE_TITLE", "WebOb's | " + name);
+				context.dispatch("ATLAS", {
+					cdnom: atlasCdnom,
+					name: atlasName
+				});
 			});
 		}
 	}
