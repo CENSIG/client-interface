@@ -1,6 +1,7 @@
 import keyMirror from "keymirror";
 
 export default keyMirror({
+	ATLAS                  : null,
 	PARENTS                : null,
 	FIRST_CHILDS           : null,
 	INFO                   : null,
