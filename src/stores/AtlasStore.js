@@ -11,24 +11,18 @@ class AtlasStore extends BaseStore
 {
 	constructor(dispatcher) {
 		super(dispatcher);
-		this.id = null;
-		this.name = null;
+		this.current = Immutable.Map();
 	}
 
-	_handleCurrentAtlas(parents) {
-		this.dispatcher.waitFor(ParentsStore, () => {
-			var current = parents.first();
-			this.id     = current.get("cdnom");
-			this.name   = current.get("name");
-			this.emitChange();
-		});
+	_handleCurrentAtlas(current) {
+		this.current = Immutable.fromJS(current);
+		this.emitChange();
 	}
 
 	getState() {
 		return {
-			id: this.id,
-			name: this.name
-		};
+			current: this.current
+		}
 	}
 	
 	dehydrate() {
@@ -36,13 +30,12 @@ class AtlasStore extends BaseStore
 	}
 
 	rehydrate(state) {
-		this.id = state.id;
-		this.name = state.name;
+		this.current = Immutable.fromJS(state.current);
 	}
 }
 
 AtlasStore.storeName = "AtlasStore";
 AtlasStore.handlers = {};
-AtlasStore.handlers[Event.PARENTS] = "_handleCurrentAtlas";
+AtlasStore.handlers[Event.ATLAS] = "_handleCurrentAtlas";
 
 export default AtlasStore;
