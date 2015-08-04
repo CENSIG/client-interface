@@ -1,4 +1,8 @@
 import Api from "../utils/Api";
+import elementNavIndex from "./elementNavIndex";
+import routesActions from "./routesActions";
+import themesForMap from "./themesForMap";
+import panelTitle from "./panelTitle";
 
 /**
  * Configuration for application
@@ -18,5 +22,13 @@ export default {
 		}
 	},
 
-	"templateName": "simpleDashBoard"
-};
+	"templateName"    : "simpleDashBoard",
+
+	"elementNavIndex" : elementNavIndex,
+
+	"routesActions"   : routesActions,
+
+	"themesForMap"    : themesForMap,
+
+	"panelTitle"      : panelTitle
+}
