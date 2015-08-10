@@ -1,6 +1,6 @@
 import React from "react";
 import path from "path";
-import template from "../templates";
+import template from "../../templates";
 
 /**
  * Class for manage template pages

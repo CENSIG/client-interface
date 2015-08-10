@@ -1,8 +1,8 @@
 import React							from "react";
-import BrothersNavigationStore from "../stores/BrothersNavigationStore";
-import AtlasStore from "../stores/AtlasStore";
-import InfoStore  from "../stores/InfoStore";
-import ParentsStore  from "../stores/ParentsStore";
+import BrothersNavigationStore from "../../stores/BrothersNavigationStore";
+import AtlasStore from "../../stores/AtlasStore";
+import InfoStore  from "../../stores/InfoStore";
+import ParentsStore  from "../../stores/ParentsStore";
 import {connectToStores}  from "fluxible/addons";
 import Template					  from "./Template";
 
@@ -15,13 +15,6 @@ class Taxon extends React.Component
 	constructor(props) {
 		super(props);
 	}
-
-	/*shouldComponentUpdate(nextProps) {
-		if (this.props.taxon.current === null) {
-			return true;	
-		}
-		return nextProps.taxon.current !== this.props.taxon.current;
-	}*/
 
 	render() {
 		return <Template component="taxon" {...this.props} />; 

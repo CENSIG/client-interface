@@ -1,5 +1,5 @@
 import React						from "react";
-import ApplicationStore from "../stores/ApplicationStore";
+import ApplicationStore from "../../stores/ApplicationStore";
 
 const scriptsProdName = [
 	"/static/vendor.bundle.js",
