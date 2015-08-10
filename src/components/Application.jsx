@@ -5,7 +5,7 @@ import {handleHistory}  from "fluxible-router";
 import {api} from "../configs/appConfig";
 
 if (process.env.BROWSER) {
-	var Loading = require("./Loading");
+	var Loading = require("./pages/Loading");
 }
 
 /**

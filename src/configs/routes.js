@@ -2,9 +2,9 @@ import TaxonAction from "../actions/TaxonAction";
 import AtlasAction from "../actions/AtlasAction";
 import InfoStore from "../stores/InfoStore";
 import AtlasStore	 from "../stores/AtlasStore";
-import Index		   from "../components/Index";
-import Atlas		   from "../components/Atlas";
-import Taxon			 from "../components/Taxon";
+import Index		   from "../components/pages/Index";
+import Atlas		   from "../components/pages/Atlas";
+import Taxon			 from "../components/pages/Taxon";
 import {atlas}	 from "../configs/appConfig";
 import Event from "../utils/Event";
 

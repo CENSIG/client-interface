@@ -1,5 +1,5 @@
 import React from "react";
-import NavIndex				 from "../../components/NavIndex";
+import NavIndex				 from "../../components/pages/NavIndex";
 import {elementNavIndex} from "../../configs/appConfig";
 
 if (process.env.BROWSER) {

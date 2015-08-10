@@ -22,7 +22,7 @@ var express       = require("express"),
 		React         = require("react"),
 		app           = require("./app"),
 		navigation    = require("fluxible-router").navigateAction,
-		HtmlComponent = React.createFactory(require("./components/Html"));
+		HtmlComponent = React.createFactory(require("./components/pages/Html"));
 
 // Use expose function
 expstate.extend(server);
