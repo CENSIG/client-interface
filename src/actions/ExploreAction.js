@@ -1,5 +1,6 @@
 import promise from "bluebird"; 
 import Immutable from "immutable";
+import Event from "../utils/Event";
 
 const resource = "taxon"; 
 
@@ -7,15 +8,17 @@ class ExploreAction
 {
 	static exploreSubTaxon(context, payload) {
 		var api = payload.api;
-		var event = (payload.event === "sub") ? "EXPLORE_SUB" : "EXPLORE_SUP";
-		return promise.resolve(0).then(() => {
+		var event = (payload.event === "sub") ? Event.EXPLORE_SUB : Event.EXPLORE_SUP;
+			context.dispatch(Event.START_REQUEST_EXPLORER);
 			context.dispatch(event, payload);
-			return api.get(resource, payload.cdnom, "first_child_obs");
-		}).then(data => {
-			context.dispatch("EXPLORE_CHILDS", Immutable.fromJS(data));
+		return api.get(resource, payload.cdnom, "first_child_obs")
+		.then(data => {
+			context.dispatch(Event.EXPLORE_CHILDS, Immutable.fromJS(data));
 		}).catch(err => {
-			context.dispatch("NOT_CHILDS");
-		});
+			context.dispatch(Event.NOT_CHILDS);
+		}).finally(() => {
+			context.dispatch(Event.END_REQUEST_EXPLORER);
+		})
 	}
 }
 

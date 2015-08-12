@@ -17,7 +17,6 @@ class AtlasAction extends BaseAction
 	 * @param payload data
 	 */
 	static getData(context, payload) {
-		context.dispatch("LOADED", false);
 		return AtlasAction.reduce(context, atlasActionRequest(resource, payload));
 	}
 }

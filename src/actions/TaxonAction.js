@@ -16,7 +16,6 @@ class TaxonAction extends BaseAction
 	 * @param payload data
 	 */
 	static getData(context, payload) {
-		context.dispatch("LOADED", false);
 		return TaxonAction.reduce(context, taxonActionRequest(resource, payload));
 	}
 }
