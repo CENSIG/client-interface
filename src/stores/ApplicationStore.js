@@ -1,4 +1,5 @@
 import BaseStore from "fluxible/addons/BaseStore";
+import Event from "../utils/Event";
 
 /**
  * Store for Application
@@ -9,7 +10,6 @@ class ApplicationStore extends BaseStore
 	constructor(dispatcher) {
 		super(dispatcher);
 		this.currentTitlePage = null;
-		this.loaded           = true;
 	}
 	
 	_handleTitle(title) {
@@ -17,23 +17,13 @@ class ApplicationStore extends BaseStore
 		this.emitChange();
 	}
 
-	_handleLoaded(loaded) {
-		this.loaded = loaded;	
-		this.emitChange();
-	}
-
 	getCurrentTitlePage() {
 		return this.currentTitlePage;
 	}
 
-	getLoaded() {
-		return this.loaded;	
-	}
-
 	getState() {
 		return {
-			currentTitlePage : this.currentTitlePage,
-			loaded           : this.loaded
+			currentTitlePage : this.currentTitlePage
 		};
 	}
 	
@@ -43,14 +33,11 @@ class ApplicationStore extends BaseStore
 
 	rehydrate(state) {
 		this.currentTitlePage = state.currentTitlePage;
-		this.loaded           = state.loaded;
 	}
 }
 
 ApplicationStore.storeName = "ApplicationStore";
-ApplicationStore.handlers = {
-	"UPDATE_TITLE"           : "_handleTitle",
-	"LOADED"                 : "_handleLoaded"
-};
+ApplicationStore.handlers = {};
+ApplicationStore.handlers[Event.UPDATE_TITLE] = "_handleTitle";
 
 export default ApplicationStore;
