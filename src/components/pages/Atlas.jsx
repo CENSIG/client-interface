@@ -1,4 +1,5 @@
 import React						 from "react";
+import shouldPureComponentUpdate from "react-pure-render/function";
 import AtlasStore				 from "../../stores/AtlasStore";
 import {connectToStores} from "fluxible/addons";
 import Template					 from "./Template";
@@ -13,12 +14,7 @@ class Atlas extends React.Component
 		super(props);
 	}
 
-	shouldComponentUpdate(nextProps) {
-		if (this.props.current === null) {
-			return true;	
-		}
-		return nextProps.id !== this.props.id;
-	}
+	shouldComponentUpdate = shouldPureComponentUpdate
 
 	render() {
 		return <Template component="atlas" {...this.props} />

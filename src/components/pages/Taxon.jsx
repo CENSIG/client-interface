@@ -5,6 +5,7 @@ import InfoStore  from "../../stores/InfoStore";
 import ParentsStore  from "../../stores/ParentsStore";
 import {connectToStores}  from "fluxible/addons";
 import Template					  from "./Template";
+import shouldPureComponentUpdate from "react-pure-render/function";
 
 /**
  * A component to display a taxon of atlas
@@ -15,6 +16,8 @@ class Taxon extends React.Component
 	constructor(props) {
 		super(props);
 	}
+
+	shouldComponentUpdate = shouldPureComponentUpdate
 
 	render() {
 		return <Template component="taxon" {...this.props} />; 
