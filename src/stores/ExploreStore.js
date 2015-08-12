@@ -10,6 +10,7 @@ class ExploreStore extends BaseStore
 		super(dispatcher);
 		this.parents     = Immutable.List();
 		this.firstChilds = Immutable.List();
+		this.pendingRequest = false;
 	}
 
 	_handleExploreParents(parents) {
@@ -45,10 +46,21 @@ class ExploreStore extends BaseStore
 		this.emitChange();
 	}
 
+	_handleStart() {
+		this.pendingRequest = true;	
+		this.emitChange();
+	}
+
+	_handleEnd() {
+		this.pendingRequest = false;	
+		this.emitChange();
+	}
+
 	getState() {
 		return {
 			parents  : this.parents,
-			firstChilds : this.firstChilds
+			firstChilds : this.firstChilds,
+			pendingRequest: this.pendingRequest
 		}	
 	}
 
@@ -59,20 +71,23 @@ class ExploreStore extends BaseStore
 	rehydrate(state) {
 		this.parents  = Immutable.fromJS(state.parents);
 		this.firstChilds = Immutable.fromJS(state.firstChilds);
+		this.pendingRequest = state.pendingRequest;
 	}
 	
 }
 
 ExploreStore.storeName = "ExploreStore";
-ExploreStore.handlers  = {
-	"EXPLORE_CHILDS" : "_handleExploreChilds",
-	"EXPLORE_SUB"    : "_handleExploreSub",
-	"EXPLORE_SUP"    : "_handleExploreSup",
-	"NOT_CHILDS"		 : "_handleNotChilds"
-};
+ExploreStore.handlers  = {};
+
 ExploreStore.handlers[Event.PARENTS] = "_handleExploreParents";
 ExploreStore.handlers[Event.FIRST_CHILDS] = "_handleExploreChilds";
 ExploreStore.handlers[Event.NOT_FIRST_CHILDS] = "_handleNotChilds";
+ExploreStore.handlers[Event.START_REQUEST_EXPLORER] = "_handleStart";
+ExploreStore.handlers[Event.EXPLORE_CHILDS] = "_handleExploreChilds";
+ExploreStore.handlers[Event.EXPLORE_SUB] = "_handleExploreSub";
+ExploreStore.handlers[Event.EXPLORE_SUP] = "_handleExploreSup";
+ExploreStore.handlers[Event.END_REQUEST_EXPLORER] = "_handleEnd";
+ExploreStore.handlers[Event.NOT_CHILDS] = "_handleNotChilds";
 
 export default ExploreStore;
 

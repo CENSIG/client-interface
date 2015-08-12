@@ -16,6 +16,9 @@ class SearchStore extends BaseStore
 	}
 
 	_handleSearchPending(req) {
+		if (this.pendingRequest) {
+			this.pendingRequest.abort();	
+		}
 		this.pendingRequest = req;
 		this.emitChange();
 	}
@@ -26,6 +29,9 @@ class SearchStore extends BaseStore
 	}
 
 	_handleResetSearch() {
+		if (this.pendingRequest) {
+			this.pendingRequest.abort();	
+		}
 		this.results        = Immutable.List();
 		this.pendingRequest = null;
 		this.notResults			= null;
@@ -35,6 +41,11 @@ class SearchStore extends BaseStore
 	_handleNotResults(q) {
 		this.results    = Immutable.List();
 		this.notResults = q
+		this.emitChange();
+	}
+
+	_handleEndRequestPending() {
+		this.pendingRequest = null;	
 		this.emitChange();
 	}
 
@@ -57,5 +68,6 @@ SearchStore.handlers[Event.REQUEST_SEARCH_PENDING] = "_handleSearchPending";
 SearchStore.handlers[Event.SEARCH_CHILDS] = "_handleResults";
 SearchStore.handlers[Event.NOT_SEARCH_CHILDS] = "_handleNotResults";
 SearchStore.handlers[Event.RESET_SEARCH_CHILDS] = "_handleResetSearch";
+SearchStore.handlers[Event.END_REQUEST_PENDING] = "_handleEndRequestPending";
 
 export default SearchStore;
