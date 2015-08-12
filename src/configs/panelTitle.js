@@ -38,6 +38,12 @@ export default {
 			adverbe: "du",
 			label: "genre"
 		}
+	},
+	DFLT: {
+		firstChildChart: {
+			adjectif: "principaux",
+			label: "taxons inférieurs"
+		}	
 	}
 };
 
