@@ -20,7 +20,7 @@ export default {
 		page: "index",
 		handler: Index,
 		action: (context, payload, done) => {
-			context.dispatch("UPDATE_TITLE", "Bienvenue sur l'application WebOb's");
+			context.dispatch(Event.UPDATE_TITLE, "Bienvenue sur l'application WebOb's");
 			done();
 		}
 	},
@@ -32,7 +32,7 @@ export default {
 		action  : (context, payload) => {
 			var atlasName = payload.get("params").get("name");
 			var cdnom     = atlas[atlasName].cdnom;
-			context.dispatch("UPDATE_TITLE", "Atlas des " + atlasName);
+			context.dispatch(Event.UPDATE_TITLE, "Atlas des " + atlasName);
 			return AtlasAction.getData(context, { cdnom: cdnom })
 				.then(() => {
 					context.dispatch(Event.ATLAS, {
@@ -64,8 +64,8 @@ export default {
 				limit: limit
 			}).then(function() {
 				var name = context.getStore(InfoStore).getState().general.get("nom");
-				context.dispatch("UPDATE_TITLE", "WebOb's | " + name);
-				context.dispatch("ATLAS", {
+				context.dispatch(Event.UPDATE_TITLE, `WebOb's | Atlas des ${atlasName} | ${name}`);
+				context.dispatch(Event.ATLAS, {
 					cdnom: atlasCdnom,
 					name: atlasName
 				});
