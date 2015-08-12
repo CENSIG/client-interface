@@ -2,13 +2,13 @@ import React from "react";
 import {Navbar, Nav, NavItem, Row, Col} from "react-bootstrap"; 
 import {Panel, Grid, ListGroup, ListGroupItem} from "react-bootstrap";
 
-import BaseExplorer from "../../components/BaseExplorer";
-import BaseSearch from "../../components/BaseSearch";
+import BaseExplorer from "../../components/explorer/BaseExplorer";
+import BaseSearch from "../../components/search/BaseSearch";
 import Monographies from "./components/Monographies";
 import FirstChildsChart from "../../components/FirstChildsChart";
 import PhenologieChart from "../../components/PhenologieChart";
-import BaseAriane from "../../components/BaseAriane";
-import BaseBrothersNav from "../../components/BaseBrothersNav";
+import BaseAriane from "../../components/ariane/BaseAriane";
+import BaseBrothersNav from "../../components/brothersNav/BaseBrothersNav";
 import CarouselPhoto from "../../components/carousel/CarouselPhoto";
 import Title from "../../components/Title";
 
@@ -69,8 +69,8 @@ export default function(props) {
 							<BaseSearch
 								withBackdrop={true}
 								divInput={searchStyle.divInput}
-								label={props.atlas.current.get("name")}
-								parentsCdnom={props.atlas.current.get("cdnom")}
+								ulResults={searchStyle.ulResults}
+								cdnom={props.atlas.current.get("cdnom")}
 							/>
 						</ul>
 					</div>

@@ -3,8 +3,8 @@ import {Navbar, Nav, NavItem, Row, Col} from "react-bootstrap";
 import {Panel, Grid, ListGroup, ListGroupItem} from "react-bootstrap";
 import {CollapsibleNav} from "react-bootstrap";
 
-import BaseExplorer from "../../components/BaseExplorer";
-import BaseSearch from "../../components/BaseSearch";
+import BaseExplorer from "../../components/explorer/BaseExplorer";
+import BaseSearch from "../../components/search/BaseSearch";
 import FirstChildsChart from "../../components/FirstChildsChart";
 import PhenologieChart from "../../components/PhenologieChart";
 import Title from "../../components/Title";
@@ -59,8 +59,8 @@ export default function(props) {
 							<BaseSearch
 								withBackdrop={true}
 								divInput={searchStyle.divInput}
-								label={props.current.get("nomVern")}
-								parentsCdnom={props.current.get("cdnom")}
+								ulResults={searchStyle.ulResults}
+								cdnom={props.current.get("cdnom")}
 							/>
 						</ul>
 					</div>
