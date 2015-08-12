@@ -1,8 +1,14 @@
 import React from "react";
 import {Ariane} from "client-interface-components";
 import {connectToStores}  from "fluxible/addons";
-import ParentsStore from "../stores/ParentsStore";
+import ParentsStore from "../../stores/ParentsStore";
 
+import ComposeArianeItem from "./ComposeArianeItem";
+
+/**
+ * Component for display ariane
+ * @author Jean BOUDET
+ */
 class BaseAriane extends React.Component
 {
 	constructor(props) {
@@ -11,12 +17,10 @@ class BaseAriane extends React.Component
 
 	render() {
 		return (
-			<div>
-				<Ariane 
-					withLink={true} 
-					parents={this.props.parents}
-				/>	
-			</div>
+			<Ariane 
+				parents={this.props.parents}
+				withCompose={ComposeArianeItem}
+			/>	
 		)	
 	}
 }
