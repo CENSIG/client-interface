@@ -14,7 +14,8 @@ class Title extends React.Component
 
 	_buildFirstChildTitle(rang, name)
 	{
-		let current  = panelTitle[rang].firstChildChart;
+		rang = rang || "DFLT";
+		let current  = panelTitle[rang].firstChildChart; 
 		let adjectif = current.adjectif;
 		let label    = current.label;
 		return (

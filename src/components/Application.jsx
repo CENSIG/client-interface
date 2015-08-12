@@ -44,11 +44,7 @@ class Application extends React.Component
 			content = <Loading />
 		}
 
-		return (
-			<div>
-				{content}
-			</div>
-		);
+		return content;
 	}
 }
 
