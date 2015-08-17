@@ -1,7 +1,6 @@
 import React from "react";
-import {Navbar, Nav, NavItem, Row, Col} from "react-bootstrap"; 
+import {Row, Col} from "react-bootstrap"; 
 import {Panel, Grid, ListGroup, ListGroupItem} from "react-bootstrap";
-import {CollapsibleNav} from "react-bootstrap";
 
 import BaseExplorer from "../../components/explorer/BaseExplorer";
 import BaseSearch from "../../components/search/BaseSearch";
@@ -10,6 +9,9 @@ import PhenologieChart from "../../components/PhenologieChart";
 import Title from "../../components/Title";
 
 import Monographies from "./components/Monographies";
+import NavBarWrapper from "./components/NavBarWrapper";
+import MainTitle from "./components/MainTitle";
+import Content from "./components/Content";
 import CarouselPhoto from "../../components/carousel/CarouselPhoto";
 
 import {themesForMap} from "../../configs/appConfig";
@@ -28,10 +30,10 @@ if (process.env.BROWSER && window !== "undefined") {
 export default function(props) {
 	const name = <em>{props.current.get("name")}</em>;
 	const title = (
-		<h1>
+		<MainTitle>
 			<span>Atlas des {props.current.get("nomVern")} </span>
 			<span>({name})</span>
-		</h1>
+		</MainTitle>
 	);
 	const mapTitle        = (<h3>Répartition en maille 10km des {name}</h3>);
 	const galeriePhoto    = (<h3>Photo de {name}</h3>);
@@ -49,25 +51,20 @@ export default function(props) {
 
 	return (
 		<div>
-			<nav className="navbar navbar-default navbar-fixed-top" role="navigation">
-				<div className="navbar-header">
-					<a className="navbar-brand" href="#">{title}</a>
-				</div>
-				<div className="navbar-default sidebar">
-					<div className="sidebar-nav navbar-collapse">
-						<ul className="side-menu">
-							<BaseSearch
-								withBackdrop={true}
-								divInput={searchStyle.divInput}
-								ulResults={searchStyle.ulResults}
-								cdnom={props.current.get("cdnom")}
-							/>
-						</ul>
-					</div>
-				</div>
-			</nav>
+			<NavBarWrapper title={title}>
+				<li>
+					<BaseSearch
+						withBackdrop={true}
+						divInput={searchStyle.divInput}
+						divInputActive={searchStyle.divInputActive}
+						divContainer={searchStyle.divContainer}
+						ulResults={searchStyle.ulResults}
+						cdnom={props.current.get("cdnom")}
+					/>
+				</li>
+			</NavBarWrapper>
 			<BaseExplorer className="explorer" buttonMaterial={true} />
-			<div className="content">
+			<Content>
 				<Grid fluid>
 						<Row>
 									<Col lg={5}>
@@ -91,7 +88,7 @@ export default function(props) {
 									</Col>
 								</Row>
 					</Grid>
-				</div>
+				</Content>
 		</div>
 	);
 }

@@ -5,6 +5,9 @@ import {Panel, Grid, ListGroup, ListGroupItem} from "react-bootstrap";
 import BaseExplorer from "../../components/explorer/BaseExplorer";
 import BaseSearch from "../../components/search/BaseSearch";
 import Monographies from "./components/Monographies";
+import NavBarWrapper from "./components/NavBarWrapper";
+import MainTitle from "./components/MainTitle";
+import Content from "./components/Content";
 import FirstChildsChart from "../../components/FirstChildsChart";
 import PhenologieChart from "../../components/PhenologieChart";
 import BaseAriane from "../../components/ariane/BaseAriane";
@@ -28,10 +31,10 @@ if (process.env.BROWSER && window !== "undefined") {
 export default function(props) {
 	const name = <em>{props.info.get("nom")}</em>;
 	const title = (
-		<h1>
+		<MainTitle>
 			<span>{name}</span>
 			<span> ({props.info.get("nomVern")})</span>
-		</h1>
+		</MainTitle>
 	);
 	const mapTitle        = (<h3>Répartition en maille 10km des {name}</h3>);
 	const galeriePhoto    = (<h3>Photos de {name}</h3>);
@@ -39,12 +42,6 @@ export default function(props) {
 	const firstChildTitle =	<Title name={name} rang={props.info.get("rang")} type="firstChild" />
 	const phenologieTitle = (<h3>Phénologie de {name}</h3>);
 	const brothersTitle   = <Title name={name} rang={props.info.get("rang")} type="brothersNav" />
-
-	const brand = (
-			<div className="navbar-brand">
-				<BaseAriane />
-			</div>
-	);
 
 	if (process.env.BROWSER && window !== "undefined") {
 		map = <BaseMap
@@ -56,28 +53,20 @@ export default function(props) {
 
 	return (
 		<div>
-			<nav className="navbar navbar-default navbar-fixed-top" role="navigation">
-				<div className="navbar-header">
-					<a className="navbar-brand" href="#">{title}</a>
-				</div>
-				<div className="nav-align navbar-right">
-					<BaseAriane />	
-				</div>
-				<div className="navbar-default sidebar">
-					<div className="sidebar-nav navbar-collapse">
-						<ul className="side-menu">
-							<BaseSearch
-								withBackdrop={true}
-								divInput={searchStyle.divInput}
-								ulResults={searchStyle.ulResults}
-								cdnom={props.atlas.current.get("cdnom")}
-							/>
-						</ul>
-					</div>
-				</div>
-			</nav>
+			<NavBarWrapper title={title} right={<BaseAriane />}>
+				<li>
+					<BaseSearch
+						withBackdrop={true}
+						divInput={searchStyle.divInput}
+						divInputActive={searchStyle.divInputActive}
+						divContainer={searchStyle.divContainer}
+						ulResults={searchStyle.ulResults}
+						cdnom={props.atlas.current.get("cdnom")}
+					/>
+				</li>
+			</NavBarWrapper>
 			<BaseExplorer className="explorer" buttonMaterial={true} />
-			<div className="content">
+			<Content>
 				<Grid fluid>
 					<Row>
 						<Col md={12}>
@@ -108,7 +97,7 @@ export default function(props) {
 						</Col>
 					</Row>
 				</Grid>
-			</div>
+			</Content>
 		</div>
 	);
 }
