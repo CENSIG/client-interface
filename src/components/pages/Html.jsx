@@ -52,6 +52,7 @@ class Html extends React.Component
 			<html lang="fr">
 				<head>
 					<meta charSet="UTF-8" />
+					<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 					{this._getLink()}
 					<title>{this.props.context.getStore(ApplicationStore).getCurrentTitlePage()}</title>
 				</head>
