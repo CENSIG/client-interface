@@ -1,6 +1,20 @@
 export default {
+
+	divContainer: {
+		position: "fixed",
+		width: "500px",
+		"@media (max-width: 780px)": {
+			width: "100%"	
+		}
+	},
+
 	divInput: {
 		width   : 120
+	},
+
+	divInputActive: {
+		boxShadow: "0 2px 5px rgba(0, 0, 0, 0.26)",
+		width: "100%"
 	},
 
 	ulResults: {
@@ -9,7 +23,7 @@ export default {
 		padding: 10,
 		position: "absolute",
 		maxHeight: 400,
-		minWidth: 500,
+		width: "100%",
 		overflowY: "scroll",
 		zIndex: 1100
 	}
