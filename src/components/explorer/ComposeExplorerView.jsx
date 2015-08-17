@@ -25,11 +25,11 @@ class ComposeExplorerView extends React.Component
 		let label = labelMap[props.rang] || "Voir les taxons inférieurs";
 		return (
 			<li style={props.styleViewLi}>
-				<NavLink routeName="taxon" navParams={{
+				<NavLink style={props.styleViewLiFirst} routeName="taxon" navParams={{
 					name: this.context.atlasUriName,
 					cdnom: props.cdnom
 				}}>
-					<span style={props.styleViewLiFirst}>
+					<span>
 						{props.name}						
 					</span>
 				</NavLink>
