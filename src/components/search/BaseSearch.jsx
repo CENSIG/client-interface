@@ -31,8 +31,19 @@ class BaseSearch extends React.Component
 	constructor(props) {
 		super(props);	
 		this.state = {
-			backDropShow: false	
+			backDropShow: false,
+			over: false
 		}
+	}
+
+	componentDidMount() {
+		let divSearch = React.findDOMNode(this.refs.search);
+		divSearch.children[1].addEventListener("mouseover", (e) => {
+			this.setState({over: true});
+		});
+		divSearch.children[1].addEventListener("mouseout", (e) => {
+			this.setState({over: false});	
+		});
 	}
 
 	shouldComponentUpdate = shouldPureComponentUpdate
@@ -64,17 +75,17 @@ class BaseSearch extends React.Component
 
 	// When input is leave
 	_handleOnBlur(e) {
-		e.target.value = "";
-		this._actionReset();
-		this.setState({
-			backDropShow: false
-		});
+		if (!this.state.over) {
+			this._actionReset();
+			this.setState({backDropShow: false});
+		}
 	}
 
 	render() {
 		let displaySpin = (this.props.pendingRequest) ? true : false;
 		return (
 			<Search
+				ref="search"
 				backDropShow={this.state.backDropShow}
 				actionSearch={this._actionSearch.bind(this)}
 				actionReset={this._actionReset.bind(this)}
