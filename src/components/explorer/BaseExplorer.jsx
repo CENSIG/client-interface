@@ -8,7 +8,6 @@ import ExploreAction from "../../actions/ExploreAction";
 import ExploreStore from "../../stores/ExploreStore";
 import ComposeExplorerView from "./ComposeExplorerView";
 import LoadingForComponent from "../pages/LoadingForComponent";
-import style from "./style";
 
 /**
  * Component for display explorer
@@ -43,26 +42,21 @@ class BaseExplorer extends React.Component
 	render() {
 		let props = this.props;
 		return (
-			<div style={[style.baseExplorer, style.baseResponsive]}>
+			<div style={[props.baseExplorer, props.baseResponsive]}>
 				<Explorer
-					styleButton={style.button}
-					buttonMaterial={props.buttonMaterial}
 					parents={props.parents}
 					firstChilds={props.firstChilds}
 					actionClickSup={this._actionClickSup.bind(this)}	
 					actionClickSub={this._actionClickSub.bind(this)}
 					withCompose={ComposeExplorerView}
 					displaySpin={props.pendingRequest}
-					withSpin={<LoadingForComponent style={style.loading}/>}
+					withSpin={<LoadingForComponent style={props.styleLoading}/>}
+					{...props}
 				/>
 			</div>
 		);
 	}
 }
-
-BaseExplorer.defaultProps = {
-	buttonMaterial: false
-};
 
 BaseExplorer.contextTypes = {
 	executeAction: React.PropTypes.func,

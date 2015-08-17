@@ -4,7 +4,6 @@ import {connectToStores}  from "fluxible/addons";
 import ParentsStore from "../../stores/ParentsStore";
 
 import ComposeArianeItem from "./ComposeArianeItem";
-import style from "./style";
 
 /**
  * Component for display ariane
@@ -17,11 +16,12 @@ class BaseAriane extends React.Component
 	}
 
 	render() {
+		let props = this.props;
 		return (
 			<Ariane 
-				styleDivBase={style.base}
 				parents={this.props.parents}
 				withCompose={ComposeArianeItem}
+				{...props}
 			/>	
 		)	
 	}
