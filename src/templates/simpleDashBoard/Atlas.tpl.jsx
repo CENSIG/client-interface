@@ -16,6 +16,7 @@ import CarouselPhoto from "../../components/carousel/CarouselPhoto";
 
 import {themesForMap} from "../../configs/appConfig";
 import searchStyle from "./components/styles/searchStyle";
+import explorerStyle from "./components/styles/explorerStyle";
 
 var map;
 
@@ -63,7 +64,13 @@ export default function(props) {
 					/>
 				</li>
 			</NavBarWrapper>
-			<BaseExplorer className="explorer" buttonMaterial={true} />
+			<BaseExplorer 
+				baseExplorer={explorerStyle.baseExplorer}
+				baseResponsive={explorerStyle.baseResponsive}
+				buttonMaterial={true} 
+				styleButton={explorerStyle.button}
+				styleLoading={explorerStyle.loading}
+			/>
 			<Content>
 				<Grid fluid>
 						<Row>

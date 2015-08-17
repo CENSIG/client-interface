@@ -17,6 +17,8 @@ import Title from "../../components/Title";
 
 import {themesForMap} from "../../configs/appConfig";
 import searchStyle from "./components/styles/searchStyle";
+import arianeStyle from "./components/styles/arianeStyle";
+import explorerStyle from "./components/styles/explorerStyle";
 
 var map;
 
@@ -53,7 +55,7 @@ export default function(props) {
 
 	return (
 		<div>
-			<NavBarWrapper title={title} right={<BaseAriane />}>
+			<NavBarWrapper title={title} right={<BaseAriane styleDivBase={arianeStyle.base}/>}>
 				<li>
 					<BaseSearch
 						withBackdrop={true}
@@ -65,7 +67,13 @@ export default function(props) {
 					/>
 				</li>
 			</NavBarWrapper>
-			<BaseExplorer className="explorer" buttonMaterial={true} />
+			<BaseExplorer 
+				baseExplorer={explorerStyle.baseExplorer}
+				baseResponsive={explorerStyle.baseResponsive}
+				buttonMaterial={true} 
+				styleButton={explorerStyle.button}
+				styleLoading={explorerStyle.loading}
+			/>
 			<Content>
 				<Grid fluid>
 					<Row>
