@@ -43,7 +43,11 @@ export default {
 		firstChildChart: {
 			adjectif: "principaux",
 			label: "taxons inférieurs"
-		}	
+		},
+		brothersNav: {
+			adverbe: "du",
+			label: "niveau"
+		}
 	}
 };
 
