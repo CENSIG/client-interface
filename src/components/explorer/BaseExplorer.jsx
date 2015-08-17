@@ -1,4 +1,5 @@
 import React from "react";
+import Radium from "radium";
 import {Explorer} from "client-interface-components";
 import {connectToStores}  from "fluxible/addons";
 import Spinner from "react-spinkit";
@@ -7,29 +8,9 @@ import ExploreAction from "../../actions/ExploreAction";
 import ExploreStore from "../../stores/ExploreStore";
 import ComposeExplorerView from "./ComposeExplorerView";
 import LoadingForComponent from "../pages/LoadingForComponent";
+import style from "./style";
 
-// style for div container
-const style = {
-	position: "fixed",
-	right: "10px",
-	top: "20px",
-	zIndex: 1030
-};
-
-// style for explrer button
-const styleButton = {
-	"cursor": "pointer",
-	"margin": "0 0 0 auto"
-}
-
-// style for spinner
-const styleLoading = {
-	height: 50,
-	margin: "30px auto 0",
-	width: "1%"
-};
-
-/*
+/**
  * Component for display explorer
  * @author Jean BOUDET
  */
@@ -62,9 +43,9 @@ class BaseExplorer extends React.Component
 	render() {
 		let props = this.props;
 		return (
-			<div style={style}>
+			<div style={[style.baseExplorer, style.baseResponsive]}>
 				<Explorer
-					styleButton={styleButton}
+					styleButton={style.button}
 					buttonMaterial={props.buttonMaterial}
 					parents={props.parents}
 					firstChilds={props.firstChilds}
@@ -72,7 +53,7 @@ class BaseExplorer extends React.Component
 					actionClickSub={this._actionClickSub.bind(this)}
 					withCompose={ComposeExplorerView}
 					displaySpin={props.pendingRequest}
-					withSpin={<LoadingForComponent style={styleLoading}/>}
+					withSpin={<LoadingForComponent style={style.loading}/>}
 				/>
 			</div>
 		);
@@ -87,6 +68,8 @@ BaseExplorer.contextTypes = {
 	executeAction: React.PropTypes.func,
 	api: React.PropTypes.object
 };
+
+BaseExplorer = Radium(BaseExplorer);
 
 BaseExplorer = connectToStores(BaseExplorer, [ ExploreStore ], (context, props) => {
 	return context.getStore(ExploreStore).getState();
