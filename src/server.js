@@ -29,6 +29,7 @@ expstate.extend(server);
 
 // Static ressource
 server.use("/static", express.static(__dirname+"/assets/dist"));
+server.use("/cdn", express.static(__dirname+"/assets/cdn"));
 
 // All requests
 server.use(function(req, res, next) {
