@@ -1,10 +1,45 @@
 import React from "react";
+import Radium from "radium";
 import Carousel from "nuka-carousel";
 import {connectToStores}  from "fluxible/addons";
 import PhotoStore from "../../stores/PhotoStore";
 import {NavLink} from "fluxible-router";
 
 import style from "./style";
+
+/**
+ * Component for decorated left control carousel
+ * @author Jean BOUDET
+ */
+class ArrowLeft extends React.Component
+{
+	constructor(props) {
+		super(props);
+	}
+
+	render() {
+		let props = this.props;
+		let styleArrow = props.currentSlide === 0 ? style.arrowHidden : style.arrowLeft;
+		return <div style={[styleArrow, style.responsive]} onClick={props.previousSlide}><span style={style.textArrow}>Précédent</span></div>
+	}
+}
+
+/**
+ * Component for decorated right control carousel
+ * @author Jean BOUDET
+ */
+class ArrowRight extends React.Component
+{
+	constructor(props) {
+		super(props);
+	}
+
+	render() {
+		let props = this.props;
+		let styleArrow = props.currentSlide === props.slideCount-1 ? style.arrowHidden : style.arrowRight;
+		return <div style={[styleArrow, style.responsive]} onClick={props.nextSlide}><span style={style.textArrow}>Suivant</span></div>
+	}
+}
 
 class CarouselPhoto extends React.Component
 {
@@ -34,10 +69,20 @@ class CarouselPhoto extends React.Component
 
 	render() {
 		let items = this._getCarouselItem();
+		let decorators = [
+			{
+				component: Radium(ArrowLeft),
+				position: 'CenterLeft'
+			},
+			{
+				component: Radium(ArrowRight),
+				position: 'CenterRight'
+			}
+		];
 		return (items.size === 0)
 			? <p>Pas de photo trouvée</p>
 			: (
-				<Carousel>
+				<Carousel decorators={decorators}>
 					{items}
 				</Carousel>
 			);
