@@ -25,6 +25,7 @@ class Title extends React.Component
 
 	_buildBrothersNavTitle(rang, name)
 	{
+		rang = rang || "DFLT";
 		let current = panelTitle[rang].brothersNav;
 		let adverbe = current.adverbe;
 		let label   = current.label;
