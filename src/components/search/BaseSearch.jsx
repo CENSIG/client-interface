@@ -1,4 +1,5 @@
 import React from "react";
+import shouldPureComponentUpdate from "react-pure-render/function";
 import SearchStore	 from "../../stores/SearchStore";
 import SearchAction from "../../actions/SearchAction";
 import {connectToStores} from "fluxible/addons";
@@ -33,6 +34,8 @@ class BaseSearch extends React.Component
 			backDropShow: false	
 		}
 	}
+
+	shouldComponentUpdate = shouldPureComponentUpdate
 
 	// When letter (>3) is enter
 	_actionSearch(q) {
