@@ -19,7 +19,11 @@ class SearchAction
 			.then((data) => {
 				context.dispatch(Event.SEARCH_CHILDS, data);
 			}).catch(err => {
-				context.dispatch(Event.NOT_SEARCH_CHILDS, payload.options.q)
+				if (err.status === 401) {
+					context.dispatch(Event.UNAUTHORIZED);
+				} else {
+					context.dispatch(Event.NOT_SEARCH_CHILDS, payload.options.q)
+				}
 			}).finally(() => {
 				context.dispatch(Event.END_REQUEST_PENDING);
 			});

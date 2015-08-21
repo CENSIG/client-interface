@@ -15,7 +15,11 @@ class ExploreAction
 		.then(data => {
 			context.dispatch(Event.EXPLORE_CHILDS, Immutable.fromJS(data));
 		}).catch(err => {
-			context.dispatch(Event.NOT_CHILDS);
+			if (err.status == 401) {
+				context.dispatch(Event.UNAUTHORIZED);
+			} else {
+				context.dispatch(Event.NOT_CHILDS);
+			}
 		}).finally(() => {
 			context.dispatch(Event.END_REQUEST_EXPLORER);
 		})
