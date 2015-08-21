@@ -18,11 +18,16 @@ if (process.env.NODE_ENV !== "prod") {
 // Dependencies
 var express       = require("express"),
 		expstate      = require("express-state"),
+		cookieParser	= require("cookie-parser"),
 		server        = express(),
 		React         = require("react"),
 		app           = require("./app"),
 		navigation    = require("fluxible-router").navigateAction,
-		HtmlComponent = React.createFactory(require("./components/pages/Html"));
+		HtmlComponent = React.createFactory(require("./components/pages/Html")),
+		api						= require("./configs/appConfig").api,
+		context				= app.createContext(),
+		auth					= require("./utils/server/auth"),
+		AuthAction    = require("./actions/AuthAction");
 
 // Use expose function
 expstate.extend(server);
@@ -31,9 +36,22 @@ expstate.extend(server);
 server.use("/static", express.static(__dirname+"/assets/dist"));
 server.use("/cdn", express.static(__dirname+"/assets/cdn"));
 
-// All requests
+// Parse cookie
+server.use(cookieParser());
+
+// Authentification before first rendering
 server.use(function(req, res, next) {
-	var context = app.createContext();
+	var clientId = req.cookies._id;
+
+	if (clientId) {
+		auth.authWithClientId(req, res, next, context, clientId);
+	} else {
+		auth.authWithSignature(req, res, next, context);	
+	}
+});
+
+// Get static HTML
+server.use(function(req, res, next) {
 	var params = {
 		url: req.url	
 	};
@@ -60,6 +78,8 @@ server.use(function(req, res, next) {
 			mode: process.env.NODE_ENV,
 			state: res.locals.state
 		}));
+
+		// Get the response
 		res.send(html);
 	});
 });
