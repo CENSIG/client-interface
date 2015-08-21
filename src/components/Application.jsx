@@ -1,4 +1,5 @@
 import React						from "react";
+import shouldPureComponentUpdate from "react-pure-render/function";
 import ApplicationStore from "../stores/ApplicationStore";
 import {provideContext, connectToStores} from "fluxible/addons";
 import {handleHistory}  from "fluxible-router";
@@ -18,6 +19,8 @@ class Application extends React.Component
 	constructor(props, context) {
 		super(props);
 	}
+
+	shouldComponentUpdate = shouldPureComponentUpdate
 
 	getChildContext() {
 		let props = this.props;
@@ -43,10 +46,13 @@ class Application extends React.Component
 		let content;
 		let Handler = this.props.currentRoute.get("handler");
 
-		if (this.props.isNavigateComplete) {
-			content = <Handler />
+		if (this.props.unauthorized) {
+			console.log("oh");
+			content = <p>Réactualiser</p>;
+		} else if (this.props.isNavigateComplete) {
+			content = <Handler />;
 		} else {
-			content = <Loading />
+			content = <Loading />;
 		}
 
 		return content;
