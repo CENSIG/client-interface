@@ -24,10 +24,12 @@ export default keyMirror({
 	EXPLORE_CHILDS         : null,
 	EXPLORE_FIRST_CHILDS   : null,
 	START_REQUEST_EXPLORER : null,
-	END_REQUEST_EXPLORER : null,
+	END_REQUEST_EXPLORER   : null,
 	SEARCH_CHILDS          : null,
 	REQUEST_SEARCH_PENDING : null,
 	END_REQUEST_PENDING    : null,
 	RESET_SEARCH_CHILDS    : null,
-	NOT_SEARCH_CHILDS      : null
+	NOT_SEARCH_CHILDS      : null,
+	UNAUTHORIZED           : null,
+	ACCESS_TOKEN           : null
 });
