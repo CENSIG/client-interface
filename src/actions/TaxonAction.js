@@ -1,5 +1,5 @@
 import Api from "../utils/Api";
-import BaseAction from "./BaseAction";
+import PageAction from "./PageAction";
 import {taxonActionRequest} from "../configs/routesActions";
 
 const resource = "taxon";
@@ -8,7 +8,7 @@ const resource = "taxon";
  * Actions for taxon (get informations and geojson)
  * @author Jean BOUDET
  */
-class TaxonAction extends BaseAction
+class TaxonAction extends PageAction
 {
 	/**
 	 * A promise for execute multiple GET request
@@ -16,7 +16,12 @@ class TaxonAction extends BaseAction
 	 * @param payload data
 	 */
 	static getData(context, payload) {
-		return TaxonAction.reduce(context, taxonActionRequest(resource, payload));
+		let cdnom = payload.cdnom;
+		let api = TaxonAction.getApiWithHeaders(payload.auth);
+		return TaxonAction.reduce(context, taxonActionRequest(resource, {
+			cdnom: cdnom,
+			api: api
+		}));
 	}
 }
 
