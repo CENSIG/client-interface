@@ -13,6 +13,7 @@ class Api
 	constructor(params) {
 		this.baseUri        = `http://${params.ip}:${params.port}/${params.name}`;
 		this.requestPending = null;
+		this.headers = null;
 	}
 
 	/**
@@ -24,20 +25,35 @@ class Api
 	 */
 	get(resource, id, object=null, options=null) {
 		return new promise((resolve, reject) => {
-			var url = this.buildUrl(resource, id, object, options);
-			this.requestPending = request.get(url);
+			let url = this.buildUrl(resource, id, object, options);
+			this.requestPending = request.get(url).set(this.headers);
+			this.requestPending.end((err, res) => {
+					if (err) {
+						reject(res.body.error);
+					} else {
+						resolve(res.body);
+					}
+				});
+		});
+	}
+
+	post(resource, body, id=null, object=null, options=null) {
+		return new promise((resolve, reject) => {
+			let url = this.buildUrl(resource, id, object, options);
+			this.requestPending = request.post(url).send(body);
 			this.requestPending.end((err, res) => {
 				if (err) {
-					reject(res.body.error);
-				} else {
-					resolve(res.body);
+					reject(err);	
+				}	else {
+					resolve(res.body);	
 				}
 			});
 		});
 	}
 
 	buildUrl(resource, id, object, options) {
-		var url = `${this.baseUri}/${resource}/${id}`;
+		let url = `${this.baseUri}/${resource}`;
+		url += (id) ? `/${id}` : "";
 		url += (object) ? `/${object}` : "";
 		url += this.extractOption(options);
 		return url;
@@ -57,6 +73,10 @@ class Api
 
 	getRequestPending() {
 		return this.requestPending;	
+	}
+
+	setHeaders(headers) {
+		this.headers = headers;	
 	}
 }
 
