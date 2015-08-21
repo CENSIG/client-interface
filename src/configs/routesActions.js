@@ -1,6 +1,5 @@
 import Immutable from "immutable";
 import Event from "../utils/Event";
-import {api} from "../configs/appConfig";
 
 /**
  * Return array of object with:
@@ -11,8 +10,8 @@ import {api} from "../configs/appConfig";
  * @author Jean BOUDET
  */
 export function taxonActionRequest(resource, payload) {
-	var cdnom = payload.cdnom;
-	var limit = payload.limit;
+	let cdnom = payload.cdnom;
+	let api = payload.api;
 
 	return [
 		{event: Event.PARENTS, req: api.get(resource, cdnom, "parents")},
@@ -40,7 +39,8 @@ export function taxonActionRequest(resource, payload) {
  * @author Jean BOUDET
  */
 export function atlasActionRequest(resource, payload) {
-	var cdnom = payload.cdnom;
+	let cdnom = payload.cdnom;
+	let api = payload.api;
 
 	return [
 		{event: Event.PHOTO, req: api.get(resource, cdnom, "photos")},
