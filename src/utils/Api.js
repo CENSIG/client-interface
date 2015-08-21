@@ -29,7 +29,10 @@ class Api
 			this.requestPending = request.get(url).set(this.headers);
 			this.requestPending.end((err, res) => {
 					if (err) {
-						reject(res.body.error);
+						reject({
+							status: err.status,
+							message: res.body.error
+						});
 					} else {
 						resolve(res.body);
 					}
