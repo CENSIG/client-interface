@@ -20,8 +20,13 @@ class Application extends React.Component
 	}
 
 	getChildContext() {
+		let props = this.props;
+		api.setHeaders({
+			"X-Access-Token": props.auth.get("token"),
+			"X-Client-Id": props.auth.get("id")
+		});
 		return {
-			atlasUriName: this.props.currentRoute.get("params").get("name"),
+			atlasUriName: props.currentRoute.get("params").get("name"),
 			api: api
 		};
 	}
