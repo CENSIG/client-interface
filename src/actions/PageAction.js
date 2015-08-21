@@ -1,12 +1,25 @@
 import promise from "bluebird"; 
 import Immutable from "immutable";
+import {api} from "../configs/appConfig";
 
 /**
  * Base class for action
  * @author Jean BOUDET
  */
-class BaseAction
+class PageAction
 {
+	/**
+	 * Return api instance with headers set
+	 * @author Jean BOUDET
+	 */
+	static getApiWithHeaders(headers) {
+		api.setHeaders({
+			"X-Access-Token": headers.get("token"),
+			"X-Client-Id": headers.get("id")
+		});
+		return api;
+	}
+
 	/**
 	 * Reduce array of promise
 	 * @author Jean BOUDET
@@ -25,10 +38,14 @@ class BaseAction
 						context.dispatch(item.event, res);
 					}
 				}).catch(err => {
-					context.dispatch(item.eventError);
+					if (err.status === 401) {
+						context.dispatch("UNAUTHORIZED");
+					} else {
+						context.dispatch(item.eventError);
+					}
 				});
 			}, 0);
 	}
 }
 
-export default BaseAction;
+export default PageAction;
