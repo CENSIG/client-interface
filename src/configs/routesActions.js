@@ -15,7 +15,7 @@ export function taxonActionRequest(resource, payload) {
 	var limit = payload.limit;
 
 	return [
-		{event: Event.PARENTS, req: api.get(resource, cdnom, "parents", { limit: limit })},
+		{event: Event.PARENTS, req: api.get(resource, cdnom, "parents")},
 		{event: Event.BROTHERS, baseData: Immutable.Map({cdnom: cdnom}), 
 			req: api.get(resource, cdnom, "brothers")
 		},
@@ -47,7 +47,7 @@ export function atlasActionRequest(resource, payload) {
 		{event: Event.FIRST_CHILDS, eventError: Event.NOT_FIRST_CHILDS,
 			req: api.get(resource, cdnom, "first_child_obs")
 		},
-		{event: Event.PARENTS, req: api.get(resource, cdnom, "parents", { limit: "OR" })},
+		{event: Event.PARENTS, req: api.get(resource, cdnom, "parents")},
 		{event: Event.INFO, req: api.get(resource, cdnom, "informations")},
 		{event: Event.MONOGRAPHIES, eventError: Event.NOT_MONOGRAPHIES,
 			req: api.get(resource, cdnom, "monographies")},
