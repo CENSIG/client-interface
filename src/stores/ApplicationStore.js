@@ -12,6 +12,7 @@ class ApplicationStore extends BaseStore
 		super(dispatcher);
 		this.currentTitlePage = null;
 		this.auth = Immutable.Map(); 
+		this.unauthorized = false;
 	}
 	
 	_handleTitle(title) {
@@ -23,6 +24,11 @@ class ApplicationStore extends BaseStore
 		this.auth = Immutable.fromJS(auth);
 	}
 
+	_handleUnauthorized() {
+		this.unauthorized = true;	
+		this.emitChange();
+	}
+
 	getCurrentTitlePage() {
 		return this.currentTitlePage;
 	}
@@ -30,7 +36,8 @@ class ApplicationStore extends BaseStore
 	getState() {
 		return {
 			currentTitlePage : this.currentTitlePage,
-			auth: this.auth
+			auth: this.auth,
+			unauthorized: this.unauthorized
 		};
 	}
 	
@@ -41,12 +48,14 @@ class ApplicationStore extends BaseStore
 	rehydrate(state) {
 		this.currentTitlePage = state.currentTitlePage;
 		this.auth = Immutable.fromJS(state.auth);
+		this.unauthorized = state.unauthorized;
 	}
 }
 
 ApplicationStore.storeName = "ApplicationStore";
 ApplicationStore.handlers = {};
 ApplicationStore.handlers[Event.UPDATE_TITLE] = "_handleTitle";
-ApplicationStore.handlers["ACCESS_TOKEN"] = "_handleToken";
+ApplicationStore.handlers[Event.ACCESS_TOKEN] = "_handleToken";
+ApplicationStore.handlers[Event.UNAUTHORIZED] = "_handleUnauthorized";
 
 export default ApplicationStore;
