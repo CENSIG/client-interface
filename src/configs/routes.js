@@ -1,6 +1,7 @@
 import TaxonAction from "../actions/TaxonAction";
 import AtlasAction from "../actions/AtlasAction";
 import InfoStore from "../stores/InfoStore";
+import ApplicationStore from "../stores/ApplicationStore";
 import AtlasStore	 from "../stores/AtlasStore";
 import Index		   from "../components/pages/Index";
 import Atlas		   from "../components/pages/Atlas";
@@ -30,10 +31,11 @@ export default {
 		method  : "get",
 		handler : Atlas,
 		action  : (context, payload) => {
-			var atlasName = payload.get("params").get("name");
-			var cdnom     = atlas[atlasName].cdnom;
+			let atlasName = payload.get("params").get("name");
+			let cdnom = atlas[atlasName].cdnom;
+			let auth = context.getStore(ApplicationStore).getState().auth;
 			context.dispatch(Event.UPDATE_TITLE, "Atlas des " + atlasName);
-			return AtlasAction.getData(context, { cdnom: cdnom })
+			return AtlasAction.getData(context, { cdnom: cdnom, auth: auth })
 				.then(() => {
 					context.dispatch(Event.ATLAS, {
 						cdnom   : cdnom,
@@ -53,17 +55,17 @@ export default {
 		page: "taxon",
 		action : (context, payload) => {
 			context.dispatch(Event.RESET_SEARCH_CHILDS);
-			var atlasName = payload.get("params").get("name");
+			let atlasName = payload.get("params").get("name");
 
-			var cdnom = payload.get("params").get("cdnom");
-			var atlasCdnom = atlas[atlasName].cdnom;
-			var limit = atlas[atlasName].limit;
+			let cdnom = payload.get("params").get("cdnom");
+			let atlasCdnom = atlas[atlasName].cdnom;
 
+			let auth = context.getStore(ApplicationStore).getState().auth;
 			return TaxonAction.getData(context, { 
-				cdnom: cdnom, 
-				limit: limit
-			}).then(function() {
-				var name = context.getStore(InfoStore).getState().general.get("nom");
+				cdnom: cdnom,
+				auth: auth
+			}).then(() => {
+				let name = context.getStore(InfoStore).getState().general.get("nom");
 				context.dispatch(Event.UPDATE_TITLE, `WebOb's | Atlas des ${atlasName} | ${name}`);
 				context.dispatch(Event.ATLAS, {
 					cdnom: atlasCdnom,
