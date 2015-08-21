@@ -12,7 +12,7 @@ export default {
 	"api": new Api({
 		"ip"   : (process.env.BROWSER) ? "127.0.0.1" : process.env.API_PORT_9000_TCP_ADDR,
 		"port" : 9000,
-		"name" : "apiv1"
+		"name" : "api"
 	}),
 
 	"atlas": {
