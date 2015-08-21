@@ -76,6 +76,7 @@ class BaseSearch extends React.Component
 	// When input is leave
 	_handleOnBlur(e) {
 		if (!this.state.over) {
+			e.target.value = "";
 			this._actionReset();
 			this.setState({backDropShow: false});
 		}
