@@ -1,8 +1,8 @@
 import TaxonAction from "../actions/TaxonAction";
 import AtlasAction from "../actions/AtlasAction";
-import InfoStore from "../stores/InfoStore";
 import ApplicationStore from "../stores/ApplicationStore";
 import AtlasStore	 from "../stores/AtlasStore";
+import TaxonStore	 from "../stores/TaxonStore";
 import Index		   from "../components/pages/Index";
 import Atlas		   from "../components/pages/Atlas";
 import Taxon			 from "../components/pages/Taxon";
@@ -36,14 +36,7 @@ export default {
 			let auth = context.getStore(ApplicationStore).getState().auth;
 			context.dispatch(Event.UPDATE_TITLE, "Atlas des " + atlasName);
 			return AtlasAction.getData(context, { cdnom: cdnom, auth: auth })
-				.then(() => {
-					context.dispatch(Event.ATLAS, {
-						cdnom   : cdnom,
-						name    : context.getStore(InfoStore).getState().general.get("nom"),
-						nomVern : context.getStore(InfoStore).getState().general.get("nomVern"),
-						rang    : context.getStore(InfoStore).getState().general.get("rang")
-					});
-				});
+				.then(() => {});
 		}
 	},
 
@@ -65,7 +58,7 @@ export default {
 				cdnom: cdnom,
 				auth: auth
 			}).then(() => {
-				let name = context.getStore(InfoStore).getState().general.get("nom");
+				let name = context.getStore(TaxonStore).getState().info.get("nom");
 				context.dispatch(Event.UPDATE_TITLE, `WebOb's | Atlas des ${atlasName} | ${name}`);
 				context.dispatch(Event.ATLAS, {
 					cdnom: atlasCdnom,

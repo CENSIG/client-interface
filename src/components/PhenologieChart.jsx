@@ -1,7 +1,5 @@
 import React from "react";
-import {connectToStores} from "fluxible/addons";
-
-import PhenologieStore from "../stores/PhenologieStore";
+import shouldPureComponentUpdate from "react-pure-render/function";
 import SeveralBarChart from "../thirdparty/react-d3/src/severalBarChart/SeveralBarChart";
 
 class PhenologieChart extends React.Component
@@ -9,6 +7,8 @@ class PhenologieChart extends React.Component
 	constructor(props) {
 		super(props);	
 	}
+
+	shouldComponentUpdate = shouldPureComponentUpdate
 
 	_getChart(data) {
 		var chart = null;
@@ -36,11 +36,5 @@ class PhenologieChart extends React.Component
 		)	
 	}
 }
-
-PhenologieChart = connectToStores(PhenologieChart, [ PhenologieStore ], (context, props) => {
-	return {
-		data: context.getStore(PhenologieStore).getState()
-	}
-});
 
 export default PhenologieChart;

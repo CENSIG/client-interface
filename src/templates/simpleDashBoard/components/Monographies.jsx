@@ -1,9 +1,7 @@
 import React from "react";
 import {TabbedArea, TabPane} from "react-bootstrap";
-import {connectToStores}  from "fluxible/addons";
 
 import PanelInfo from "./PanelInfo";
-import InfoStore from "../../../stores/InfoStore";
 
 class Monographies extends React.Component
 {
@@ -41,9 +39,5 @@ class Monographies extends React.Component
 		);	
 	}
 }
-
-Monographies = connectToStores(Monographies, [ InfoStore ], (context, props) => {
-	return context.getStore(InfoStore).getState();
-});
 
 export default Monographies;

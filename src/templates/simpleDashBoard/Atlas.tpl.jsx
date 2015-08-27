@@ -8,7 +8,7 @@ import FirstChildsChart from "../../components/FirstChildsChart";
 import PhenologieChart from "../../components/PhenologieChart";
 import Title from "../../components/Title";
 
-import Monographies from "./components/Monographies";
+import PanelInfo from "./components/PanelInfo";
 import NavBarWrapper from "./components/NavBarWrapper";
 import MainTitle from "./components/MainTitle";
 import Content from "./components/Content";
@@ -29,21 +29,22 @@ if (process.env.BROWSER && window !== "undefined") {
 }
 
 export default function(props) {
-	const name = <em>{props.current.get("name")}</em>;
+	const name = <em>{props.info.get("nom")}</em>;
 	const title = (
 		<MainTitle>
-			<span>Atlas des {props.current.get("nomVern")} </span>
+			<span>Atlas des {props.info.get("nomVern")} </span>
 			<span>({name})</span>
 		</MainTitle>
 	);
 	const mapTitle        = (<h3>Répartition en maille 10km des {name}</h3>);
 	const galeriePhoto    = (<h3>Photo de {name}</h3>);
 	const infoTitle       = (<h3>Informations sur {name}</h3>);
-	const firstChildTitle = <Title name={name} rang={props.current.get("rang")} type="firstChild" />
+	const firstChildTitle = <Title name={name} rang={props.info.get("rang")} type="firstChild" />
 	const phenologieTitle = (<h3>Phénologie de {name}</h3>);
 
 	if (process.env.BROWSER && window !== "undefined") {
 		map = <BaseMap
+			grille10={props.grille10}
 			height={500}
 			width="100%"
 			theme={themesForMap.base}
@@ -79,18 +80,18 @@ export default function(props) {
 											{map}
 										</Panel>
 										<Panel header={firstChildTitle}>
-											<FirstChildsChart />	
+											<FirstChildsChart data={props.firstChilds} />	
 										</Panel>
 										<Panel header={phenologieTitle}>
-											<PhenologieChart />
+											<PhenologieChart data={props.phenologie} />
 										</Panel>
 									</Col>
 									<Col lg={7}>
 												<Panel header={galeriePhoto}>
-													<CarouselPhoto />
+													<CarouselPhoto photos={props.photos} />
 												</Panel>
 												<Panel header={infoTitle}>
-													<Monographies />
+													<PanelInfo info={props.info} />
 												</Panel>
 									</Col>
 								</Row>

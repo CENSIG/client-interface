@@ -18,13 +18,17 @@ class PanelInfo extends React.Component
 	}
 
 	render() {
+		let props = this.props;
+		var info = props.info;
 		return (
 			<ListGroup>
-			{displayInfo.map((info, index) => {
-				let modal = info.withSearch ? <UsersSearch labelButton={info.withSearch} /> : "";
+			{displayInfo.map((item, index) => {
+				let modal = item.withSearch && info.get("rang") !== "OR"
+					? <UsersSearch labelButton={item.withSearch} /> 
+					: "";
 				return (
-					<ListGroupItem key={index} header={info.label}>
-						<strong>{this.props.info.get(info.key)}</strong>
+					<ListGroupItem key={index} header={item.label}>
+						<strong>{info.get(item.key)}</strong>
 						{modal}
 					</ListGroupItem>
 				);

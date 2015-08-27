@@ -11,18 +11,11 @@ import SearchStore	from "./stores/SearchStore";
 import AtlasStore				from "./stores/AtlasStore";
 import BrothersNavigationStore from "./stores/BrothersNavigationStore";
 import ExploreStore from "./stores/ExploreStore";
-import ParentsStore from "./stores/ParentsStore";
-import FirstChildsStore from "./stores/FirstChildsStore";
-import InfoStore from "./stores/InfoStore";
-import GeoStore from "./stores/GeoStore";
-import PhotoStore from "./stores/PhotoStore";
-import PhenologieStore from "./stores/PhenologieStore";
 
 const stores = [
-	ApplicationStore, ParentsStore, BaseRouteStore,
+	ApplicationStore, BaseRouteStore,
 	TaxonStore, SearchStore, AtlasStore,
-	BrothersNavigationStore, ExploreStore, FirstChildsStore,
-	InfoStore, GeoStore, PhotoStore, PhenologieStore
+	BrothersNavigationStore, ExploreStore,
 ];
 
 var app = new Fluxible({

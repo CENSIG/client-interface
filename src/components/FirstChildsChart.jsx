@@ -1,7 +1,6 @@
 import React from "react";
+import shouldPureComponentUpdate from "react-pure-render/function";
 import BarChart	from "../thirdparty/react-d3/src/barchart/BarChart"
-import {connectToStores}  from "fluxible/addons";
-import FirstChildsStore from "../stores/FirstChildsStore";
 
 class FirstChildsChart extends React.Component
 {
@@ -9,6 +8,7 @@ class FirstChildsChart extends React.Component
 		super(props);	
 	}
 
+	shouldComponentUpdate = shouldPureComponentUpdate
 	_getChart() {
 		var chart = null;
 		if (this.props.data.size !== 0) {
@@ -36,11 +36,5 @@ class FirstChildsChart extends React.Component
 			: (<div>Il n'y a pas de fils observés</div>);
 	}
 }
-
-FirstChildsChart = connectToStores(FirstChildsChart, [ FirstChildsStore ], (context, props) => {
-	return {
-		data: context.getStore(FirstChildsStore).getState()	
-	};
-});
 
 export default FirstChildsChart;

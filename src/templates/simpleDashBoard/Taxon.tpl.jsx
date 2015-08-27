@@ -31,22 +31,28 @@ if (process.env.BROWSER && window !== "undefined") {
 }
 
 export default function(props) {
-	const name = <em>{props.info.get("nom")}</em>;
+	
+	const atlas = props.atlas;
+	const taxon = props.taxon;
+	
+	console.log(taxon.parents);
+	const name = <em>{taxon.info.get("nom")}</em>;
 	const title = (
 		<MainTitle>
 			<span>{name}</span>
-			<span> ({props.info.get("nomVern")})</span>
+			<span> ({taxon.info.get("nomVern")})</span>
 		</MainTitle>
 	);
 	const mapTitle        = (<h3>Répartition en maille 10km des {name}</h3>);
 	const galeriePhoto    = (<h3>Photos de {name}</h3>);
 	const infoTitle       = (<h3>Informations sur {name}</h3>);
-	const firstChildTitle =	<Title name={name} rang={props.info.get("rang")} type="firstChild" />
+	const firstChildTitle =	<Title name={name} rang={taxon.info.get("rang")} type="firstChild" />
 	const phenologieTitle = (<h3>Phénologie de {name}</h3>);
-	const brothersTitle   = <Title name={name} rang={props.info.get("rang")} type="brothersNav" />
+	const brothersTitle   = <Title name={name} rang={taxon.info.get("rang")} type="brothersNav" />
 
 	if (process.env.BROWSER && window !== "undefined") {
 		map = <BaseMap
+			grille10={taxon.grille10}
 			height={500}
 			width="100%"
 			theme={themesForMap.base}
@@ -55,7 +61,7 @@ export default function(props) {
 
 	return (
 		<div>
-			<NavBarWrapper title={title} right={<BaseAriane styleDivBase={arianeStyle.base}/>}>
+			<NavBarWrapper title={title} right={<BaseAriane parents={taxon.parents} styleDivBase={arianeStyle.base}/>}>
 				<li>
 					<BaseSearch
 						withBackdrop={true}
@@ -63,7 +69,7 @@ export default function(props) {
 						divInputActive={searchStyle.divInputActive}
 						divContainer={searchStyle.divContainer}
 						ulResults={searchStyle.ulResults}
-						cdnom={props.atlas.current.get("cdnom")}
+						cdnom={atlas.current.get("cdnom")}
 					/>
 				</li>
 			</NavBarWrapper>
@@ -89,18 +95,21 @@ export default function(props) {
 								{map}
 							</Panel>
 							<Panel header={firstChildTitle}>
-								<FirstChildsChart />	
+								<FirstChildsChart data={taxon.firstChilds} />	
 							</Panel>
 							<Panel header={phenologieTitle}>
-								<PhenologieChart />
+								<PhenologieChart data={taxon.phenologie} />
 							</Panel>
 						</Col>
 						<Col lg={7}>
 							<Panel header={galeriePhoto}>
-								<CarouselPhoto />
+								<CarouselPhoto photos={taxon.photos} />
 							</Panel>
 							<Panel header={infoTitle}>
-								<Monographies />
+								<Monographies 
+									general={taxon.info}	
+									monographies={taxon.monographies}
+								/>
 							</Panel>
 						</Col>
 					</Row>

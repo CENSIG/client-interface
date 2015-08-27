@@ -1,4 +1,5 @@
 import React from "react";
+import shouldPureComponentUpdate from "react-pure-render/function";
 import BrothersNavigationStore from "../../stores/BrothersNavigationStore";
 import {connectToStores}  from "fluxible/addons";
 import {BrothersNavigation} from "client-interface-components";
@@ -14,6 +15,8 @@ class BaseBrothersNav extends React.Component
 	constructor(props) {
 		super(props);	
 	}
+
+	shouldComponentUpdate = shouldPureComponentUpdate
 
 	render() {
 		return (

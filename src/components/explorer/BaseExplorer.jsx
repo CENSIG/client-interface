@@ -1,4 +1,5 @@
 import React from "react";
+import shouldPureComponentUpdate from "react-pure-render/function";
 import Radium from "radium";
 import {Explorer} from "client-interface-components";
 import {connectToStores}  from "fluxible/addons";
@@ -18,6 +19,8 @@ class BaseExplorer extends React.Component
 	constructor(props) {
 		super(props);
 	}
+
+	shouldComponentUpdate = shouldPureComponentUpdate
 
 	// When an ariane taxon is clicked
 	_actionClickSup(name, cdnom) {

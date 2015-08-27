@@ -1,7 +1,6 @@
 import React from "react";
+import shouldPureComponentUpdate from "react-pure-render/function";
 import {Ariane} from "client-interface-components";
-import {connectToStores}  from "fluxible/addons";
-import ParentsStore from "../../stores/ParentsStore";
 
 import ComposeArianeItem from "./ComposeArianeItem";
 
@@ -15,6 +14,8 @@ class BaseAriane extends React.Component
 		super(props);	
 	}
 
+	shouldComponentUpdate = shouldPureComponentUpdate
+
 	render() {
 		let props = this.props;
 		return (
@@ -26,11 +27,5 @@ class BaseAriane extends React.Component
 		)	
 	}
 }
-
-BaseAriane = connectToStores(BaseAriane, [ ParentsStore ], (context, props) => {
-	return {
-		parents: context.getStore(ParentsStore).getState()
-	};
-});
 
 export default BaseAriane;

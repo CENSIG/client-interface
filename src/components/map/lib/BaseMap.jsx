@@ -1,10 +1,9 @@
 import React										 from "react";
+import shouldPureComponentUpdate from "react-pure-render/function";
 import Leaflet									 from "leaflet";
 import {Map, TileLayer, GeoJson} from "react-leaflet";
 import Legend										 from "./Legend";
 import MyGeojson						     from "./MyGeojson";
-import {connectToStores} from "fluxible/addons";
-import GeoStore from "../../../stores/GeoStore";
 
 
 import style from "../style";
@@ -21,6 +20,8 @@ class BaseMap extends React.Component
 	constructor(props) {
 		super(props);
 	}
+
+	shouldComponentUpdate = shouldPureComponentUpdate
 
 	_handleStyle(feature) {
 		return {
@@ -70,14 +71,6 @@ BaseMap.defaultProps = {
 	height : style.height,
 	width  : style.width
 }
-
-BaseMap = connectToStores(BaseMap, [ GeoStore ], (context, props) => {
-	return {
-		grille10: context.getStore(GeoStore).getState().grille10
-	}
-});
-
-BaseMap = BaseMap;
 
 export default BaseMap;
 

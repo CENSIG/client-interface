@@ -1,8 +1,7 @@
 import React from "react";
+import shouldPureComponentUpdate from "react-pure-render/function";
 import Radium from "radium";
 import Carousel from "nuka-carousel";
-import {connectToStores}  from "fluxible/addons";
-import PhotoStore from "../../stores/PhotoStore";
 import {NavLink} from "fluxible-router";
 
 import style from "./style";
@@ -16,6 +15,8 @@ class ArrowLeft extends React.Component
 	constructor(props) {
 		super(props);
 	}
+
+	shouldComponentUpdate = shouldPureComponentUpdate
 
 	render() {
 		let props = this.props;
@@ -92,9 +93,5 @@ class CarouselPhoto extends React.Component
 CarouselPhoto.contextTypes = {
 	atlasUriName: React.PropTypes.string
 }
-
-CarouselPhoto = connectToStores(CarouselPhoto, [ PhotoStore ], (context, props) => {
-	return context.getStore(PhotoStore).getState();
-});
 
 export default CarouselPhoto;

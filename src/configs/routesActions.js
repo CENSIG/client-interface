@@ -49,8 +49,6 @@ export function atlasActionRequest(resource, payload) {
 		},
 		{event: Event.PARENTS, req: api.get(resource, cdnom, "parents")},
 		{event: Event.INFO, req: api.get(resource, cdnom, "informations")},
-		{event: Event.MONOGRAPHIES, eventError: Event.NOT_MONOGRAPHIES,
-			req: api.get(resource, cdnom, "monographies")},
 		{event: Event.PHENOLOGIE, req: api.get(resource, cdnom, "phenologie")},
 		{event: Event.GRILLE_10, req: api.get(resource, cdnom, "geojson")}
 	];

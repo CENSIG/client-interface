@@ -1,7 +1,5 @@
 import BaseStore from "fluxible/addons/BaseStore";
 import Immutable from "immutable";
-import ParentsStore from "./ParentsStore";
-import FirstChildsStore from "./FirstChildsStore";
 import Event from "../utils/Event";
 
 class ExploreStore extends BaseStore
@@ -14,17 +12,13 @@ class ExploreStore extends BaseStore
 	}
 
 	_handleExploreParents(parents) {
-		this.dispatcher.waitFor(ParentsStore, () => {
-			this.parents = parents; 
-			this.emitChange(); 
-		});
+		this.parents = parents; 
+		this.emitChange(); 
 	}
 
 	_handleExploreChilds(firstChilds) {
-		this.dispatcher.waitFor(FirstChildsStore, () => {
-			this.firstChilds = firstChilds;
-			this.emitChange();
-		});
+		this.firstChilds = firstChilds;
+		this.emitChange();
 	}
 
 	_handleExploreSub(add) {
