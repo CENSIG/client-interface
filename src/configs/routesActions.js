@@ -22,6 +22,9 @@ export function taxonActionRequest(resource, payload) {
 			req: api.get(resource, cdnom, "first_child_obs")
 		},
 		{event: Event.PHENOLOGIE, req: api.get(resource, cdnom, "phenologie")},
+		{event: Event.ALPHABET_OBS, eventError: Event.NOT_ALPHABET_OBS, req: api.get(resource, cdnom, "observateurs", {
+			output: "alphabet"	
+		})},
 		{event: Event.MONOGRAPHIES, eventError: Event.NOT_MONOGRAPHIES,
 			req: api.get(resource, cdnom, "monographies")},
 		{event: Event.INFO, req: api.get(resource, cdnom, "informations")},
