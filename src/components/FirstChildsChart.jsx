@@ -13,14 +13,16 @@ class FirstChildsChart extends React.Component
 		var chart = null;
 		if (this.props.data.size !== 0) {
 			chart = <BarChart
-				nameLabelProp="name"
-				nameValueProp="observations"
+				accessLabelProp={(d)=>d.cdnom}
+				accessValueProp={(d)=>d.observations}
+				accessLabelTooltip={(d)=>d.name}
 				data={this.props.data.slice(0, 5).toJS()}
 				margins={{top: 15, right: 20, bottom: 60, left: 70}}
 				fill="#3182bd"
 				width={600}
 				height={200}
 				viewBox="0 0 590 200"
+				withTooltip={true}
 			/>;
 		}
 		return chart;
