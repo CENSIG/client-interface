@@ -14,7 +14,7 @@ class Title extends React.Component
 
 	_buildFirstChildTitle(rang, name)
 	{
-		rang = rang || "DFLT";
+		rang = (rang && rang !== "SSES") ? rang : "DFLT";
 		let current  = panelTitle[rang].firstChildChart; 
 		let adjectif = current.adjectif;
 		let label    = current.label;
@@ -25,7 +25,8 @@ class Title extends React.Component
 
 	_buildBrothersNavTitle(rang, name)
 	{
-		rang = rang || "DFLT";
+		rang = (rang && rang !== "SSES") ? rang : "DFLT";
+		console.log(rang);
 		let current = panelTitle[rang].brothersNav;
 		let adverbe = current.adverbe;
 		let label   = current.label;
