@@ -35,14 +35,8 @@ export default function(props) {
 	const atlas = props.atlas;
 	const taxon = props.taxon;
 	
-	console.log(taxon.parents);
 	const name = <em>{taxon.info.get("nom")}</em>;
-	const title = (
-		<MainTitle>
-			<span>{name}</span>
-			<span> ({taxon.info.get("nomVern")})</span>
-		</MainTitle>
-	);
+	const title = <MainTitle firstTitle={name} smallTitle={taxon.info.get("nomVern")} />;
 	const mapTitle        = (<h3>Répartition en maille 10km des {name}</h3>);
 	const galeriePhoto    = (<h3>Photos de {name}</h3>);
 	const infoTitle       = (<h3>Informations sur {name}</h3>);
@@ -107,6 +101,7 @@ export default function(props) {
 							</Panel>
 							<Panel header={infoTitle}>
 								<Monographies 
+									alphabetObservateurs={taxon.alphabetObservateurs}
 									general={taxon.info}	
 									monographies={taxon.monographies}
 								/>

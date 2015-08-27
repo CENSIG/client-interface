@@ -22,15 +22,21 @@ class UsersSearch extends React.Component
 		let modal = React.findDOMNode(this.refs.modal);
 		let modalContent = React.findDOMNode(this.refs.modalContent);
 		modalContent.addEventListener("mouseover", this._handleMouseOver.bind(this));
-		modalContent.addEventListener("mouseleave", this._handleMouseOver.bind(this));
+		modalContent.addEventListener("mouseleave", this._handleMouseLeave.bind(this));
 
 		modal.addEventListener("click", this._hanldeModalClick.bind(this));
 	}
 
 	_handleMouseOver(e) {
 		this.setState({
-			over: !this.state.over
+			over: true 
 	  });	
+	}
+
+	_handleMouseLeave(e) {
+		this.setState({
+			over: false	
+		});		
 	}
 
 	_hanldeModalClick(e) {
@@ -51,24 +57,40 @@ class UsersSearch extends React.Component
 		return this.state.displaying ? modalStyle.show : modalStyle.hidden;
 	}
 
-	render() {
+	_getContent() {
 		let props = this.props;
+		return (
+			<div>
+				<ul style={style.ul}>
+					{props.alphabet.map((letter, idx) => {
+						return (
+							<li key={idx}>{letter.get("firstNameLetter")}</li>
+						);	
+					})}
+				</ul>
+				<ul style={style.ul}>
+					<li>Abady Florian</li>
+					<li>Bouche Huguette</li>
+					<li>Sino Oscar</li>
+				</ul>
+			</div>
+		);	
+	}
+
+	render() {
+		let content;
+		let props = this.props;
+		if (props.alphabet.size === 0) {
+			content = <p>Il n'y a pas d'utilisateur</p>;
+		} else {
+			content = this._getContent();
+		}
 		return (
 			<div>
 				<span onClick={this._handleClick.bind(this)}>{props.labelButton}</span>
 				<div ref="modal" style={this._getStyleModal()}>
 					<div ref="modalContent" style={modalStyle.content}>
-						<ul style={style.ul}>
-							<li>A</li>
-							<li>B</li>
-							<li>C</li>
-							<li>D</li>
-						</ul>
-						<ul style={style.ul}>
-							<li>Abady Florian</li>
-							<li>Bouche Huguette</li>
-							<li>Sino Oscar</li>
-						</ul>
+						{content}
 					</div>
 				</div>
 			</div>

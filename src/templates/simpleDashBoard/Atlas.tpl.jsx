@@ -29,13 +29,13 @@ if (process.env.BROWSER && window !== "undefined") {
 }
 
 export default function(props) {
+	const firstTitle = "Atlas des " + props.info.get("nomVern");
+
 	const name = <em>{props.info.get("nom")}</em>;
-	const title = (
-		<MainTitle>
-			<span>Atlas des {props.info.get("nomVern")} </span>
-			<span>({name})</span>
-		</MainTitle>
-	);
+	const title = <MainTitle
+		firstTitle={firstTitle}
+		smallTitle={name}
+	/>;
 	const mapTitle        = (<h3>Répartition en maille 10km des {name}</h3>);
 	const galeriePhoto    = (<h3>Photo de {name}</h3>);
 	const infoTitle       = (<h3>Informations sur {name}</h3>);

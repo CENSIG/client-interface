@@ -11,8 +11,12 @@ class MainTitle extends React.Component
 
 	render() {
 		let props = this.props;
+		let {base, firstTitle, smallTitle} = style;
 		return (
-			<h1 style={style}>{props.children}</h1>
+			<div style={base}>
+				<h1 ref="firstTitle" style={firstTitle}>{props.firstTitle}</h1>
+				<h4 ref="smallTitle" style={smallTitle}>{props.smallTitle}</h4>
+			</div>
 		);	
 	}
 }

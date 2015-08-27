@@ -6,6 +6,7 @@ export default {
 		position: "fixed",
 		width: 150,
 		transition:"transform 0.5s",
+		top: 70,
 		"@media (max-width: 780px)": {
 			transform: "translateX(-150px)"
 		}

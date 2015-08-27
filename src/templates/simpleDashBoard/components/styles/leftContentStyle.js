@@ -4,12 +4,13 @@ export default {
 	},
 
 	withRight: {
+		verticalAlign: "middle",
 		width: "50%"
 	},
 
 	responsive: {
 		"@media (max-width: 780px)": {
-			margin: "auto",
+			margin: "20px auto",
 			width: "95%"	
 		},
 
