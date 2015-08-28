@@ -12,11 +12,13 @@ class Monographies extends React.Component
 	
 	shouldComponentUpdate = shouldPureComponentUpdate
 
-	_getGeneral(info, alphabetObservateurs) {
+	_getGeneral() {
+		let props = this.props;
 		return (
 			<PanelInfo 
-				alphabetObservateurs={alphabetObservateurs}
-				info={info} 
+				alphabetObservateurs={props.alphabetObservateurs}
+				alphabetCommunes={props.alphabetCommunes}
+				info={props.general} 
 			/>
 		);
 	}
@@ -25,13 +27,13 @@ class Monographies extends React.Component
 		let props = this.props;
 		if (props.monographies.size === 0) {
 			return (
-				this._getGeneral(props.general, props.alphabetObservateurs)
+				this._getGeneral()
 			);
 		}
 		return (
 			<TabbedArea>
 				<TabPane eventKey={1} tab="Général">
-					{this._getGeneral(props.general, props.alphabetObservateurs)}
+					{this._getGeneral()}
 				</TabPane>
 				{props.monographies.map((mono, index) => {
 					let bloc = mono.get("bloc");

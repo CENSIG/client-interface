@@ -3,13 +3,14 @@ import shouldPureComponentUpdate from "react-pure-render/function";
 import {ListGroup, ListGroupItem} from "react-bootstrap";
 
 import UsersSearch from "./UsersSearch";
+import CommunesSearch from "./CommunesSearch";
 
 const displayInfo = [
 	{ key: "nomVern", label: "Nom vernaculaire:"},
 	{ key: "observations", label: "Nombre d'observations:" },
 	{ key: "observateurs", label: "Nombre d'observateurs:", withSearch: " (Voir les observateurs)"},
 	{ key: "especes", label: "Nombre d'espèces observées:" },
-	{ key: "communes", label: "Nombre de communes visitées:"}
+	{ key: "communes", label: "Nombre de communes visitées:", withSearch: " (Voir les communes)"}
 ];
 
 class PanelInfo extends React.Component
@@ -29,6 +30,14 @@ class PanelInfo extends React.Component
 				taxonName={props.info.get("nom")}
 				labelButton={label}
 			/>;
+		} else if (key === "communes") {
+			res = <CommunesSearch
+				alphabet={props.alphabetCommunes}
+				cdnom={props.info.get("id")}
+				taxonName={props.info.get("nom")}
+				labelButton={label}
+			/>;
+
 		}
 		return res;
 	}

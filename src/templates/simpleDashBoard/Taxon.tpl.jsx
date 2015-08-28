@@ -34,7 +34,7 @@ export default function(props) {
 	
 	const atlas = props.atlas;
 	const taxon = props.taxon;
-	
+	console.log(taxon.alphabetCommunes.toJS());	
 	const name = <em>{taxon.info.get("nom")}</em>;
 	const title = <MainTitle firstTitle={name} smallTitle={taxon.info.get("nomVern")} />;
 	const mapTitle        = (<h3>Répartition en maille 10km des {name}</h3>);
@@ -102,6 +102,7 @@ export default function(props) {
 							<Panel header={infoTitle}>
 								<Monographies 
 									alphabetObservateurs={taxon.alphabetObservateurs}
+									alphabetCommunes={taxon.alphabetCommunes}
 									general={taxon.info}	
 									monographies={taxon.monographies}
 								/>
