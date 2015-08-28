@@ -61,7 +61,7 @@ export default function(props) {
 						divInputActive={searchStyle.divInputActive}
 						divContainer={searchStyle.divContainer}
 						ulResults={searchStyle.ulResults}
-						cdnom={props.current.get("cdnom")}
+						cdnom={props.info.get("id")}
 					/>
 				</li>
 			</NavBarWrapper>
