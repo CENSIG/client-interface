@@ -30,6 +30,23 @@ class SearchAction
 		context.dispatch(Event.REQUEST_SEARCH_PENDING, api.getRequestPending());
 	}
 
+	static getSearchObservateur(context, payload) {
+		let {api, cdnom, options} = payload;
+		context.dispatch(Event.START_REQUEST_OBSERVATEURS);
+		api.get(resource, cdnom, "observateurs", options)
+			.then((data) => {
+				context.dispatch(Event.SEARCH_OBSERVATEURS, data);	
+			}).catch(err => {
+				if (err.status === 401) {
+					context.dispatch(Event.UNAUTHORIZED);
+				}	else {
+					context.dispatch(Event.NOT_SEARCH_OBSERVATEURS);
+				}
+			}).finally(() => {
+				//context.dispatch(Event.END_REQUEST_OBSERVATEURS)	
+			});
+	}
+
 	/**
 	 * Reset the search
 	 * @param context the context
