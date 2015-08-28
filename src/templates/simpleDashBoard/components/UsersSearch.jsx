@@ -3,72 +3,32 @@ import shouldPureComponentUpdate from "react-pure-render/function";
 import Radium from "radium";
 import {connectToStores} from "fluxible/addons";
 
+import style from "./styles/modalContentStyle";
 import ObservateursStore from "../../../stores/ObservateursStore";
-import modalStyle from "./styles/modalStyle";
 import SearchAction from "../../../actions/SearchAction";
 import LoadingForComponent from "../../../components/pages/LoadingForComponent";
-
-const style = {
-	ul: {
-		display: "inline-block",
-		verticalAlign: "top",
-		maxHeight: 300,
-		overflowY: "scroll"
-	},
-
-	left: {
-		width: "10%"
-	},
-	
-	right: {
-		width: "90%"
-	}
-}
+import Modal from "./Modal";
 
 class UsersSearch extends React.Component
 {
 	constructor(props) {
 		super(props);	
 		this.state = {
-			displaying: false,
-			over: false
+			displaying: false
 		};
 	}
-
+	
 	shouldComponentUpdate = shouldPureComponentUpdate
-
-	componentDidMount() {
-		let modal = React.findDOMNode(this.refs.modal);
-		let modalContent = React.findDOMNode(this.refs.modalContent);
-		modalContent.addEventListener("mouseover", this._handleMouseOver.bind(this));
-		modalContent.addEventListener("mouseleave", this._handleMouseLeave.bind(this));
-
-		modal.addEventListener("click", this._hanldeModalClick.bind(this));
-	}
-
-	_handleMouseOver(e) {
-		this.setState({
-			over: true 
-	  });	
-	}
-
-	_handleMouseLeave(e) {
-		this.setState({
-			over: false	
-		});		
-	}
-
-	_hanldeModalClick(e) {
-		if (!this.state.over) {
-			this.setState({
-				displaying: false	
-			});	
-		}	
-	}
-
+	
 	_handleClick(e) {
 		this.setState({
 			displaying: true	
+		});	
+	}
+
+	_handleModalHide() {
+		this.setState({
+			displaying: false	
 		});	
 	}
 
@@ -82,15 +42,11 @@ class UsersSearch extends React.Component
 		});
 	}
 
-	_getStyleModal() {
-		return this.state.displaying ? modalStyle.show : modalStyle.hidden;
-	}
-
 	_getContent() {
 		let props = this.props;
 		let rightContent;
 		if (props.pendingRequest) {
-			rightContent = <LoadingForComponent />;
+			rightContent = <LoadingForComponent style={style.loading}/>;
 		} else {
 			rightContent = (
 				<ul style={[style.ul, style.right]}>
@@ -111,7 +67,9 @@ class UsersSearch extends React.Component
 				<ul style={[style.ul, style.left]}>
 					{props.alphabet.map((letter, idx) => {
 						return (
-							<li key={idx} onClick={this._handleClickAlphabet.bind(this)}>{letter.get("firstNameLetter")}</li>
+							<li key={idx} onClick={this._handleClickAlphabet.bind(this)}>
+								{letter.get("firstNameLetter")}
+							</li>
 						);	
 					})}
 				</ul>
@@ -123,6 +81,7 @@ class UsersSearch extends React.Component
 	render() {
 		let content;
 		let props = this.props;
+		let title = <h1>Rechercher un observateurs pour <em>{props.taxonName}</em></h1>
 		if (props.alphabet.size === 0) {
 			content = <p>Il n'y a pas d'utilisateur</p>;
 		} else {
@@ -131,19 +90,20 @@ class UsersSearch extends React.Component
 		return (
 			<div style={{display: "inline"}}>
 				<span onClick={this._handleClick.bind(this)}>{props.labelButton}</span>
-				<div ref="modal" style={this._getStyleModal()}>
-					<div ref="modalContent" style={modalStyle.content}>
-						<h1 style={modalStyle.title}>Rechercher un observateurs pour <em>{props.taxonName}</em></h1>
+				<Modal 
+					title={title}
+					displaying={this.state.displaying}
+					handleHide={this._handleModalHide.bind(this)}
+				>
 						{content}
-					</div>
-				</div>
+				</Modal>
 			</div>
 		);	
 	}
 }
 
 UsersSearch.contextTypes = {
-	api: React.PropTypes.func,
+	api: React.PropTypes.object,
 	executeAction: React.PropTypes.func
 };
 
