@@ -7,7 +7,7 @@ import UsersSearch from "./UsersSearch";
 const displayInfo = [
 	{ key: "nomVern", label: "Nom vernaculaire:"},
 	{ key: "observations", label: "Nombre d'observations:" },
-	{ key: "observateurs", label: "Nombre d'observateurs:", withSearch: "Rechercher un utilisateur"},
+	{ key: "observateurs", label: "Nombre d'observateurs:", withSearch: " (Voir les observateurs)"},
 	{ key: "especes", label: "Nombre d'espèces observées:" },
 	{ key: "communes", label: "Nombre de communes visitées:"}
 ];
@@ -25,6 +25,8 @@ class PanelInfo extends React.Component
 		if (key === "observateurs") {
 			res = <UsersSearch
 				alphabet={props.alphabetObservateurs}
+				cdnom={props.info.get("id")}
+				taxonName={props.info.get("nom")}
 				labelButton={label}
 			/>;
 		}
@@ -42,8 +44,10 @@ class PanelInfo extends React.Component
 					: "";
 				return (
 					<ListGroupItem key={index} header={item.label}>
-						<strong>{info.get(item.key)}</strong>
-						{modal}
+						<div>
+							<strong>{info.get(item.key)}</strong>
+							{modal}
+						</div>
 					</ListGroupItem>
 				);
 			})}
