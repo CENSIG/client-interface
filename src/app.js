@@ -10,6 +10,7 @@ import TaxonStore				from "./stores/TaxonStore";
 import SearchStore	from "./stores/SearchStore";
 import AtlasStore				from "./stores/AtlasStore";
 import ObservateursStore from "./stores/ObservateursStore";
+import CommunesStore from "./stores/CommunesStore";
 import BrothersNavigationStore from "./stores/BrothersNavigationStore";
 import ExploreStore from "./stores/ExploreStore";
 
@@ -17,7 +18,7 @@ const stores = [
 	ApplicationStore, BaseRouteStore,
 	TaxonStore, SearchStore, AtlasStore,
 	BrothersNavigationStore, ExploreStore,
-	ObservateursStore
+	ObservateursStore, CommunesStore
 ];
 
 var app = new Fluxible({
