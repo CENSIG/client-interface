@@ -25,6 +25,9 @@ export function taxonActionRequest(resource, payload) {
 		{event: Event.ALPHABET_OBS, eventError: Event.NOT_ALPHABET_OBS, req: api.get(resource, cdnom, "observateurs", {
 			output: "alphabet"	
 		})},
+		{event: Event.ALPHABET_COMMUNES, eventError: Event.NOT_ALPHABET_COMMUNES, req: api.get(resource, cdnom, "communes", {
+			output: "alphabet"	
+		})},
 		{event: Event.MONOGRAPHIES, eventError: Event.NOT_MONOGRAPHIES,
 			req: api.get(resource, cdnom, "monographies")},
 		{event: Event.INFO, req: api.get(resource, cdnom, "informations")},
