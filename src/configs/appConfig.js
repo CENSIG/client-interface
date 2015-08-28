@@ -15,6 +15,8 @@ export default {
 		"name" : "api"
 	}),
 
+	"urlPhoto": "http://192.168.1.55",
+
 	"atlas": {
 		"papillons": {
 			"cdnom":"185214",

@@ -4,6 +4,7 @@ import Radium from "radium";
 import Carousel from "nuka-carousel";
 import {NavLink} from "fluxible-router";
 
+import {urlPhoto} from "../../configs/appConfig";
 import style from "./style";
 
 /**
@@ -50,7 +51,7 @@ class CarouselPhoto extends React.Component
 
 	_getCarouselItem() {
 		let items = this.props.photos.map((photo, index) => {
-			let url = `http://192.168.1.55/${photo.get("urlPhotoResize")}` 
+			let url = `${urlPhoto}/${photo.get("urlPhotoResize")}` 
 			let params = {
 				name: this.context.atlasUriName,
 				cdnom: photo.get("cdref")
