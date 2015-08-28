@@ -12,6 +12,7 @@ export default keyMirror({
 	PHENOLOGIE                 : null,
 	UPDATE_TITLE               : null,
 	ALPHABET_OBS               : null,
+	ALPHABET_COMMUNES          : null,
 	NOT_PARENTS                : null,
 	NOT_FIRST_CHILDS           : null,
 	NOT_INFO                   : null,
@@ -20,6 +21,8 @@ export default keyMirror({
 	NOT_PHOTO                  : null,
 	NOT_MONOGRAPHIES           : null,
 	NOT_CHILDS                 : null,
+	NOT_ALPHABET_OBS           : null,
+	NOT_ALPHABET_COMMUNES      : null,
 	EXPLORE_SUB                : null,
 	EXPLORE_SUP                : null,
 	EXPLORE_CHILDS             : null,
@@ -36,5 +39,9 @@ export default keyMirror({
 	SEARCH_OBSERVATEURS        : null,
 	NOT_SEARCH_OBSERVATEURS    : null,
 	START_REQUEST_OBSERVATEURS : null,
-	END_REQUEST_OBSERVATEURS   : null
+	END_REQUEST_OBSERVATEURS   : null,
+	SEARCH_COMMUNES            : null,
+	NOT_SEARCH_COMMUNES        : null,
+	START_REQUEST_COMMUNES     : null,
+	END_REQUEST_COMMUNES       : null
 });
