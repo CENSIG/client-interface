@@ -19,6 +19,7 @@ class TaxonStore extends BaseStore
 		this.phenologie = Immutable.List();
 		this.monographies = Immutable.List();
 		this.alphabetObservateurs = Immutable.List();
+		this.alphabetCommunes = Immutable.List();
 	}
 
 	_handleParents(parents) {
@@ -86,9 +87,19 @@ class TaxonStore extends BaseStore
 		this.emitChange();
 	}
 
+	_handleAlphabetCommunes(alphabet) {
+		this.alphabetCommunes = alphabet;	
+		this.emitChange();
+	}
+
+	_handleNotAlphabetCommunes() {
+		this.alphabetCommunes = Immutable.List();	
+		this.emitChange();
+	}
 	getState() {
 		return {
 			alphabetObservateurs: this.alphabetObservateurs,
+			alphabetCommunes: this.alphabetCommunes,
 			firstChilds: this.firstChilds,
 			grille10: this.grille10,
 			info: this.info,
@@ -105,6 +116,7 @@ class TaxonStore extends BaseStore
 
 	rehydrate(state) {
 		this.alphabetObservateurs = Immutable.fromJS(state.alphabetObservateurs);
+		this.alphabetCommunes = Immutable.fromJS(state.alphabetCommunes);
 		this.firstChilds = Immutable.fromJS(state.firstChilds);
 		this.grille10 = Immutable.fromJS(state.grille10);
 		this.info = Immutable.fromJS(state.info);
@@ -125,6 +137,9 @@ TaxonStore.handlers[Event.INFO] = "_handleInfo";
 TaxonStore.handlers[Event.PHENOLOGIE] = "_handlePhenologie";
 TaxonStore.handlers[Event.MONOGRAPHIES] = "_handleMonographies";
 TaxonStore.handlers[Event.ALPHABET_OBS] = "_handleAlphabetObservateurs";
+TaxonStore.handlers[Event.NOT_ALPHABET_OBS] = "_handleNotAlphabetObservateurs";
+TaxonStore.handlers[Event.ALPHABET_COMMUNES] = "_handleAlphabetCommunes";
+TaxonStore.handlers[Event.NOT_ALPHABET_COMMUNES] = "_handleNotAlphabetCommunes";
 TaxonStore.handlers[Event.NOT_PHOTO] = "_handleNotPhotos";
 TaxonStore.handlers[Event.NOT_GRILLE_10] = "_handleNotGrille10";
 TaxonStore.handlers[Event.NOT_FIRST_CHILDS] = "_handleNotFirstChilds";
