@@ -16,8 +16,12 @@ class FirstChildsChart extends React.Component
 				accessLabelProp={(d)=>d.cdnom}
 				accessValueProp={(d)=>d.observations}
 				accessLabelTooltip={(d)=>d.name}
+				xAxisLabel="Identifiant taxonomique"
+				yAxisLabel="Nombre d'observations"
+				xAxisLabelOffset={50}
+				yAxisLabelOffset={65}
 				data={this.props.data.slice(0, 5).toJS()}
-				margins={{top: 15, right: 20, bottom: 60, left: 70}}
+				margins={{top: 35, right: 20, bottom: 60, left: 80}}
 				fill="#3182bd"
 				width={600}
 				height={200}
