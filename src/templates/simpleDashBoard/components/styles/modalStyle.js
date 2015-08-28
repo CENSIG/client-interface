@@ -11,12 +11,18 @@ export default {
 		display: "none"	
 	},
 
+	title: {
+		fontSize: "1.2em",
+		margin: "0 0 15px 0"
+	},
+
 	content: {
 		background: "#fff",	
 		borderRadius: 3,
 		boxShadow: "0 2px 5px rgba(0, 0, 0, 0.26)",
 		margin: "50 auto 0 auto",
 		minHeight: 300,
+		padding: 10,
 		width: "50%"
 	}
 }
