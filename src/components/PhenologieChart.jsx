@@ -18,11 +18,14 @@ class PhenologieChart extends React.Component
 				nameLabelProp="mois"
 				nameValueProp={["total","adultes","larves"]}
 				data={data.toJS()}
-				margins={{top: 5, right: 20, bottom: 110, left: 60}}
+				margins={{top: 40, right: 4, bottom: 60, left: 90}}
 				widthWithLegend="100%"
-				viewBox="0 0 470 120"
+				viewBox="0 0 510 180"
 				width="500"
 				height={200}
+				xAxisLabel="Mois"
+				yAxisLabel="Nombre d'observations"
+				yAxisLabelOffset={70}
 			/>;
 		}
 		return chart; 
