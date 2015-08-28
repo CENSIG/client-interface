@@ -43,7 +43,24 @@ class SearchAction
 					context.dispatch(Event.NOT_SEARCH_OBSERVATEURS);
 				}
 			}).finally(() => {
-				//context.dispatch(Event.END_REQUEST_OBSERVATEURS)	
+				context.dispatch(Event.END_REQUEST_OBSERVATEURS)	
+			});
+	}
+
+	static getSearchCommunes(context, payload) {
+		let {api, cdnom, options} = payload;
+		context.dispatch(Event.START_REQUEST_COMMUNES);
+		api.get(resource, cdnom, "communes", options)
+			.then((data) => {
+				context.dispatch(Event.SEARCH_COMMUNES, data);	
+			}).catch(err => {
+				if (err.status === 401) {
+					context.dispatch(Event.UNAUTHORIZED);
+				}	else {
+					context.dispatch(Event.NOT_SEARCH_COMMUNES);
+				}
+			}).finally(() => {
+				context.dispatch(Event.END_REQUEST_COMMUNES)	
 			});
 	}
 
