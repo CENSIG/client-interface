@@ -1,3 +1,7 @@
+:root {
+	--fontFamily: Open Sans;
+}
+
 /**
  * Classes for map legend
  */
@@ -42,6 +46,6 @@
 	border-radius    : 2px;
 }
 
-.card h3 { font-family: open_sansbold; }
+.card h3 { font-family: var(--fontFamily); }
 .card h3, p { margin: 0 0 10px 0;	}
 .card ul { margin: 0 0 0 10px ; }
