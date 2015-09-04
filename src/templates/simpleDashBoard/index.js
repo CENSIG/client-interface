@@ -7,7 +7,6 @@ if (process.env.BROWSER) {
 	require("bootstrap/dist/css/bootstrap.min.css");
 	require("./css/reset.css");
 	require("./css/utils.css");
-	require("./css/fonts/fonts.css");
 }
 
 module.exports = {

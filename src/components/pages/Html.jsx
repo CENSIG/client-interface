@@ -53,6 +53,7 @@ class Html extends React.Component
 				<head>
 					<meta charSet="UTF-8" />
 					<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+					<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
 					{this._getLink()}
 					<title>{this.props.context.getStore(ApplicationStore).getCurrentTitlePage()}</title>
 				</head>
