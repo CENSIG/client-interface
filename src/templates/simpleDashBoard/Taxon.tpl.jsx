@@ -23,7 +23,6 @@ import explorerStyle from "./components/styles/explorerStyle";
 var map;
 
 if (process.env.BROWSER && window !== "undefined") {
-	require("./css/explorer.css");
 	require("./css/content.css");
 	require("../../../node_modules/leaflet/dist/leaflet.css");
 
